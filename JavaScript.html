@@ -204,14 +204,24 @@
 </ul>
 </li>
 <li><a href="#修改class">修改class</a></li>
+<li><a href="#运动函数-tween">运动函数   tween</a><ul>
+<li><a href="#时间版运动">时间版运动</a><ul>
+<li><a href="#动画帧">动画帧:</a></li>
+</ul>
+</li>
+<li><a href="#速度版运动">速度版运动</a></li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
+</li>
+</ul>
 </div>
 </div>
 </div>
+
+
 
 <h1 id="javascript">JavaScript</h1>
 
@@ -1156,11 +1166,15 @@ let a = arr.push(5,2); <br>
 console.dir(a);</code></p></li>
 </ul>
 
+
+
 <h4 id="2pop传参都是唬人的">2、pop(传参都是唬人的)</h4>
 
 <ul><li><p>往数组的最后一位删除一个数据</p></li>
 <li><p>返回值为删除的那个，改变原数组</p></li>
 </ul>
+
+
 
 <h4 id="3unshift">3、unshift:</h4>
 
@@ -1168,11 +1182,15 @@ console.dir(a);</code></p></li>
 <li><p>返回值是新数组的长度，改变原数组</p></li>
 </ul>
 
+
+
 <h4 id="4shift">4、shift:</h4>
 
 <ul><li><p>往数组的首位删除一个数据</p></li>
 <li><p>返回值是删除的那个，空即为undefined，改变原数组</p></li>
 </ul>
+
+
 
 <h4 id="5splice">5、splice:</h4>
 
@@ -1223,6 +1241,8 @@ console.log(arr);</code></p>
 </blockquote></li></ul></li></ul></li>
 </ul>
 
+
+
 <h4 id="6foreach专门用来循环数组的">6、forEach:专门用来循环数组的。</h4>
 
 <ul><li><p>两个参数:</p>
@@ -1243,6 +1263,8 @@ arr.forEach(function(item,i,all){ <br>
 },arr);</code></p></li>
 </ul>
 
+
+
 <h4 id="7map">7、map:</h4>
 
 <ul><li><p>循环数组</p></li>
@@ -1262,6 +1284,8 @@ console.log(newArr); <br>
 ul.innerHTML = newArr.join('');</code></p></li></ul></li>
 </ul>
 
+
+
 <h4 id="8join">8、join():</h4>
 
 <ul><li><p>以某个字符串为连接符，连接数组的每一项</p></li>
@@ -1276,6 +1300,8 @@ ul.innerHTML = newArr.join('');</code></p></li></ul></li>
   // console.log(arr[0]+arr[1]);</code></p>
 </blockquote></li>
 </ul>
+
+
 
 <h4 id="9filter过滤条件成立的值">9、filter：过滤条件成立的值</h4>
 
@@ -1300,6 +1326,8 @@ let arr2 = arr.filter(function(item,i){ <br>
 console.log(arr3);</code></p></li>
 </ul>
 
+
+
 <h4 id="10reverse翻转数组">10、reverse：翻转数组</h4>
 
 <ul><li><p>颠倒数组顺序，改变原数组</p>
@@ -1311,6 +1339,8 @@ console.log(arr3);</code></p></li>
 // console.dir(arr);  <br>
 let str = '您迎欢峰珠'; //转成'珠峰欢迎您'    console.log(str.split('').reverse().join(''));</code></p></li></ul></li>
 </ul>
+
+
 
 <h4 id="11some">11、some:</h4>
 
@@ -1324,6 +1354,8 @@ let str = '您迎欢峰珠'; //转成'珠峰欢迎您'    console.log(str.split(
 //查看数组中是否有6，明显没有，就返回false <br>
 console.log(arr.some(function(item){return item===6}))</code></p></li>
 </ul>
+
+
 
 <h4 id="12every">12、every:</h4>
 
@@ -1363,6 +1395,8 @@ arr.sort(function(a,b){ <br>
 console.log(arr);</code></p></li>
 </ul>
 
+
+
 <h4 id="14concat">14、concat()</h4>
 
 <ul><li><p>连接一个或者多个数组</p></li>
@@ -1378,6 +1412,8 @@ console.log(arr);</code></p></li>
 let arr3 = [4,5,6]; <br>
 console.log(arr2.concat(arr3,[7,8,9]));</code></p></li></ul></li></ul></li>
 </ul>
+
+
 
 <h4 id="15数组截取">15、数组截取</h4>
 
@@ -2968,6 +3004,8 @@ str.match(/^1[89]$/)</code></p>
 </div><div class="hljs-line">}
 </div></code></pre>
 
+
+
 <h4 id="替换图片">替换图片</h4>
 
 <ul><li><p><strong>onload  图片加载成功的时候触发</strong></p></li>
@@ -3016,4 +3054,43 @@ if(!cn.split(' ').includes(cname)){ <br>
     obj.className =  cn; <br>
 }; <br>
 }</code></p></li></ul></li>
-</ul></div></body></html>
+</ul>
+
+
+
+<h3 id="运动函数-tween">运动函数   tween</h3>
+
+<ul><li><p>ActionScript  -&gt; AS</p></li>
+</ul>
+
+
+
+<h4 id="时间版运动">时间版运动</h4>
+
+<ul><li><p>t : time 已过时间</p></li>
+<li><p>b : begin 起始值</p></li>
+<li><p>c : count 总的运动值</p></li>
+<li><p>d : duration 持续时间</p></li>
+</ul>
+
+
+
+<h5 id="动画帧">动画帧:</h5>
+
+<ul><li><p>requestAnimationFrame(函数)</p>
+
+<ul>
+<li><p>返回值为number（编号）</p></li></ul></li>
+<li><p>关闭动画帧</p>
+
+<ul>
+<li><p>cancelAnimationFrame(编号)</p></li></ul></li>
+<li><p>匀速运动:</p>
+
+<ul>
+<li><p>b + c * (t/d)  </p></li></ul></li>
+</ul>
+
+
+
+<h4 id="速度版运动">速度版运动</h4></div></body></html>
