@@ -204,12 +204,22 @@
 </ul>
 </li>
 <li><a href="#修改class">修改class</a></li>
-<li><a href="#运动函数-tween">运动函数   tween</a><ul>
+<li><a href="#运动函数-tween">运动函数   Tween</a><ul>
+<li><a href="#速度版运动">速度版运动</a></li>
 <li><a href="#时间版运动">时间版运动</a><ul>
 <li><a href="#动画帧">动画帧:</a></li>
 </ul>
 </li>
-<li><a href="#速度版运动">速度版运动</a></li>
+<li><a href="#回调函数">回调函数</a></li>
+</ul>
+</li>
+<li><a href="#事件">事件</a><ul>
+<li><a href="#事件模型">事件模型</a></li>
+<li><a href="#冒泡的坏处阻止冒泡">冒泡的坏处–阻止冒泡</a></li>
+<li><a href="#冒泡的好处事件委托">冒泡的好处–事件委托</a></li>
+<li><a href="#没有冒泡的也可以阻止穿透">没有冒泡的，也可以阻止穿透</a></li>
+<li><a href="#坐标值">坐标值</a></li>
+<li><a href="#键盘事件">键盘事件</a></li>
 </ul>
 </li>
 </ul>
@@ -1254,7 +1264,7 @@ function(数组中的每个值,索引值,整个数组){ <br>
 }</p></li>
 <li><p>第二个参数: <br>
 改变this指向,写啥是啥（如果写个null,undefined还是为window）</p></li></ul></li>
-<li><p>返回值是undefined，不可以链式调用。 <br>
+<li><p>返回值是undefined，不会改变原数组。 <br>
 <code>let arr = [true,'haha',10,{},[1,2,3]]; <br>
 arr.forEach(function(item,i,all){ <br>
     // console.log(item);//数组中的每项 <br>
@@ -3058,10 +3068,14 @@ if(!cn.split(' ').includes(cname)){ <br>
 
 
 
-<h3 id="运动函数-tween">运动函数   tween</h3>
+<h3 id="运动函数-tween">运动函数   Tween</h3>
 
 <ul><li><p>ActionScript  -&gt; AS</p></li>
 </ul>
+
+
+
+<h4 id="速度版运动">速度版运动</h4>
 
 
 
@@ -3077,20 +3091,271 @@ if(!cn.split(' ').includes(cname)){ <br>
 
 <h5 id="动画帧">动画帧:</h5>
 
-<ul><li><p>requestAnimationFrame(函数)</p>
+<ul><li><p><strong>requestAnimationFrame(函数)   动画帧</strong></p>
 
 <ul>
 <li><p>返回值为number（编号）</p></li></ul></li>
-<li><p>关闭动画帧</p>
-
-<ul>
-<li><p>cancelAnimationFrame(编号)</p></li></ul></li>
+<li><p><strong>cancelAnimationFrame(编号)  关闭动画帧</strong></p></li>
 <li><p>匀速运动:</p>
 
 <ul>
 <li><p>b + c * (t/d)  </p></li></ul></li>
 </ul>
 
+<h4 id="回调函数">回调函数</h4>
 
+<blockquote>
+  <p>回调（ 钩子函数 ） -&gt; 在做某件事情(某个条件成立)的时候调用函数</p>
+</blockquote>
 
-<h4 id="速度版运动">速度版运动</h4></div></body></html>
+<ul><li><p>点击 onclick</p>
+
+<ul>
+<li><p>在按下的时候 + 抬起的时候 = 点击</p></li></ul></li>
+<li><p>onmousedown -&gt; 鼠标按下</p></li>
+<li><p>onmouseup -&gt; 鼠标抬起</p></li>
+</ul>
+
+<h3 id="事件">事件</h3>
+
+<blockquote>
+  <p>1、每个元素天生都有很多属性、方法及事件，如果没有事件函数，赋值此时事件的默认值为null <br>
+  2、如果有系统内置的事件默认值为null，自定义的事件为undefined <br>
+  3、当用户操作浏览器的时候，用户被当做被监听者，浏览器一直监听者用户的操作，会触发若干个事件，如果某个事件上有事件函数，那么就被执行</p>
+</blockquote>
+
+<ul><li><p><strong>DOM0级事件</strong></p>
+
+<ul>
+<li><p>on事件 + 事件函数为原始的事件绑定方式</p></li>
+<li><p>解除事件将某个元素的事件赋值为null</p>
+
+<ul>
+<li><p>ele.事件 = null </p></li></ul></li></ul></li>
+<li><p>1级DOM–(为什么没有1级DOM)</p>
+
+<ul>
+<li><p>DOM级别1于1998年10月1日成为W3C推荐标准。1级DOM标准中并没有定义事件相关的内容，所以没有所谓的1级DOM事件模型。在2级DOM中除了定义了一些DOM相关的操作之外还定义了一个事件模型 ，这个标准下的事件模型就是我们所说的2级DOM事件模型 </p></li></ul></li>
+<li><p><strong>DOM2级事件</strong></p>
+
+<ul>
+<li><p>事件绑定:</p>
+
+<ul>
+<li><p>ele.addEventListener(‘不带on的事件名’,函数,是否捕获)</p></li></ul></li>
+<li><p>事件解除:(重要的是解除绑定)</p>
+
+<ul>
+<li><p>ele.removeEventListener(‘不带on的事件名’,有名函数(和绑定函数一个地址),是否捕获) <br>
+<code>btn.addEventListener('click',c.bind(this)); <br>
+function c(){ <br>
+alert(1); <br>
+//绑定和解除绑定不是同一地址，所以解除不了 <br>
+btn.removeEventListener('click',c); <br>
+}</code></p></li></ul></li></ul></li>
+<li><p><strong>onclick  点击</strong></p></li>
+<li><p><strong>onmouseover  移入</strong></p></li>
+<li><p><strong>onmouseout  移出</strong></p></li>
+<li><p><strong>onmousedown  鼠标按下</strong></p></li>
+<li><p><strong>onmouseup  鼠标抬起</strong></p></li>
+<li><p><strong>onscroll 有滚动条的时候滚轮时触发</strong></p></li>
+<li><p><strong>onload  加载完后</strong></p></li>
+<li><p><strong>onerror  异常加载</strong></p></li>
+<li><p><strong>onhashchange  当hash值发生变化的时候就触发</strong></p></li>
+<li><p><strong>onresize  缩放浏览器的时候触发的事件</strong></p></li>
+</ul>
+
+<h4 id="事件模型">事件模型</h4>
+
+<ul><li><p>从捕获阶段 到 目标阶段 再到 冒泡阶段 的过程称为<strong>事件流</strong>。</p>
+
+<ul>
+<li><p>先执行捕获再执行冒泡</p></li>
+<li><p>如果事件绑定的是目标元素，那么是按照绑定事件函数的先后顺序来依次执行（跟捕获冒泡没关系）</p></li></ul></li>
+<li><p>从window 到 目标点的阶段叫<strong>捕获阶段</strong>。</p>
+
+<ul>
+<li><p>在捕获的过程中，如果上级和下级(祖先级关系)绑定同一事件函数；那么先触发上级的在触发下级的</p></li>
+<li><p>DOM0捕获不到捕获阶段，只有冒泡阶段。 <br>
+<code>box1.addEventListener(不带on的事件名,function(){ <br>
+    alert('red'); <br>
+},是否捕获); <br>
+捕获就为: true <br>
+冒泡就为:false  （默认）</code></p></li></ul></li>
+<li><p>从目标点由下而上 直到window 叫做<strong>冒泡阶段</strong> 。</p>
+
+<ul>
+<li><p>在这个过程中，如果上级和下级同理有祖先关系，绑定同一事件函数 先触发目标 再触发目标的上级，这整个过程叫做<strong>事件流 事件模型</strong></p></li></ul></li>
+<li><p>祖先级关系 是套个多层 </p></li>
+</ul>
+
+<h4 id="冒泡的坏处阻止冒泡">冒泡的坏处–阻止冒泡</h4>
+
+<ul><li><p>事件函数中的第一个参数，默认为<strong>事件对象</strong></p></li>
+<li><p><strong>事件对象:</strong></p>
+
+<ul>
+<li><p>当用户触发某个事件的时候，记录用户操作页面的一些细节信息</p></li></ul></li>
+<li><p><strong>阻止冒泡</strong>：(目的是为了不让自己冒泡触发祖先级的同一事件)</p>
+
+<ul>
+<li><p>ev.cancelBubble = true;  它不是一个标准，但是所有浏览器都支持</p></li>
+<li><p>ev.stopPropagation(); 它是标准，但是在低版本IE下是不兼容的</p></li></ul></li>
+<li><p>chrome/IE</p>
+
+<ul>
+<li><p>window中都有一个event</p></li></ul></li>
+<li><p>FF中是没有event对象的  <br>
+<code>let onoff = true; <br>
+btn.onclick = function(ev){ <br>
+    if(onoff){ <br>
+        box.style.display = 'block'; <br>
+        btn.innerHTML = '隐藏' <br>
+    }else{ <br>
+        box.style.display = 'none'; <br>
+        btn.innerHTML = '打开' <br>
+    } <br>
+    onoff = !onoff; <br>
+    // alert(1); <br>
+    // ev.cancelBubble = true; <br>
+    ev.stopPropagation(); <br>
+    // console.log(ev) <br>
+} <br>
+document.onclick = function(){ <br>
+box.style.display = 'none'; <br>
+onoff = true; <br>
+btn.innerHTML = '打开' <br>
+}</code></p></li>
+</ul>
+
+<h4 id="冒泡的好处事件委托">冒泡的好处–事件委托</h4>
+
+<ul><li><p><strong>ev.target  目标点(事件源)</strong></p>
+
+<ul>
+<li><p>在嵌套关系中，给上层元素绑定事件，可以通过事件源查到事件触发的对象(元素)</p></li></ul></li>
+<li><p><strong>tagName 查看标签名  注意：大写</strong></p></li>
+<li><p>jq中有个delegate原理就是事件委托。 <br>
+<code>ul.onclick = function(ev){ <br>
+// console.log(ev.target) <br>
+if(ev.target.tagName === 'LI'){ <br>
+   console.log(ev.target.parentNode.children) <br>
+   let lis = ev.target.parentNode.children; <br>
+   for(let i=0;i&lt;lis.length;i++){ <br>
+       console.log(lis[i]===ev.target,lis[i],i); <br>
+       if(lis[i] !== ev.target){ <br>
+           lis[i].style.background = ''; <br>
+       }else{ <br>
+           ev.target.style.background = 'green'; <br>
+       } <br>
+   } <br>
+} <br>
+// console.log(ev.target.tagName) <br>
+}</code></p></li>
+</ul>
+
+<h4 id="没有冒泡的也可以阻止穿透">没有冒泡的，也可以阻止穿透</h4>
+
+<ul><li><p><strong>onmouseenter 移入</strong></p></li>
+<li><p><strong>onmouseleave 移出</strong> <br>
+<code>box.onmouseenter = function(){ <br>
+    alert('box移入') <br>
+} <br>
+box.onmouseleave = function(){ <br>
+    alert('bo移出') <br>
+} <br>
+box1.onmouseenter = function(){ <br>
+    alert('box2移入') <br>
+}</code></p></li>
+</ul>
+
+<h4 id="坐标值">坐标值</h4>
+
+<ul><li><p>基于浏览器可视区的顶端</p>
+
+<ul>
+<li><p><strong>ev.clientX  横轴   数字类型</strong></p></li>
+<li><p><strong>ev.clientY  纵轴   数字类型</strong></p></li></ul></li>
+<li><p>基于body的</p>
+
+<ul>
+<li><p><strong>ev.pageX   横轴</strong></p></li>
+<li><p><strong>ev.pageY   纵轴</strong>     </p></li></ul></li>
+</ul>
+
+<h4 id="键盘事件">键盘事件</h4>
+
+<ul><li><p><strong>onkeydown  键盘按下</strong>  获取不到最新的value值</p></li>
+<li><p><strong>onkeyup    键盘抬起</strong>  可以获取到最新的value值</p></li>
+<li><p><strong>ev.keyCode   键码</strong>  获取的值为数字类型</p>
+
+<ul>
+<li><p>37-40  键盘的左上右下</p></li>
+<li><p>空格 32</p></li></ul></li>
+<li><p>特殊按键:</p>
+
+<ul>
+<li><p><strong>ev.ctrlKey</strong></p></li>
+<li><p><strong>ev.shiftKey</strong></p></li>
+<li><p><strong>ev.altKey</strong></p></li></ul></li>
+<li><p>只要按住就为true，否则false <br>
+<code>//第一种2个键值写法 <br>
+    let code = false; <br>
+    txt.onkeydown = function (ev) { <br>
+        if (ev.keyCode === 17) { <br>
+            code = true; <br>
+            console.log(code); <br>
+        } <br>
+    } <br>
+    txt.onkeyup = function (ev) { <br>
+        if (ev.keyCode === 13 &amp;&amp; code) { <br>
+            console.log('bong'); <br>
+        } <br>
+        if (ev.keyCode === 17) { <br>
+            code = false; <br>
+        } <br>
+    }</code> <br>
+<code>//第二种2个键值写法。 <br>
+    txt.onkeyup = function (ev) { <br>
+        if (ev.keyCode === 13 &amp;&amp; ev.shiftKey) { <br>
+            let li = document.createElement('li'); <br>
+            li.innerHTML = this.value; <br>
+            //下面这种写法和上面这种写法结果一样 <br>
+            ul.insertBefore(li, ul.children[0]); <br>
+            txt.value = ''; <br>
+        } <br>
+    }</code></p></li>
+<li><p>当按键的时候会停顿一下，这个停顿有助于提高用户体验，避免重复输入</p></li>
+</ul>
+
+<pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><div class="hljs-line"><span class="hljs-keyword">let</span> numL = <span class="hljs-number">0</span>;
+</div><div class="hljs-line"><span class="hljs-keyword">let</span> numT = <span class="hljs-number">0</span>;
+</div><div class="hljs-line"><span class="hljs-keyword">let</span> timer = <span class="hljs-literal">null</span>;
+</div><div class="hljs-line"><span class="hljs-built_in">document</span>.onkeydown = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">ev</span>) </span>{
+</div><div class="hljs-line">   clearInterval(timer);
+</div><div class="hljs-line">   timer = setInterval(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+</div><div class="hljs-line">       <span class="hljs-keyword">switch</span> (ev.keyCode) {
+</div><div class="hljs-line">           <span class="hljs-keyword">case</span> <span class="hljs-number">39</span>: <span class="hljs-comment">//右</span>
+</div><div class="hljs-line">               numL += <span class="hljs-number">10</span>;
+</div><div class="hljs-line">               box.style.left = numL + <span class="hljs-string">'px'</span>;
+</div><div class="hljs-line">               <span class="hljs-keyword">break</span>;
+</div><div class="hljs-line">           <span class="hljs-keyword">case</span> <span class="hljs-number">40</span>: <span class="hljs-comment">//下</span>
+</div><div class="hljs-line">               numT += <span class="hljs-number">10</span>;
+</div><div class="hljs-line">               box.style.top = numT + <span class="hljs-string">'px'</span>;
+</div><div class="hljs-line">               <span class="hljs-keyword">break</span>;
+</div><div class="hljs-line">           <span class="hljs-keyword">case</span> <span class="hljs-number">37</span>: <span class="hljs-comment">//左</span>
+</div><div class="hljs-line">               numL -= <span class="hljs-number">10</span>;
+</div><div class="hljs-line">               box.style.left = numL + <span class="hljs-string">'px'</span>;
+</div><div class="hljs-line">               <span class="hljs-keyword">break</span>;
+</div><div class="hljs-line">           <span class="hljs-keyword">case</span> <span class="hljs-number">38</span>: <span class="hljs-comment">//上</span>
+</div><div class="hljs-line">               numT -= <span class="hljs-number">10</span>;
+</div><div class="hljs-line">               box.style.top = numT + <span class="hljs-string">'px'</span>;
+</div><div class="hljs-line">               <span class="hljs-keyword">break</span>;
+</div><div class="hljs-line">       }
+</div><div class="hljs-line">   }, <span class="hljs-number">22</span>);
+</div><div class="hljs-line">}
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line"><span class="hljs-built_in">document</span>.onkeyup = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+</div><div class="hljs-line">   clearInterval(timer);
+</div><div class="hljs-line">}
+</div></code></pre></div></body></html>
