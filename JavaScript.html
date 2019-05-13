@@ -192,12 +192,13 @@
 <li><a href="#正则">正则</a></li>
 <li><a href="#盒子模型">盒子模型</a><ul>
 <li><a href="#计算后的样式">计算后的样式：</a></li>
-<li><a href="#获取宽高">获取宽高：</a></li>
-<li><a href="#距离">距离</a></li>
+<li><a href="#获取宽高尺寸">获取宽高尺寸：</a></li>
+<li><a href="#可视区的宽高">可视区的宽高</a></li>
 <li><a href="#绝对位置当前元素到页面顶端的位置">绝对位置：当前元素到页面顶端的位置。</a></li>
 </ul>
 </li>
 <li><a href="#bombrowser-object-model-浏览器对象模型">BOM:Browser Object Model  浏览器对象模型</a><ul>
+<li><a href="#滚动距离">滚动距离</a></li>
 <li><a href="#浏览器地址信息">浏览器地址信息</a></li>
 <li><a href="#延迟加载">延迟加载</a></li>
 <li><a href="#替换图片">替换图片</a></li>
@@ -226,6 +227,23 @@
 <li><a href="#焦点事件">焦点事件</a></li>
 <li><a href="#滚轮事件">滚轮事件</a></li>
 <li><a href="#加载事件">加载事件</a></li>
+</ul>
+</li>
+<li><a href="#拖拽">拖拽</a><ul>
+<li><ul>
+<li><a href="#1拖拽">1、拖拽</a></li>
+<li><a href="#2拖拽">2、拖拽</a></li>
+<li><a href="#3dom2拖拽">3、DOM2拖拽</a></li>
+</ul>
+</li>
+<li><a href="#4在限制范围内拖拽">4、在限制范围内拖拽</a><ul>
+<li><a href="#5仿windows的拖拽">5、仿windows的拖拽</a></li>
+</ul>
+</li>
+<li><a href="#自定义滚动条">自定义滚动条</a><ul>
+<li><a href="#自定义滚动条加滚轮">自定义滚动条—加滚轮</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -2801,7 +2819,7 @@ str.match(/^1[89]$/)</code></p>
 
 
 
-<h4 id="获取宽高">获取宽高：</h4>
+<h4 id="获取宽高尺寸">获取宽高尺寸：</h4>
 
 <ul><li><p><strong>ele.clientWidth/ele.clientHeight</strong></p>
 
@@ -2823,83 +2841,74 @@ str.match(/^1[89]$/)</code></p>
 
 
 
-<h4 id="距离">距离</h4>
+<h4 id="可视区的宽高">可视区的宽高</h4>
 
-<ul><li><p><strong>offsetParent</strong></p>
-
-<ul>
-<li><p>定位父级，没有定位父级走body</p></li></ul></li>
-<li><p><strong>offsetLeft</strong></p>
+<ul><li><p><strong>document.documentElement.clientWidth/document.documentElement.clientHeight</strong>  </p>
 
 <ul>
-<li><p>当前元素（左外边框）到定位父级的（左内边框）距离</p></li>
-<li><p>获取的是不带单位的数字。 </p></li></ul></li>
-<li><p><strong>offsetTop</strong></p>
+<li><p>不包含滚动条</p></li></ul></li>
+<li><p><strong>window.innerWidth/window.innerHeight</strong> （BOM）</p>
 
 <ul>
-<li><p>当前元素（上外边框）到定位父级的（上内边框）距离</p></li>
-<li><p>获取的是不带单位的数字。 </p></li></ul></li>
-</ul>
-
-<blockquote>
-  <p>如果要使用上面的属性，一定要做到以下几点: <br>
-  1.子级有绝对定位 <br>
-   2.定位父级也一定要有定位 <br>
-  3.子级和父级都要有宽高（触发haslayout，zoom:1）</p>
-</blockquote>
-
-
-
-<h4 id="绝对位置当前元素到页面顶端的位置">绝对位置：当前元素到页面顶端的位置。</h4>
-
-<ul><li><p><strong>clientLeft/clientTop  边框尺寸</strong></p></li>
-<li><p><strong>getComputedStyle(box3).borderTopWidth  边框尺寸</strong></p></li>
-<li><p><strong>getBoundingClientRect( )  当前元素到页面可视区的尺寸、距离</strong></p>
-
-<ul>
-<li><p>width/height/left/right/top/bottom/x/y</p></li>
-<li><p><strong>注意：是跟滚动条走的。</strong></p></li></ul></li>
-</ul>
-
-
-
-<h3 id="bombrowser-object-model-浏览器对象模型">BOM:Browser Object Model  浏览器对象模型</h3>
-
-<ul><li><p>获取浏览器的尺寸</p>
-
-<ul>
-<li><p><strong>window.innerWidth/window.innerHeight</strong></p>
+<li><p>包含滚动条</p>
 
 <blockquote>
   <p>注意: <br>
   window.innerWidth||window.innerHeight如果有滚动条，是忽略了滚动条的尺寸的  1280 <br>
   document.body.clientWidth(浏览器的尺寸,排除滚动条的) ，使用的时候把默认样式清除  1263</p>
 </blockquote></li></ul></li>
-<li><p><strong>window.open(url,用什么方式打开_blank,_self)</strong></p>
+</ul>
 
-<ul>
-<li><p>打开新的窗口</p>
+<h4 id="绝对位置当前元素到页面顶端的位置">绝对位置：当前元素到页面顶端的位置。</h4>
+
+<ul><li><p><strong>offsetParent  定位父级，没有就按照body走</strong></p></li>
+<li><p><strong>offsetLeft/offsetTop  当前元素的左|上外边框到定位父级的左|上的内边框的距离</strong></p>
 
 <blockquote>
-  <p>注意：需要用户主动触发才不会被拦截 <br>
-  <code>比如： window.open('http://www.baidu.com')</code></p>
-</blockquote></li></ul></li>
-<li><p><strong>window.close( );</strong></p>
+  <p>如果要使用offsetLeft/offsetTop的属性，一定要做到以下几点: <br>
+  1.子级有绝对定位 <br>
+   2.定位父级也一定要有定位 <br>
+  3.子级和父级都要有宽高（触发haslayout，zoom:1）</p>
+</blockquote></li>
+<li><p><strong>getBoundingClientRect( )top/left( )  当前元素到页面可视区的尺寸、距离</strong></p>
 
 <ul>
-<li><p>关闭浏览器窗口，最好也是用户主动触发体验才好</p></li></ul></li>
-<li><p><strong>window.pageYOffset/window.pageXOffset</strong></p>
+<li><p>width/height/left/right/top/bottom/x/y</p></li>
+<li><p><strong>注意：是跟滚动条走的。</strong></p></li></ul></li>
+<li><p><strong>clientLeft/clientTop  边框尺寸</strong></p></li>
+</ul>
+
+<h3 id="bombrowser-object-model-浏览器对象模型">BOM:Browser Object Model  浏览器对象模型</h3>
+
+
+
+<h4 id="滚动距离">滚动距离</h4>
+
+<ul><li><p><strong>window.pageYOffset/window.pageXOffset</strong></p>
 
 <ul>
 <li><p>滚动条的距离，只能读不能写</p></li></ul></li>
 <li><p><strong>window.scrollTo(x,y) </strong></p>
 
 <ul>
-<li><p>专门用来写滚动条距离的</p></li></ul></li>
-<li><p><strong>document.documentElement.scrollTop</strong></p>
+<li><p>专门用来写滚动条距离的，只写</p></li></ul></li>
+<li><p><strong>document.documentElement.scrollTop/document.documentElement.scrollLeft</strong></p>
 
 <ul>
 <li><p>滚动条的距离，既能读也能写(document.documentElement=HTML)</p></li></ul></li>
+<li><p>打开新的窗口</p>
+
+<ul>
+<li><p><strong>window.open(url,用什么方式打开_blank,_self)</strong></p>
+
+<blockquote>
+  <p>注意：需要用户主动触发才不会被拦截 <br>
+  <code>比如： window.open('http://www.baidu.com')</code></p>
+</blockquote></li></ul></li>
+<li><p>关闭浏览器窗口，最好也是用户主动触发体验才好</p>
+
+<ul>
+<li><p><strong>window.close( );</strong></p></li></ul></li>
 <li><p><strong>window.onresize  缩放浏览器的时候触发的事件</strong></p></li>
 <li><p><strong>window.onscroll  有滚动条的时候滚轮时触发</strong></p></li>
 <li><p><strong>window.navigator.userAgent  查看用户的浏览器内核信息</strong></p>
@@ -2908,27 +2917,29 @@ str.match(/^1[89]$/)</code></p>
 <li><p>注意：使用的时候判断的字符串有可能会被模拟。</p></li>
 <li><p>Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.103 Safari/537.36</p></li>
 <li><p>操作系统的版本，位数</p></li></ul></li>
-<li><p><strong>window.location.href   在当前页面中跳转页面</strong></p></li>
 </ul>
-
-
 
 <h4 id="浏览器地址信息">浏览器地址信息</h4>
 
-<ul><li><p><strong>hash: “”</strong>  浏览器hash信息 #之后的信息，更换这个信息是不会刷新页面的</p></li>
-<li><p><strong>window.location.hash</strong> 即能读也能写</p></li>
-<li><p><strong>host: “”</strong>  ip地址 + 端口号</p></li>
-<li><p><strong>hostname: “”</strong> ip地址</p></li>
-<li><p><strong>href: “”</strong>  url</p></li>
-<li><p><strong>origin: “file://”</strong></p></li>
-<li><p><strong>port: “”</strong> 端口</p></li>
-<li><p><strong>protocol: “file:”</strong>  协议</p></li>
-<li><p><strong>reload: ƒ reload()</strong>   刷新页面</p></li>
-<li><p><strong>replace: ƒ ()</strong> 替换页面</p></li>
-<li><p><strong>search: “”</strong>  查询信息</p>
+<ul><li><p><strong>window.location.hash</strong> 即能读也能写 –<strong>重点</strong></p>
 
 <ul>
-<li><p>window.location.search</p></li>
+<li><p><strong>hash: “”</strong>  浏览器hash信息 (#及之后的信息)，更换这个信息是不会刷新页面的 </p></li></ul></li>
+<li><p><strong>host: “”</strong>  ip地址 + 端口号</p></li>
+<li><p><strong>hostname: “”</strong> ip地址</p></li>
+<li><p><strong>href: “”</strong>  url地址 –<strong>重点</strong></p>
+
+<ul>
+<li><p><strong>window.location.href   在当前页面中跳转页面</strong></p></li></ul></li>
+<li><p><strong>origin: “file://”</strong></p></li>
+<li><p><strong>port: “”</strong> 端口 –<strong>重点</strong></p></li>
+<li><p><strong>protocol: “file:”</strong>  协议 –<strong>重点</strong></p></li>
+<li><p><strong>reload: ƒ reload()</strong>   刷新页面 –<strong>重点</strong></p></li>
+<li><p><strong>replace: ƒ ()</strong> 替换页面</p></li>
+<li><p><strong>search: “”</strong>  查询信息  –<strong>重点</strong></p>
+
+<ul>
+<li><p>window.location.search –<strong>重点</strong></p></li>
 <li><p>?到#号之间的信息</p></li>
 <li><p>即可读也可写，只不过写的时候会刷新页面 <br>
 <code>http://www.zhufengpeixun.cn?num=1#page=0</code></p></li></ul></li>
@@ -2936,14 +2947,14 @@ str.match(/^1[89]$/)</code></p>
 <code>window.onhashchange = function(){ <br>
     alert('触发'); <br>
 }</code></p></li>
-<li><p><strong>window.location.reload( )</strong>  刷新页面</p></li>
+<li><p><strong>window.location.reload( )</strong>  刷新页面  –<strong>重点</strong></p></li>
 </ul>
-
-
 
 <h4 id="延迟加载">延迟加载</h4>
 
-
+<ul><li><p>防抖：高频率不触发，停下来才触发</p></li>
+<li><p>节流：每隔一段时间触发                </p></li>
+</ul>
 
 <pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><div class="hljs-line"><span class="hljs-comment">//工具中的绝对位置</span>
 </div><div class="hljs-line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Tools</span> </span>{
@@ -3050,7 +3061,7 @@ str.match(/^1[89]$/)</code></p>
 <ul><li><p>元素身上有个classList对象</p>
 
 <ul>
-<li><p>add(类名)  添加类名</p></li>
+<li><p>add(类名,…)  添加类名</p></li>
 <li><p>remove(类名) 删除类名</p></li>
 <li><p>replace(替换谁，替换成什么)替换</p></li>
 <li><p>contains(类名) 布尔值</p></li>
@@ -3152,11 +3163,11 @@ if(!cn.split(' ').includes(cname)){ <br>
 <li><p>事件绑定:</p>
 
 <ul>
-<li><p>ele.addEventListener(‘不带on的事件名’,函数,是否捕获)</p></li></ul></li>
+<li><p><strong>ele.addEventListener(‘不带on的事件名’,函数,是否捕获)</strong></p></li></ul></li>
 <li><p>事件解除:(重要的是解除绑定)</p>
 
 <ul>
-<li><p>ele.removeEventListener(‘不带on的事件名’,有名函数(和绑定函数一个地址),是否捕获) <br>
+<li><p><strong>ele.removeEventListener(‘不带on的事件名’,有名函数(和绑定函数一个地址),是否捕获)</strong> <br>
 <code>btn.addEventListener('click',c.bind(this)); <br>
 function c(){ <br>
 alert(1); <br>
@@ -3164,6 +3175,7 @@ alert(1); <br>
 btn.removeEventListener('click',c); <br>
 }</code></p></li></ul></li></ul></li>
 <li><p><strong>onclick  点击</strong></p></li>
+<li><p><strong>ondblclick  鼠标双击事件</strong></p></li>
 <li><p><strong>onmouseover  移入</strong></p></li>
 <li><p><strong>onmouseout  移出</strong></p></li>
 <li><p><strong>onmousedown  鼠标按下</strong></p></li>
@@ -3174,8 +3186,6 @@ btn.removeEventListener('click',c); <br>
 <li><p><strong>onhashchange  当hash值发生变化的时候就触发</strong></p></li>
 <li><p><strong>onresize  缩放浏览器的时候触发的事件</strong></p></li>
 </ul>
-
-
 
 <h4 id="事件模型">事件模型</h4>
 
@@ -3409,6 +3419,8 @@ box1.onmouseenter = function(){ <br>
   如果想阻止某部分元素的默认行为，那么在指定的元素下阻止即可。</p>
 </blockquote>
 
+
+
 <pre class="prettyprint hljs-dark"><code class="hljs lua"><div class="hljs-line">// document.onkeydown = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(ev)</span></span>{
 </div><div class="hljs-line">    //     // console.log(ev);
 </div><div class="hljs-line">    //     // ev.returnValue = <span class="hljs-literal">false</span>;
@@ -3426,10 +3438,14 @@ box1.onmouseenter = function(){ <br>
 </div><div class="hljs-line">    }
 </div></code></pre>
 
+
+
 <h4 id="右键默认菜单">右键默认菜单</h4>
 
 <ul><li><p>oncontextmenu 事件可以阻止右键菜单</p></li>
 </ul>
+
+
 
 <pre class="prettyprint hljs-dark"><code class="hljs javascript"><div class="hljs-line"><span class="hljs-built_in">document</span>.onmousedown = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">ev</span>)</span>{
 </div><div class="hljs-line">   <span class="hljs-comment">// console.log(1);</span>
@@ -3441,7 +3457,7 @@ box1.onmouseenter = function(){ <br>
 
 <h4 id="输入文字">输入文字</h4>
 
-<ul><li><p>oninput： 改变输入框的内容就触发</p></li>
+<ul><li><p>oninput： 改变输入框的内容就触发    </p></li>
 </ul>
 
 
@@ -3455,14 +3471,12 @@ box1.onmouseenter = function(){ <br>
 
 <h4 id="焦点事件">焦点事件</h4>
 
-<ul><li><p>焦点事件： onfocus()           </p></li>
+<ul><li><p>聚焦事件： onfocus()           </p></li>
 <li><p>失去焦点事件： onblur()</p></li>
 <li><p>自动聚焦： ele.focus()     </p></li>
 <li><p>select() 选中文本框的内容 （它也有聚焦的功能）</p></li>
 <li><p>onchange  内容改变的时候触发(内容一定要不一致才触发)</p></li>
 </ul>
-
-
 
 <pre class="prettyprint hljs-dark"><code class="hljs awk"><div class="hljs-line">let arr = [<span class="hljs-string">'0.jpg'</span>,<span class="hljs-string">'1.jpg'</span>,<span class="hljs-string">'2.jpg'</span>]
 </div><div class="hljs-line">    sele.onchange = <span class="hljs-keyword">function</span>(){
@@ -3492,21 +3506,23 @@ box1.onmouseenter = function(){ <br>
 <h4 id="滚轮事件">滚轮事件</h4>
 
 <ul><li><p>onscroll  滚轮事件  （页面必须要有滚动条）</p></li>
-<li><p>onmousewheel  滚轮事件(只要鼠标滚轮就触发)</p></li>
+<li><p>onmousewheel  （Chrome）没有滚动条的滚轮事件(只要鼠标滚轮就触发)</p>
+
+<ul>
 <li><p>ev.wheelDelta 可以检测滚动的方向</p>
 
 <ul>
-<li><p>180  为上滚轮</p></li>
-<li><p>-180 为下滚轮    </p></li></ul></li>
-<li><p>DOMMouseScroll  FF的滚轮（只能使用DOM2来进行绑定）</p></li>
+<li><p>大于0， 为上滚轮</p></li>
+<li><p>小于0， 为下滚轮    </p></li></ul></li></ul></li>
+<li><p>DOMMouseScroll  （FF的滚轮）（只能使用DOM2来进行绑定）</p>
+
+<ul>
 <li><p>ev.detail  可以检测滚动的方向</p>
 
 <ul>
-<li><p>-3  为上滚轮</p></li>
-<li><p>3  为下滚轮</p></li></ul></li>
+<li><p>小于0， 为上滚轮</p></li>
+<li><p>大于0， 为下滚轮</p></li></ul></li></ul></li>
 </ul>
-
-
 
 <pre class="prettyprint hljs-dark"><code class="hljs javascript"><div class="hljs-line"><span class="hljs-built_in">document</span>.onmousewheel = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">ev</span>)</span>{
 </div><div class="hljs-line">        <span class="hljs-keyword">if</span>(ev.wheelDelta &gt; <span class="hljs-number">0</span>){
@@ -3551,6 +3567,8 @@ box1.onmouseenter = function(){ <br>
 <ul><li><p>在try中包裹可能会报错的代码，包裹之后不会影响下面代码执行，只要捕获到错误，那么会进catch</p></li>
 </ul>
 
+
+
 <pre class="prettyprint hljs-dark"><code class="hljs scilab"><div class="hljs-line"><span class="hljs-keyword">try</span>{
 </div><div class="hljs-line">     document.documentElement.doScroll(<span class="hljs-string">'left'</span>)
 </div><div class="hljs-line">     console.<span class="hljs-built_in">log</span>(<span class="hljs-string">'DOM加载完成'</span>);
@@ -3566,4 +3584,399 @@ box1.onmouseenter = function(){ <br>
 </div><div class="hljs-line">        console.<span class="hljs-built_in">log</span>(<span class="hljs-built_in">error</span>);<span class="hljs-comment">//字符串</span>
 </div><div class="hljs-line">    }
 </div><div class="hljs-line">    alert(a);
+</div></code></pre>
+
+
+
+<h3 id="拖拽">拖拽</h3>
+
+<ul><li><p>实现的原理：改变元素top值和left值</p></li>
+<li><p>拖拽三大事件：这3个事件写拖拽在PC上是需要嵌套的。</p>
+
+<ul>
+<li><p>onmousedown</p></li>
+<li><p>onmousemove</p></li>
+<li><p>onmouseup</p></li></ul></li>
+</ul>
+
+<h5 id="1拖拽">1、拖拽</h5>
+
+<pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><div class="hljs-line"><span class="hljs-comment">//存按下的坐标的</span>
+</div><div class="hljs-line">    <span class="hljs-keyword">let</span> l = <span class="hljs-number">0</span>;
+</div><div class="hljs-line">    <span class="hljs-keyword">let</span> t = <span class="hljs-number">0</span>;
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">    <span class="hljs-keyword">let</span> ol = <span class="hljs-number">0</span>;
+</div><div class="hljs-line">    <span class="hljs-keyword">let</span> ot = <span class="hljs-number">0</span>;
+</div><div class="hljs-line">    box.onmousedown = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">ev</span>)</span>{
+</div><div class="hljs-line">        l = ev.pageX; <span class="hljs-comment">//按下的坐标</span>
+</div><div class="hljs-line">        t = ev.pageY;
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">        <span class="hljs-comment">//每次按下的时候去记录元素的初始距离</span>
+</div><div class="hljs-line">        ol = box.offsetLeft;
+</div><div class="hljs-line">        ot = box.offsetTop;
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">        box.onmousemove = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">ev</span>)</span>{
+</div><div class="hljs-line">            <span class="hljs-comment">//移动的坐标（ev.pageX） - 按下的坐标（l）</span>
+</div><div class="hljs-line">            <span class="hljs-comment">// console.log()</span>
+</div><div class="hljs-line">            box.style.left = ol + ev.pageX - l + <span class="hljs-string">'px'</span>;
+</div><div class="hljs-line">            box.style.top = ot + ev.pageY - t + <span class="hljs-string">'px'</span>;
+</div><div class="hljs-line">        }
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">        box.onmouseup = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
+</div><div class="hljs-line">            box.onmousemove = <span class="hljs-literal">null</span>;
+</div><div class="hljs-line">        }
+</div><div class="hljs-line">    }
+</div></code></pre>
+
+<h5 id="2拖拽">2、拖拽</h5>
+
+<pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><div class="hljs-line"><span class="hljs-keyword">let</span> num = <span class="hljs-number">0</span>;
+</div><div class="hljs-line">    <span class="hljs-comment">//按下的时候</span>
+</div><div class="hljs-line">    box.onmousedown = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">ev</span>)</span>{
+</div><div class="hljs-line">        <span class="hljs-comment">//拿到那一小段距离（按下的位置到边界位置）</span>
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">        <span class="hljs-comment">/*</span>
+</div><div class="hljs-line"><span class="hljs-comment">            按下的位置：</span>
+</div><div class="hljs-line"><span class="hljs-comment">                ev.pageX </span>
+</div><div class="hljs-line"><span class="hljs-comment">                ev.pageY</span>
+</div><div class="hljs-line"><span class="hljs-comment"></span>
+</div><div class="hljs-line"><span class="hljs-comment">            元素的初始位置</span>
+</div><div class="hljs-line"><span class="hljs-comment">                box.offsetLeft</span>
+</div><div class="hljs-line"><span class="hljs-comment">                box.offsetTop</span>
+</div><div class="hljs-line"><span class="hljs-comment"></span>
+</div><div class="hljs-line"><span class="hljs-comment">            按下的位置 - 元素的初始位置 = 拿到那一小段距离</span>
+</div><div class="hljs-line"><span class="hljs-comment"></span>
+</div><div class="hljs-line"><span class="hljs-comment">            问题:</span>
+</div><div class="hljs-line"><span class="hljs-comment">                1.当mousemove在元素身上的时候，鼠标移动过快会导致</span>
+</div><div class="hljs-line"><span class="hljs-comment">                鼠标脱离元素，脱离元素就不能让元素移动</span>
+</div><div class="hljs-line"><span class="hljs-comment"></span>
+</div><div class="hljs-line"><span class="hljs-comment">                解决:</span>
+</div><div class="hljs-line"><span class="hljs-comment">                    把元素身上的mousemove换到document身上</span>
+</div><div class="hljs-line"><span class="hljs-comment"></span>
+</div><div class="hljs-line"><span class="hljs-comment"></span>
+</div><div class="hljs-line"><span class="hljs-comment">                2.当mouseup的时候如果鼠标不在元素身上，那么</span>
+</div><div class="hljs-line"><span class="hljs-comment">                  解除move行为也就失效了</span>
+</div><div class="hljs-line"><span class="hljs-comment"></span>
+</div><div class="hljs-line"><span class="hljs-comment">                解决:</span>
+</div><div class="hljs-line"><span class="hljs-comment">                    把元素身上的mouseup换到document身上</span>
+</div><div class="hljs-line"><span class="hljs-comment"></span>
+</div><div class="hljs-line"><span class="hljs-comment">                3.如果在mouseup的时候只清除move函数的行为</span>
+</div><div class="hljs-line"><span class="hljs-comment">                那么在document进行up的行为还会执行</span>
+</div><div class="hljs-line"><span class="hljs-comment"></span>
+</div><div class="hljs-line"><span class="hljs-comment">                解决:</span>
+</div><div class="hljs-line"><span class="hljs-comment">                    在清除mousemove的时候也把mouseup清除</span>
+</div><div class="hljs-line"><span class="hljs-comment"></span>
+</div><div class="hljs-line"><span class="hljs-comment"></span>
+</div><div class="hljs-line"><span class="hljs-comment">        */</span>
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">        <span class="hljs-keyword">let</span> disX = ev.pageX - box.offsetLeft;
+</div><div class="hljs-line">        <span class="hljs-keyword">let</span> disY = ev.pageY - box.offsetTop;
+</div><div class="hljs-line">        <span class="hljs-comment">//为了保证移动过元素的</span>
+</div><div class="hljs-line">        <span class="hljs-keyword">let</span> onoff = <span class="hljs-literal">false</span>;
+</div><div class="hljs-line">        <span class="hljs-built_in">document</span>.onmousemove = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">ev</span>)</span>{
+</div><div class="hljs-line">            <span class="hljs-comment">//只要移动过元素就设置为true</span>
+</div><div class="hljs-line">            onoff = <span class="hljs-literal">true</span>;
+</div><div class="hljs-line">            <span class="hljs-comment">//在move的过程当值就可以求出元素的位置</span>
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">            <span class="hljs-comment">/*</span>
+</div><div class="hljs-line"><span class="hljs-comment">                移动时的坐标 - 那一小段距离 = 盒子当前的位置 </span>
+</div><div class="hljs-line"><span class="hljs-comment">            */</span>
+</div><div class="hljs-line">            box.style.left = ev.pageX - disX + <span class="hljs-string">'px'</span>;
+</div><div class="hljs-line">            box.style.top = ev.pageY - disY + <span class="hljs-string">'px'</span>;
+</div><div class="hljs-line">        }
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">        <span class="hljs-built_in">document</span>.onmouseup = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
+</div><div class="hljs-line">            <span class="hljs-comment">//只要移动过就进行累计</span>
+</div><div class="hljs-line">            <span class="hljs-keyword">if</span>(onoff){
+</div><div class="hljs-line">                num++;
+</div><div class="hljs-line">                <span class="hljs-built_in">console</span>.log(num);
+</div><div class="hljs-line">            }
+</div><div class="hljs-line">            <span class="hljs-comment">//在鼠标抬起的时候清除move</span>
+</div><div class="hljs-line">            <span class="hljs-built_in">document</span>.onmousemove = <span class="hljs-literal">null</span>;
+</div><div class="hljs-line">            <span class="hljs-built_in">document</span>.onmouseup = <span class="hljs-literal">null</span>;
+</div><div class="hljs-line">        }
+</div><div class="hljs-line">        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+</div><div class="hljs-line">    }
+</div></code></pre>
+
+
+
+<h5 id="3dom2拖拽">3、DOM2拖拽</h5>
+
+<pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><div class="hljs-line">box.addEventListener(<span class="hljs-string">'mousedown'</span>,<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">ev</span>)</span>{
+</div><div class="hljs-line">        <span class="hljs-keyword">let</span> disX = ev.pageX - <span class="hljs-keyword">this</span>.offsetLeft;
+</div><div class="hljs-line">        <span class="hljs-keyword">let</span> disY = ev.pageY - <span class="hljs-keyword">this</span>.offsetTop;
+</div><div class="hljs-line">        <span class="hljs-keyword">let</span> move = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">ev</span>)</span>{
+</div><div class="hljs-line">            box.style.left = ev.pageX - disX + <span class="hljs-string">'px'</span>;
+</div><div class="hljs-line">            box.style.top = ev.pageY - disY + <span class="hljs-string">'px'</span>;
+</div><div class="hljs-line">        }
+</div><div class="hljs-line">        <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">up</span>(<span class="hljs-params"></span>)</span>{
+</div><div class="hljs-line">            <span class="hljs-built_in">document</span>.removeEventListener(<span class="hljs-string">'mousemove'</span>,move);
+</div><div class="hljs-line">            <span class="hljs-built_in">document</span>.removeEventListener(<span class="hljs-string">'mouseup'</span>,up);
+</div><div class="hljs-line">        }
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">        <span class="hljs-built_in">document</span>.addEventListener(<span class="hljs-string">'mousemove'</span>,move);
+</div><div class="hljs-line">        <span class="hljs-built_in">document</span>.addEventListener(<span class="hljs-string">'mouseup'</span>,up);
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">        <span class="hljs-comment">// ev.returnValue = false;</span>
+</div><div class="hljs-line">        ev.preventDefault();
+</div><div class="hljs-line">    });
+</div></code></pre>
+
+
+
+<h4 id="4在限制范围内拖拽">4、在限制范围内拖拽</h4>
+
+<pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><div class="hljs-line"><span class="hljs-comment">/*</span>
+</div><div class="hljs-line"><span class="hljs-comment">        在拖拽元素的时候，要注意该元素的一个定位问题</span>
+</div><div class="hljs-line"><span class="hljs-comment"></span>
+</div><div class="hljs-line"><span class="hljs-comment">        父级要有相对定位，自己有绝对定位</span>
+</div><div class="hljs-line"><span class="hljs-comment"></span>
+</div><div class="hljs-line"><span class="hljs-comment">        如果没有相对定位，在限制范围的时候还要减去box的offsetLeft和border的尺寸</span>
+</div><div class="hljs-line"><span class="hljs-comment"></span>
+</div><div class="hljs-line"><span class="hljs-comment">    */</span>
+</div><div class="hljs-line">    box2.onmousedown = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">ev</span>)</span>{
+</div><div class="hljs-line">        <span class="hljs-keyword">let</span> disX = ev.pageX - box2.offsetLeft;
+</div><div class="hljs-line">        <span class="hljs-keyword">let</span> disY = ev.pageY - box2.offsetTop;
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">        <span class="hljs-built_in">console</span>.log(ev.pageX,box2.offsetLeft)
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">        box.onmousemove = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">ev</span>)</span>{
+</div><div class="hljs-line">            <span class="hljs-keyword">let</span> l = ev.pageX - disX;
+</div><div class="hljs-line">            <span class="hljs-keyword">let</span> t = ev.pageY - disY;
+</div><div class="hljs-line">            <span class="hljs-keyword">if</span>(l &lt; <span class="hljs-number">0</span>){
+</div><div class="hljs-line">                l = <span class="hljs-number">0</span>;
+</div><div class="hljs-line">            }<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(l &gt; <span class="hljs-number">2</span> + box.offsetLeft + box.clientWidth - box2.clientWidth){
+</div><div class="hljs-line">                l = <span class="hljs-number">2</span> + box.offsetLeft + box.clientWidth - box2.clientWidth;
+</div><div class="hljs-line">            }
+</div><div class="hljs-line">            <span class="hljs-keyword">if</span>(t &lt; <span class="hljs-number">0</span>){
+</div><div class="hljs-line">                t = <span class="hljs-number">0</span>;
+</div><div class="hljs-line">            }<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(t &gt; box.clientHeight - box2.clientHeight){
+</div><div class="hljs-line">                t = box.clientHeight - box2.clientHeight;
+</div><div class="hljs-line">            }
+</div><div class="hljs-line">            box2.style.left = l + <span class="hljs-string">'px'</span>;
+</div><div class="hljs-line">            box2.style.top = t + <span class="hljs-string">'px'</span>;
+</div><div class="hljs-line">        }
+</div><div class="hljs-line">        <span class="hljs-built_in">document</span>.onmouseup = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
+</div><div class="hljs-line">            box.onmousemove = <span class="hljs-built_in">document</span>.onmouseup = <span class="hljs-literal">null</span>;
+</div><div class="hljs-line">        }
+</div><div class="hljs-line">    }
+</div></code></pre>
+
+
+
+<h5 id="5仿windows的拖拽">5、仿windows的拖拽</h5>
+
+<pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><div class="hljs-line"><span class="hljs-comment">/*</span>
+</div><div class="hljs-line"><span class="hljs-comment">        1.在按下box的时候，创建一个跟它一样一样的元素</span>
+</div><div class="hljs-line"><span class="hljs-comment">        2.拖动一样一样的那个元素</span>
+</div><div class="hljs-line"><span class="hljs-comment">        3.抬起的时候把一样一样元素的位置给按下的那个box</span>
+</div><div class="hljs-line"><span class="hljs-comment">        4.再删除一样一样的那个元素</span>
+</div><div class="hljs-line"><span class="hljs-comment">    */</span>
+</div><div class="hljs-line">    box.onmousedown = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">ev</span>)</span>{
+</div><div class="hljs-line">        <span class="hljs-keyword">let</span> disX = ev.pageX - box.offsetLeft;
+</div><div class="hljs-line">        <span class="hljs-keyword">let</span> disY = ev.pageY - box.offsetTop;
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">        <span class="hljs-comment">//创建一个元素</span>
+</div><div class="hljs-line">        <span class="hljs-keyword">let</span> createBox = <span class="hljs-built_in">document</span>.createElement(<span class="hljs-string">'div'</span>);
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">        createBox.className = <span class="hljs-string">'active'</span>;
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">        <span class="hljs-comment">//为了第二次点击的时候一样一样这个元素的位置不为0</span>
+</div><div class="hljs-line">        <span class="hljs-comment">//所以把box的初始位置给一样一样这个元素</span>
+</div><div class="hljs-line">        createBox.style.left = box.offsetLeft + <span class="hljs-string">'px'</span>;
+</div><div class="hljs-line">        createBox.style.top = box.offsetTop + <span class="hljs-string">'px'</span>;
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">        <span class="hljs-comment">// for(let attr in getComputedStyle(box)){</span>
+</div><div class="hljs-line">        <span class="hljs-comment">//     createBox.style[attr] = getComputedStyle(box)[attr];</span>
+</div><div class="hljs-line">        <span class="hljs-comment">// }</span>
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">        <span class="hljs-comment">//插入到页面</span>
+</div><div class="hljs-line">        body.appendChild(createBox);
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">        <span class="hljs-comment">// console.log(createBox)</span>
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">        <span class="hljs-built_in">document</span>.onmousemove = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">ev</span>)</span>{
+</div><div class="hljs-line">            <span class="hljs-keyword">let</span> l = ev.pageX - disX;
+</div><div class="hljs-line">            <span class="hljs-keyword">let</span> t = ev.pageY - disY;
+</div><div class="hljs-line">            <span class="hljs-comment">//移动一样一样那个元素</span>
+</div><div class="hljs-line">            createBox.style.left = l + <span class="hljs-string">'px'</span>;
+</div><div class="hljs-line">            createBox.style.top = t + <span class="hljs-string">'px'</span>;
+</div><div class="hljs-line">        }
+</div><div class="hljs-line">        <span class="hljs-built_in">document</span>.onmouseup = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
+</div><div class="hljs-line">            <span class="hljs-comment">//把一样一样那个元素的位置给box</span>
+</div><div class="hljs-line">            box.style.left = createBox.style.left;
+</div><div class="hljs-line">            box.style.top = createBox.style.top;
+</div><div class="hljs-line">            <span class="hljs-comment">//删除一样一样那个元素</span>
+</div><div class="hljs-line">            createBox.remove();
+</div><div class="hljs-line">            <span class="hljs-built_in">document</span>.onmousemove = <span class="hljs-built_in">document</span>.onmouseup = <span class="hljs-literal">null</span>;
+</div><div class="hljs-line">        }
+</div><div class="hljs-line">        <span class="hljs-comment">//阻止默认行为</span>
+</div><div class="hljs-line">        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+</div><div class="hljs-line">    }
+</div></code></pre>
+
+
+
+<h4 id="自定义滚动条">自定义滚动条</h4>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><div class="hljs-line"><span class="hljs-comment">/*</span>
+</div><div class="hljs-line"><span class="hljs-comment">        比例:</span>
+</div><div class="hljs-line"><span class="hljs-comment"></span>
+</div><div class="hljs-line"><span class="hljs-comment">            0 - 1</span>
+</div><div class="hljs-line"><span class="hljs-comment"></span>
+</div><div class="hljs-line"><span class="hljs-comment">            1/1</span>
+</div><div class="hljs-line"><span class="hljs-comment"></span>
+</div><div class="hljs-line"><span class="hljs-comment">            box2的top / (黑色的高度 - 红色的高度) = 0到1之间的比例</span>
+</div><div class="hljs-line"><span class="hljs-comment"></span>
+</div><div class="hljs-line"><span class="hljs-comment">    */</span>
+</div><div class="hljs-line">    box2.onmousedown = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">ev</span>)</span>{
+</div><div class="hljs-line">        <span class="hljs-keyword">let</span> disY = ev.pageY - box2.offsetTop;
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">        <span class="hljs-built_in">document</span>.onmousemove = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">ev</span>)</span>{
+</div><div class="hljs-line">            <span class="hljs-keyword">let</span> t = ev.pageY - disY;
+</div><div class="hljs-line">            <span class="hljs-keyword">if</span>(t &lt; <span class="hljs-number">0</span>){
+</div><div class="hljs-line">                t = <span class="hljs-number">0</span>;
+</div><div class="hljs-line">            }<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(t &gt; box.clientHeight - box2.clientHeight){
+</div><div class="hljs-line">                t = box.clientHeight - box2.clientHeight;
+</div><div class="hljs-line">            }
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">            <span class="hljs-keyword">let</span> scale = t / (box.clientHeight - box2.clientHeight);
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">            <span class="hljs-built_in">console</span>.log(box4.scrollHeight)
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">            <span class="hljs-comment">/*</span>
+</div><div class="hljs-line"><span class="hljs-comment">                box4的top值 = 比例 * (被内容撑开的高度 - 内容可视区的高度)</span>
+</div><div class="hljs-line"><span class="hljs-comment">            */</span>
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">            box4.style.top = - scale * (box4.scrollHeight - box3.clientHeight) + <span class="hljs-string">'px'</span>;
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">            box2.style.top = t + <span class="hljs-string">'px'</span>;
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">        }
+</div><div class="hljs-line">        <span class="hljs-built_in">document</span>.onmouseup = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
+</div><div class="hljs-line">            <span class="hljs-built_in">document</span>.onmousemove = <span class="hljs-built_in">document</span>.onmouseup = <span class="hljs-literal">null</span>;
+</div><div class="hljs-line">        }
+</div><div class="hljs-line">    }
+</div></code></pre>
+
+
+
+<h5 id="自定义滚动条加滚轮">自定义滚动条—加滚轮</h5>
+
+<pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><div class="hljs-line"><span class="hljs-comment">/*</span>
+</div><div class="hljs-line"><span class="hljs-comment">       1.加滚轮</span>
+</div><div class="hljs-line"><span class="hljs-comment"></span>
+</div><div class="hljs-line"><span class="hljs-comment">       2.页面的内容是否小于内容可视区的高度，就隐藏滚动条</span>
+</div><div class="hljs-line"><span class="hljs-comment"></span>
+</div><div class="hljs-line"><span class="hljs-comment">       3.内容越多，滚动条越短，内容越少滚动条就越长</span>
+</div><div class="hljs-line"><span class="hljs-comment"></span>
+</div><div class="hljs-line"><span class="hljs-comment">    */</span>
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">    <span class="hljs-keyword">let</span> b4h = box4.scrollHeight;  <span class="hljs-comment">//box4的被内容撑开的高度</span>
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">    <span class="hljs-keyword">let</span> b3h = box3.clientHeight;<span class="hljs-comment">//内容可视区的高度</span>
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">    <span class="hljs-comment">//如果box4的高度小于等于可视区的高度，那么隐藏滚动条</span>
+</div><div class="hljs-line">    <span class="hljs-keyword">if</span>(b4h &lt;= b3h){
+</div><div class="hljs-line">        box.style.display = <span class="hljs-string">'none'</span>;
+</div><div class="hljs-line">    }
+</div><div class="hljs-line">    <span class="hljs-comment">/*</span>
+</div><div class="hljs-line"><span class="hljs-comment">        内容越多，滚动条就越短，否则就越长</span>
+</div><div class="hljs-line"><span class="hljs-comment"></span>
+</div><div class="hljs-line"><span class="hljs-comment">        最小30，最长150</span>
+</div><div class="hljs-line"><span class="hljs-comment"></span>
+</div><div class="hljs-line"><span class="hljs-comment">        30 + box3高度/box4高度 * 120</span>
+</div><div class="hljs-line"><span class="hljs-comment">    */</span>
+</div><div class="hljs-line">    <span class="hljs-keyword">let</span> h = <span class="hljs-number">30</span> + b3h/b4h * <span class="hljs-number">120</span>;
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">    <span class="hljs-comment">// if(h &lt; 30){</span>
+</div><div class="hljs-line">    <span class="hljs-comment">//     h = 30;</span>
+</div><div class="hljs-line">    <span class="hljs-comment">// }else if(h &gt; 150){</span>
+</div><div class="hljs-line">    <span class="hljs-comment">//     h = 150;</span>
+</div><div class="hljs-line">    <span class="hljs-comment">// }</span>
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">    box2.style.height = h + <span class="hljs-string">'px'</span>;
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">    box2.onmousedown = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">ev</span>)</span>{
+</div><div class="hljs-line">        <span class="hljs-keyword">let</span> disY = ev.pageY - box2.offsetTop;
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">        <span class="hljs-built_in">document</span>.onmousemove = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">ev</span>)</span>{
+</div><div class="hljs-line">            <span class="hljs-keyword">let</span> t = ev.pageY - disY;
+</div><div class="hljs-line">            <span class="hljs-keyword">if</span>(t &lt; <span class="hljs-number">0</span>){
+</div><div class="hljs-line">                t = <span class="hljs-number">0</span>;
+</div><div class="hljs-line">            }<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(t &gt; box.clientHeight - box2.clientHeight){
+</div><div class="hljs-line">                t = box.clientHeight - box2.clientHeight;
+</div><div class="hljs-line">            }
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">            <span class="hljs-keyword">let</span> scale = t / (box.clientHeight - box2.clientHeight);
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">            <span class="hljs-built_in">console</span>.log(box4.scrollHeight)
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">            <span class="hljs-comment">/*</span>
+</div><div class="hljs-line"><span class="hljs-comment">                box4的top值 = 比例 * (被内容撑开的高度 - 内容可视区的高度)</span>
+</div><div class="hljs-line"><span class="hljs-comment">            */</span>
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">            box4.style.top = - scale * (box4.scrollHeight - box3.clientHeight) + <span class="hljs-string">'px'</span>;
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">            box2.style.top = t + <span class="hljs-string">'px'</span>;
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">        }
+</div><div class="hljs-line">        <span class="hljs-built_in">document</span>.onmouseup = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
+</div><div class="hljs-line">            <span class="hljs-built_in">document</span>.onmousemove = <span class="hljs-built_in">document</span>.onmouseup = <span class="hljs-literal">null</span>;
+</div><div class="hljs-line">        }
+</div><div class="hljs-line">    }
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">    addWheel(box,<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">o</span>)</span>{
+</div><div class="hljs-line">        <span class="hljs-keyword">let</span> t = box2.offsetTop;
+</div><div class="hljs-line">        <span class="hljs-keyword">if</span>(o){
+</div><div class="hljs-line">            t -= <span class="hljs-number">5</span>;
+</div><div class="hljs-line">        }<span class="hljs-keyword">else</span>{
+</div><div class="hljs-line">            t += <span class="hljs-number">5</span>;
+</div><div class="hljs-line">        }
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">        <span class="hljs-keyword">if</span>(t &lt; <span class="hljs-number">0</span>){
+</div><div class="hljs-line">            t = <span class="hljs-number">0</span>;
+</div><div class="hljs-line">        }<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(t &gt; box.clientHeight - box2.clientHeight){
+</div><div class="hljs-line">            t = box.clientHeight - box2.clientHeight;
+</div><div class="hljs-line">        }
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">        <span class="hljs-keyword">let</span> scale = t / (box.clientHeight - box2.clientHeight);
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">        box4.style.top = - scale * (box4.scrollHeight - box3.clientHeight) + <span class="hljs-string">'px'</span>;
+</div><div class="hljs-line">        box2.style.top = t + <span class="hljs-string">'px'</span>;
+</div><div class="hljs-line">    });
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">addWheel</span>(<span class="hljs-params">obj,fn</span>)</span>{
+</div><div class="hljs-line">        <span class="hljs-comment">//let w = window.navigator.userAgent.toLowerCase();</span>
+</div><div class="hljs-line">        <span class="hljs-comment">// if(w.includes('chrome')){</span>
+</div><div class="hljs-line">        <span class="hljs-keyword">if</span>(obj.onmousewheel === <span class="hljs-literal">null</span>){
+</div><div class="hljs-line">        <span class="hljs-comment">// if('onmousewheel' in window){</span>
+</div><div class="hljs-line">            obj.onmousewheel = whell;
+</div><div class="hljs-line">        }<span class="hljs-keyword">else</span>{
+</div><div class="hljs-line">            obj.addEventListener(<span class="hljs-string">'DOMMouseScroll'</span>,whell);
+</div><div class="hljs-line">        }
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">        <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">whell</span>(<span class="hljs-params">ev</span>)</span>{
+</div><div class="hljs-line">            <span class="hljs-keyword">let</span> o = <span class="hljs-literal">true</span>;
+</div><div class="hljs-line">            <span class="hljs-comment">// console.log(ev.wheelDelta);</span>
+</div><div class="hljs-line">            <span class="hljs-keyword">if</span>(ev.wheelDelta){ <span class="hljs-comment">//是chrome</span>
+</div><div class="hljs-line">                o = ev.wheelDelta &gt; <span class="hljs-number">0</span>?<span class="hljs-literal">true</span>:<span class="hljs-literal">false</span>;
+</div><div class="hljs-line">            }<span class="hljs-keyword">else</span>{
+</div><div class="hljs-line">                o = ev.detail &lt; <span class="hljs-number">0</span>?<span class="hljs-literal">true</span>:<span class="hljs-literal">false</span>;
+</div><div class="hljs-line">            }
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">            <span class="hljs-comment">//回调函数</span>
+</div><div class="hljs-line">            fn &amp;&amp; fn(o);
+</div><div class="hljs-line">        }
+</div><div class="hljs-line">    }
 </div></code></pre></div></body></html>
