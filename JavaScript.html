@@ -2859,6 +2859,8 @@ str.match(/^1[89]$/)</code></p>
 </blockquote></li></ul></li>
 </ul>
 
+
+
 <h4 id="绝对位置当前元素到页面顶端的位置">绝对位置：当前元素到页面顶端的位置。</h4>
 
 <ul><li><p><strong>offsetParent  定位父级，没有就按照body走</strong></p></li>
@@ -2877,6 +2879,8 @@ str.match(/^1[89]$/)</code></p>
 <li><p><strong>注意：是跟滚动条走的。</strong></p></li></ul></li>
 <li><p><strong>clientLeft/clientTop  边框尺寸</strong></p></li>
 </ul>
+
+
 
 <h3 id="bombrowser-object-model-浏览器对象模型">BOM:Browser Object Model  浏览器对象模型</h3>
 
@@ -2919,6 +2923,8 @@ str.match(/^1[89]$/)</code></p>
 <li><p>操作系统的版本，位数</p></li></ul></li>
 </ul>
 
+
+
 <h4 id="浏览器地址信息">浏览器地址信息</h4>
 
 <ul><li><p><strong>window.location.hash</strong> 即能读也能写 –<strong>重点</strong></p>
@@ -2950,11 +2956,15 @@ str.match(/^1[89]$/)</code></p>
 <li><p><strong>window.location.reload( )</strong>  刷新页面  –<strong>重点</strong></p></li>
 </ul>
 
+
+
 <h4 id="延迟加载">延迟加载</h4>
 
 <ul><li><p>防抖：高频率不触发，停下来才触发</p></li>
 <li><p>节流：每隔一段时间触发                </p></li>
 </ul>
+
+
 
 <pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><div class="hljs-line"><span class="hljs-comment">//工具中的绝对位置</span>
 </div><div class="hljs-line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Tools</span> </span>{
@@ -3061,29 +3071,55 @@ str.match(/^1[89]$/)</code></p>
 <ul><li><p>元素身上有个classList对象</p>
 
 <ul>
-<li><p>add(类名,…)  添加类名</p></li>
-<li><p>remove(类名) 删除类名</p></li>
-<li><p>replace(替换谁，替换成什么)替换</p></li>
-<li><p>contains(类名) 布尔值</p></li>
-<li><p>toggle(类名) 切换  返回值还是布尔值 <br>
-<code>document.onclick = function(){ <br>
-// addClass(box,'red'); <br>
-// box.classList.add('red'); <br>
-// box.classList.replace('bg','red'); <br>
-// console.log(box.classList.contains('bg')) <br>
-console.log(box.classList.toggle('bg')); <br>
-console.log(box.classList); <br>
-} <br>
-function addClass(obj,cname){ <br>
-let cn = obj.className; <br>
-if(!cn.split(' ').includes(cname)){ <br>
-    cn += ' red'; <br>
-    obj.className =  cn; <br>
-}; <br>
-}</code></p></li></ul></li>
+<li><p><strong>add(类名,…)  添加类名</strong></p>
+
+<ul>
+<li><p>在元素中添加一个或多个类名。</p></li>
+<li><p>如果指定的类名已存在，则不会添加</p></li></ul></li>
+<li><p><strong>remove(类名) 移除类名</strong>。</p>
+
+<ul>
+<li><p>移除元素中一个或多个类名。</p></li>
+<li><p>注意： 移除不存在的类名，不会报错。</p></li></ul></li>
+<li><p><strong>replace(替换谁，替换成什么)  替换</strong></p></li>
+<li><p><strong>contains(类名)  判断指定的类名是否存在</strong></p>
+
+<ul>
+<li><p>返回布尔值</p></li>
+<li><p>true - 元素已经包含了该类名</p></li>
+<li><p>false - 元素中不存在该类名</p></li></ul></li>
+<li><p><strong>toggle(类名, true|false)   在元素中切换类名</strong>。  </p>
+
+<ul>
+<li><p>返回值是布尔值</p></li>
+<li><p>第一个参数为要在元素中移除的类名，并返回 false。 </p></li>
+<li><p>如果该类名不存在则会在元素中添加类名，并返回 true。</p></li>
+<li><p>第二个是可选参数，是个布尔值用于设置元素是否强制添加或移除类，不管该类名是否存在。</p>
+
+<ul>
+<li><p>移除一个 class: element.classList.toggle(“classToRemove”, false); </p></li>
+<li><p>添加一个 class: element.classList.toggle(“classToAdd”, true);</p>
+
+<blockquote>
+  <p>注意： Internet Explorer 或 Opera 12 及其更早版本不支持第二个参数。</p>
+</blockquote></li></ul></li></ul></li></ul></li>
 </ul>
 
-
+<p><code>document.onclick = function(){ <br>
+        // addClass(box,'red'); <br>
+        // box.classList.add('red'); <br>
+        // box.classList.replace('bg','red'); <br>
+        // console.log(box.classList.contains('bg')) <br>
+        console.log(box.classList.toggle('bg')); <br>
+        console.log(box.classList); <br>
+    } <br>
+    function addClass(obj,cname){ <br>
+        let cn = obj.className; <br>
+        if(!cn.split(' ').includes(cname)){ <br>
+            cn += ' red'; <br>
+            obj.className =  cn; <br>
+        }; <br>
+    }</code></p>
 
 <h3 id="运动函数-tween">运动函数   Tween</h3>
 
@@ -3186,6 +3222,8 @@ btn.removeEventListener('click',c); <br>
 <li><p><strong>onhashchange  当hash值发生变化的时候就触发</strong></p></li>
 <li><p><strong>onresize  缩放浏览器的时候触发的事件</strong></p></li>
 </ul>
+
+
 
 <h4 id="事件模型">事件模型</h4>
 
@@ -3478,6 +3516,8 @@ box1.onmouseenter = function(){ <br>
 <li><p>onchange  内容改变的时候触发(内容一定要不一致才触发)</p></li>
 </ul>
 
+
+
 <pre class="prettyprint hljs-dark"><code class="hljs awk"><div class="hljs-line">let arr = [<span class="hljs-string">'0.jpg'</span>,<span class="hljs-string">'1.jpg'</span>,<span class="hljs-string">'2.jpg'</span>]
 </div><div class="hljs-line">    sele.onchange = <span class="hljs-keyword">function</span>(){
 </div><div class="hljs-line">        <span class="hljs-regexp">//</span> console.log(this.value);
@@ -3523,6 +3563,8 @@ box1.onmouseenter = function(){ <br>
 <li><p>小于0， 为上滚轮</p></li>
 <li><p>大于0， 为下滚轮</p></li></ul></li></ul></li>
 </ul>
+
+
 
 <pre class="prettyprint hljs-dark"><code class="hljs javascript"><div class="hljs-line"><span class="hljs-built_in">document</span>.onmousewheel = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">ev</span>)</span>{
 </div><div class="hljs-line">        <span class="hljs-keyword">if</span>(ev.wheelDelta &gt; <span class="hljs-number">0</span>){
@@ -3599,7 +3641,11 @@ box1.onmouseenter = function(){ <br>
 <li><p>onmouseup</p></li></ul></li>
 </ul>
 
+
+
 <h5 id="1拖拽">1、拖拽</h5>
+
+
 
 <pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><div class="hljs-line"><span class="hljs-comment">//存按下的坐标的</span>
 </div><div class="hljs-line">    <span class="hljs-keyword">let</span> l = <span class="hljs-number">0</span>;
@@ -3628,7 +3674,11 @@ box1.onmouseenter = function(){ <br>
 </div><div class="hljs-line">    }
 </div></code></pre>
 
+
+
 <h5 id="2拖拽">2、拖拽</h5>
+
+
 
 <pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><div class="hljs-line"><span class="hljs-keyword">let</span> num = <span class="hljs-number">0</span>;
 </div><div class="hljs-line">    <span class="hljs-comment">//按下的时候</span>
@@ -3703,6 +3753,8 @@ box1.onmouseenter = function(){ <br>
 
 <h5 id="3dom2拖拽">3、DOM2拖拽</h5>
 
+
+
 <pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><div class="hljs-line">box.addEventListener(<span class="hljs-string">'mousedown'</span>,<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">ev</span>)</span>{
 </div><div class="hljs-line">        <span class="hljs-keyword">let</span> disX = ev.pageX - <span class="hljs-keyword">this</span>.offsetLeft;
 </div><div class="hljs-line">        <span class="hljs-keyword">let</span> disY = ev.pageY - <span class="hljs-keyword">this</span>.offsetTop;
@@ -3726,6 +3778,8 @@ box1.onmouseenter = function(){ <br>
 
 
 <h4 id="4在限制范围内拖拽">4、在限制范围内拖拽</h4>
+
+
 
 <pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><div class="hljs-line"><span class="hljs-comment">/*</span>
 </div><div class="hljs-line"><span class="hljs-comment">        在拖拽元素的时候，要注意该元素的一个定位问题</span>
@@ -3766,6 +3820,8 @@ box1.onmouseenter = function(){ <br>
 
 
 <h5 id="5仿windows的拖拽">5、仿windows的拖拽</h5>
+
+
 
 <pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><div class="hljs-line"><span class="hljs-comment">/*</span>
 </div><div class="hljs-line"><span class="hljs-comment">        1.在按下box的时候，创建一个跟它一样一样的元素</span>
@@ -3867,6 +3923,8 @@ box1.onmouseenter = function(){ <br>
 
 
 <h5 id="自定义滚动条加滚轮">自定义滚动条—加滚轮</h5>
+
+
 
 <pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><div class="hljs-line"><span class="hljs-comment">/*</span>
 </div><div class="hljs-line"><span class="hljs-comment">       1.加滚轮</span>
