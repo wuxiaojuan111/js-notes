@@ -294,12 +294,18 @@
 </ul>
 </li>
 <li><a href="#html5-css3-移动端">html5 + css3 + 移动端</a><ul>
-<li><a href="#html5的标签公司中对h5的理解就是移动端">html5的标签（公司中对H5的理解就是移动端）</a><ul>
+<li><ul>
+<li><a href="#html5的标签公司中对h5的理解就是移动端">html5的标签（公司中对H5的理解就是移动端）</a></li>
+<li><a href="#块元素行内元素行内块元素">块元素/行内元素/行内块元素</a></li>
+<li><a href="#h5标签">h5标签</a></li>
 <li><a href="#重绘">重绘</a></li>
 <li><a href="#重排回流">重排(回流)</a></li>
 <li><a href="#渐变">渐变</a></li>
-<li><a href="#background-clip">background-clip</a></li>
-<li><a href="#阴影">阴影</a></li>
+<li><a href="#背景">背景</a></li>
+<li><a href="#圆角-border-radius">圆角 border-radius</a></li>
+<li><a href="#盒子阴影">盒子阴影</a></li>
+<li><a href="#文本阴影">文本阴影</a></li>
+<li><a href="#css3选择器">CSS3选择器</a></li>
 </ul>
 </li>
 <li><a href="#css3动画">CSS3动画</a><ul>
@@ -4909,10 +4915,23 @@ box1.onmouseenter = function(){ <br>
 
 <h1 id="html5-css3-移动端">html5 + css3 + 移动端</h1>
 
-<ul><li><p>块元素/行内元素/行内块元素</p></li>
+
+
+<h3 id="html5的标签公司中对h5的理解就是移动端">html5的标签（公司中对H5的理解就是移动端）</h3>
+
+<ul><li><p>设计理念:</p></li>
+<li><p>我们采用两种设计理念来规划我们的网站</p></li>
+<li><p>渐进增强 (progressive enhancement) :</p>
+
+<ul>
+<li><p>一开始只构建站点的最少特性,然后不断的针对浏览器追加功能</p></li></ul></li>
+<li><p>优雅降级 (graceful degradation) :</p>
+
+<ul>
+<li><p>一开始就构建站点的完整功能,然后针对浏览器测试和修复</p></li></ul></li>
 </ul>
 
-
+<h3 id="块元素行内元素行内块元素">块元素/行内元素/行内块元素</h3>
 
 <pre class="prettyprint hljs-dark"><code class="hljs css"><div class="hljs-line">块:（独占一行,自上而下排列）
 </div><div class="hljs-line">   <span class="hljs-selector-tag">div</span>,<span class="hljs-selector-tag">ul</span>,<span class="hljs-selector-tag">li</span>,<span class="hljs-selector-tag">p</span>,<span class="hljs-selector-tag">h1--h6</span>,<span class="hljs-selector-tag">dl</span>  <span class="hljs-selector-tag">dt</span>  <span class="hljs-selector-tag">dd</span> <span class="hljs-selector-tag">table</span>  <span class="hljs-selector-tag">form</span>
@@ -4965,60 +4984,51 @@ box1.onmouseenter = function(){ <br>
 
 
 
-<h2 id="html5的标签公司中对h5的理解就是移动端">html5的标签（公司中对H5的理解就是移动端）</h2>
+<h3 id="h5标签">h5标签</h3>
 
+<ul><li><p>header  : 头部</p></li>
+<li><p>section : 块</p></li>
+<li><p>main : 主体部分</p></li>
+<li><p>footer : 底部</p></li>
+<li><p>nav : 导航；</p></li>
+<li><p>figure : 图片</p></li>
+<li><p>figurecaption : 图片描述</p></li>
+<li><p>article ： 文章</p></li>
+<li><p>mark : 高亮；</p></li>
+<li><p>canvas : 走显卡，要研究深入，需要算法,位图</p>
 
+<ul>
+<li><p>WEBGL ——&gt; three.js</p></li></ul></li>
+<li><p><strong>音频：</strong> <br>
+<code>&lt;audio src="https://www.runoob.com/try/demo_source/horse.mp3"&gt;</code></p></li>
+<li><p>Media.currentTime = value; //当前播放的位置，赋值可改变位置 20    </p></li>
+<li><p>Media.startTime; //一般为0，如果为流媒体或者不从0开始的资源，则不为0</p></li>
+<li><p>Media.duration; //当前资源长度流返回无限</p></li>
+<li><p>Media.paused; //是否暂停</p></li>
+<li><p>Media.defaultPlaybackRate = value;//默认的回放速度，可以设置</p></li>
+<li><p>Media.playbackRate = value;//当前播放速度，设置后马上改变</p></li>
+<li><p>Media.played; //返回已经播放的区域，TimeRanges，关于此对象见下文</p></li>
+<li><p>Media.seekable; //返回可以seek的区域 TimeRanges</p></li>
+<li><p>Media.ended;    //是否结束</p></li>
+<li><p>Media.autoPlay;    //是否自动播放</p></li>
+<li><p>Media.loop;    //是否循环播放</p></li>
+<li><p>Media.play();    //播放</p></li>
+<li><p>Media.pause();    //暂停</p></li>
+<li><p><strong>视频：</strong></p></li>
+</ul>
 
-<pre class="prettyprint hljs-dark"><code class="hljs gauss"><div class="hljs-line"><span class="hljs-built_in">header</span>  : 头部
-</div><div class="hljs-line">section : 块
-</div><div class="hljs-line">main : 主体部分
-</div><div class="hljs-line">footer : 底部
-</div><div class="hljs-line">nav : 导航；
-</div><div class="hljs-line">figure : 图片
-</div><div class="hljs-line">figurecaption : 图片描述
-</div><div class="hljs-line">article ： 文章
-</div><div class="hljs-line">mark : 高亮；
-</div><div class="hljs-line">canvas : 走显卡，要研究深入，需要算法,位图
-</div><div class="hljs-line">       WEBGL ——&gt; three.js
-</div><div class="hljs-line"><wbr>
-</div><div class="hljs-line">   音频:
-</div><div class="hljs-line">       &lt;audio src=<span class="hljs-string">"https://www.runoob.com/try/demo_source/horse.mp3"</span>&gt;
-</div><div class="hljs-line"><wbr>
-</div><div class="hljs-line"><wbr>
-</div><div class="hljs-line">   Media.currentTime = value; <span class="hljs-comment">//当前播放的位置，赋值可改变位置</span>
-</div><div class="hljs-line"><span class="hljs-number">20</span>    Media.startTime; <span class="hljs-comment">//一般为0，如果为流媒体或者不从0开始的资源，则不为0</span>
-</div><div class="hljs-line">Media.duration; <span class="hljs-comment">//当前资源长度流返回无限</span>
-</div><div class="hljs-line">Media.paused; <span class="hljs-comment">//是否暂停</span>
-</div><div class="hljs-line">Media.defaultPlaybackRate = value;<span class="hljs-comment">//默认的回放速度，可以设置</span>
-</div><div class="hljs-line">Media.playbackRate = value;<span class="hljs-comment">//当前播放速度，设置后马上改变</span>
-</div><div class="hljs-line">Media.played; <span class="hljs-comment">//返回已经播放的区域，TimeRanges，关于此对象见下文</span>
-</div><div class="hljs-line">Media.seekable; <span class="hljs-comment">//返回可以seek的区域 TimeRanges</span>
-</div><div class="hljs-line">Media.ended;    <span class="hljs-comment">//是否结束</span>
-</div><div class="hljs-line">Media.autoPlay;    <span class="hljs-comment">//是否自动播放</span>
-</div><div class="hljs-line">Media.loop;    <span class="hljs-comment">//是否循环播放</span>
-</div><div class="hljs-line">Media.play();    <span class="hljs-comment">//播放</span>
-</div><div class="hljs-line">Media.<span class="hljs-built_in">pause</span>();    <span class="hljs-comment">//暂停</span>
-</div><div class="hljs-line"><wbr>
-</div><div class="hljs-line">视频:
-</div><div class="hljs-line">   &lt;video width=<span class="hljs-string">"320"</span> height=<span class="hljs-string">"240"</span> controls&gt;
-</div><div class="hljs-line">       &lt;source src=<span class="hljs-string">"movie.mp4"</span> <span class="hljs-built_in">type</span>=<span class="hljs-string">"video/mp4"</span>&gt;
-</div><div class="hljs-line">       &lt;source src=<span class="hljs-string">"movie.ogg"</span> <span class="hljs-built_in">type</span>=<span class="hljs-string">"video/ogg"</span>&gt;
-</div><div class="hljs-line">       您的浏览器不支持Video标签。
-</div><div class="hljs-line">   &lt;/video&gt;
-</div><div class="hljs-line"><wbr>
-</div><div class="hljs-line"><wbr>
-</div><div class="hljs-line">   video这个对象下有play播放，<span class="hljs-built_in">pause</span>暂停; 
-</div><div class="hljs-line">       比如:myVideo.play(); 
-</div><div class="hljs-line"><wbr>
-</div><div class="hljs-line"><wbr>
-</div><div class="hljs-line">   controls：显示控制器，播放、暂停、进度条
-</div><div class="hljs-line"><wbr>
-</div><div class="hljs-line">   autoplay 自动播放
-</div><div class="hljs-line"><wbr>
-</div><div class="hljs-line"><span class="hljs-comment">// 新增input的属性；</span>
+<pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><div class="hljs-line">   &lt;video width=<span class="hljs-string">"320"</span> height=<span class="hljs-string">"240"</span> controls&gt;
+</div><div class="hljs-line">       <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">source</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"movie.mp4"</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"video/mp4"</span>&gt;</span></span>
+</div><div class="hljs-line"><span class="xml">       <span class="hljs-tag">&lt;<span class="hljs-name">source</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"movie.ogg"</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"video/ogg"</span>&gt;</span></span>
+</div><div class="hljs-line"><span class="xml">       您的浏览器不支持Video标签。</span>
+</div><div class="hljs-line"><span class="xml">   <span class="hljs-tag">&lt;/<span class="hljs-name">video</span>&gt;</span>  </span>
+</div><div class="hljs-line"><span class="xml">   video这个对象下有play播放，pause暂停; </span>
+</div><div class="hljs-line"><span class="xml">       比如:myVideo.play(); </span>
+</div><div class="hljs-line"><span class="xml">   controls：显示控制器，播放、暂停、进度条</span>
+</div><div class="hljs-line"><span class="xml">   autoplay 自动播放</span>
+</div><div class="hljs-line"><span class="xml"></span>
+</div><div class="hljs-line"><span class="xml">// 新增input的属性；</span>
 </div></code></pre>
-
-
 
 <h3 id="重绘">重绘</h3>
 
@@ -5051,46 +5061,168 @@ box1.onmouseenter = function(){ <br>
 
 <h3 id="渐变">渐变</h3>
 
-<blockquote>
-  <p>linear-gradient</p>
-</blockquote>
+<ul><li><p><strong>linear-gradient  直线渐变</strong></p>
+
+<ul>
+<li><p>linear-gradient([&lt;起点&gt; || &lt;角度&gt;,]? &lt;点&gt;, &lt;点&gt;…)</p></li>
+<li><p>只能用在背景上</p></li>
+<li><p>颜色是沿着一条直线轴变化</p></li>
+<li><p>参数</p>
+
+<ul>
+<li><p>起点：从什么方向开始渐变</p></li>
+<li><p>left、top、left top</p></li>
+<li><p>角度：从什么角度开始渐变</p></li>
+<li><p>xxx deg的形式</p></li>
+<li><p>点：渐变点的颜色和位置</p></li>
+<li><p>red 50%，位置可选</p></li></ul></li>
+<li><p>重复线性渐变</p></li></ul></li>
+<li><p><strong>radial-gradient  径向渐变</strong></p>
+
+<ul>
+<li><p>radial-gradient([[ || ] [at ]?,| at ,]?[,]+);</p></li>
+<li><p>从“一个点”向多方向颜色渐变</p></li>
+<li><p>shape形状 ： ellipse、circle  或设置水平半径,垂直半径</p></li>
+<li><p>size:渐变的大小，即渐变到哪里停止，有如下关键词:</p>
+
+<ul>
+<li><p>closest-side：最近边； farthest-side：最远边；</p></li>
+<li><p>closest-corner：最近角； farthest-corner：最远角 (默认值)</p></li></ul></li>
+<li><p>position ：关键词|数值|百分比</p></li>
+<li><p>重复的径向渐变</p></li></ul></li>
+</ul>
 
 
 
-<h3 id="background-clip">background-clip</h3>
+<h3 id="背景">背景</h3>
+
+<ul><li><p><strong>background-origin</strong></p>
+
+<ul>
+<li><p>padding-box 从padding区域显示（默认）</p></li>
+<li><p>border-box 从box 从content区border区域显示</p></li>
+<li><p>content-域显示</p></li></ul></li>
+<li><p><strong>background-clip</strong></p>
+
+<ul>
+<li><p>padding-box  从padding区域向外裁剪</p></li>
+<li><p>border-box  从border区域往外裁剪</p></li>
+<li><p>content-box  从content区域往外裁剪</p></li></ul></li>
+<li><p><strong>background-size</strong></p>
+
+<ul>
+<li><p>100% 100%  百分比</p></li>
+<li><p>10px 10px 数值</p></li>
+<li><p>contain   按原始比例收缩,背景图显示完整,但不一定铺满整个容器</p></li>
+<li><p>cover   按原始比例收缩,背景图可能显示不完整,但铺满整个容器</p></li></ul></li>
+<li><p><strong>background-attachment</strong> </p>
+
+<ul>
+<li><p>背景图片是滚动的还是固定的 fixed(固定的) 默认是滚动的</p></li></ul></li>
+</ul>
 
 
 
-<pre class="prettyprint hljs-dark"><code class="hljs maxima"><div class="hljs-line"><span class="hljs-built_in">border</span>-<span class="hljs-built_in">box</span>  默认值。背景绘制在边框方框内（剪切成边框方框）padding-<span class="hljs-built_in">box</span>  背景绘制在衬距方框内（剪切成衬距方框）。
-</div><div class="hljs-line"><span class="hljs-built_in">content</span>-<span class="hljs-built_in">box</span> 背景绘制在内容方框内（剪切成内容方框）。
-</div></code></pre>
+<h3 id="圆角-border-radius">圆角 border-radius</h3>
+
+<ul><li><p>border-radius: 1-4个数字 / 1-4个数字</p>
+
+<ul>
+<li><p>前面是水平半径，后面是垂直半径</p></li>
+<li><p>四个数字方向分别是左上  右上  右下  左下</p></li>
+<li><p>不给“/”则水平半径和垂直半径一样</p>
+
+<ul>
+<li><p>border-radius: 10px/5px;</p></li>
+<li><p>border-radius:60px 40px 30px 20px /30px 20px 10px 5</p></li></ul></li>
+<li><p>例子 : 圆  椭圆  半圆  扇形</p></li></ul></li>
+</ul>
 
 
 
-<h3 id="阴影">阴影</h3>
+<h3 id="盒子阴影">盒子阴影</h3>
+
+<ul><li><p><strong>box-shadow: h  v  blur spread color inset;</strong></p>
+
+<ul>
+<li><p>h :水平方向偏移</p></li>
+<li><p>v : 垂直方向偏移</p></li>
+<li><p>blur : 模糊半径</p></li>
+<li><p>spread : 扩展半径</p></li>
+<li><p>color : 颜色</p></li>
+<li><p>inset :加上这个表示内阴影 默认是外阴影</p></li></ul></li>
+</ul>
 
 
 
-<pre class="prettyprint hljs-dark"><code class="hljs groovy"><div class="hljs-line">box-<span class="hljs-string">shadow:</span> h  v  blur spread color inset;
-</div><div class="hljs-line">   <span class="hljs-string">h :</span>水平方向偏移
-</div><div class="hljs-line">   <span class="hljs-string">v :</span> 垂直方向偏移s
-</div><div class="hljs-line">   <span class="hljs-string">blur :</span> 模糊半径
-</div><div class="hljs-line">   <span class="hljs-string">spread :</span> 扩展半径
-</div><div class="hljs-line">   <span class="hljs-string">color :</span> 颜色
-</div><div class="hljs-line">   <span class="hljs-string">inset :</span>加上这个表示内阴影 默认是外阴影
-</div></code></pre>
+<h3 id="文本阴影">文本阴影</h3>
+
+<ul><li><p><strong>text-shadow : x y blur  color</strong></p>
+
+<ul>
+<li><p>x轴偏移  y轴偏移  模糊度  颜色</p></li>
+<li><p>多层阴影制作文字立体效果 ,设置多种颜色,中间以逗号隔开</p></li></ul></li>
+<li><p><strong>text-stroke: 2px blue  文字添加边框</strong></p>
+
+<ul>
+<li><p>通过设定1px的透明边框，可以让文字变得平滑</p></li>
+<li><p>颜色设成透明能创建镂空字体</p></li></ul></li>
+</ul>
+
+
+
+<h3 id="css3选择器">CSS3选择器</h3>
+
+<ul><li><p><strong>结构选择器</strong></p>
+
+<ul>
+<li><p>:nth-child(n) </p></li>
+<li><p>:nth-child(2n) 偶数元素</p></li>
+<li><p>:nth-child(2n+1) 奇数元素</p></li>
+<li><p>:nth-of-type(n)  </p></li>
+<li><p>:first-child</p></li>
+<li><p>:last-child</p></li>
+<li><p>:only-child</p></li>
+<li><p>:only-of-type</p></li>
+<li><p>:empty</p></li></ul></li>
+<li><p><strong>否定选择器</strong></p>
+
+<ul>
+<li><p>:not()</p></li></ul></li>
+<li><p><strong>属性选择器</strong></p>
+
+<ul>
+<li><p>E[attr=val]</p></li>
+<li><p>E[attr|=val]  只能等于val  或只能以val-开头</p></li>
+<li><p>E[attr*=val]  包含val字符串</p></li>
+<li><p>E[attr~=val]   属性值有多个,其中有一个是val</p></li>
+<li><p>E[attr^=val]   以val开头,不管后面是什么</p></li>
+<li><p>E[attr$=val]   以val结尾,不管前面是什么</p></li></ul></li>
+<li><p><strong>目标伪类选择器</strong></p>
+
+<ul>
+<li><p>:target 用来匹配url指向的目标元素</p></li>
+<li><p>存在url指向该匹配元素时,样式效果才会生效</p></li></ul></li>
+<li><p><strong>伪元素</strong></p>
+
+<ul>
+<li><p>: first-line  匹配第一行文本</p></li>
+<li><p>: first-letter 匹配第一个首字符</p></li>
+<li><p>: before 和 : after  DOM元素前后插入额外的内容</p></li></ul></li>
+</ul>
 
 
 
 <h2 id="css3动画">CSS3动画</h2>
 
-<blockquote>
-  <p>transition  过渡动画  加在运动物体身上 <br>
-  transition-property  过渡属性  all | [attr] <br>
-  transition-duration 过渡时间 <br>
-  transition-delay 延迟时间 <br>
-  transition-timing-function 运动类型 </p>
-</blockquote>
+<ul><li><p><strong>transition  过渡动画  加在运动物体身上</strong></p></li>
+<li><p><strong>transition-property  过渡属性  all | [attr]</strong></p></li>
+<li><p><strong>transition-duration 过渡时间</strong></p></li>
+<li><p><strong>transition-delay 延迟时间</strong></p></li>
+<li><p><strong>transition-timing-function 运动类型</strong></p></li>
+</ul>
+
+
 
 <pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><div class="hljs-line">    如果transition第一个参数不写，默认为all(所有的方向)
 </div><div class="hljs-line">    也可以指定，如果为指定只有指定的属性才能享受到运动
@@ -5115,6 +5247,8 @@ box1.onmouseenter = function(){ <br>
 </div><div class="hljs-line"><wbr>
 </div></code></pre>
 
+
+
 <h3 id="动画结束触发">动画结束触发</h3>
 
 <blockquote>
@@ -5124,7 +5258,11 @@ box1.onmouseenter = function(){ <br>
   <p>注意:如果运动的属性有多个，那么每个运动完成时都会触发一次TransitionEnd，就可能导致在同一时间内执行了多次代码</p>
 </blockquote>
 
+
+
 <h3 id="2d变换">2d变换</h3>
+
+
 
 <pre class="prettyprint hljs-dark"><code class="hljs less"><div class="hljs-line">    <span class="hljs-selector-tag">transform</span>是可以连写的，但是在写的过程当中要注意先后顺序，不然会发生意想不到的惊喜。
 </div><div class="hljs-line"><wbr>
@@ -5155,21 +5293,25 @@ box1.onmouseenter = function(){ <br>
 <h3 id="3d">3D</h3>
 
 <blockquote>
-  <p>transform-style : flat | preserve-3d (3D空间展示) 内容为3D  </p>
+  <p><strong>transform-style : flat | preserve-3d (3D空间展示) 内容为3D</strong>  </p>
   
-  <p>transform:perspective(800px) 景深  近大远小</p>
+  <p><strong>transform:perspective(800px) 景深  近大远小</strong></p>
 </blockquote>
+
+
 
 <h3 id="关键帧运动">关键帧运动</h3>
 
 <blockquote>
-  <p>keyframes 自定义的名字 { <br>
+  <p><strong>@keyframes 自定义的名字</strong> { <br>
       0%{} <br>
       100%{} <br>
   }</p>
   
-  <p>animation: 自定义的名字 1s </p>
+  <p><strong>animation: 自定义的名字 1s </strong></p>
 </blockquote>
+
+
 
 <h2 id="移动端rem布局">移动端rem布局</h2>
 
@@ -5178,12 +5320,12 @@ box1.onmouseenter = function(){ <br>
   
   <p>响应式布局</p>
   
-  <p>苹果 ios  object-c  swift   闭源</p>
+  <p><strong>苹果 ios  object-c  swift   闭源</strong></p>
   
   <ul><li><p>需要APPstore审批，时间大概在7天左右，如果没有审核过又要等7天左右，当真正上线的时候有可能已经赚不到钱了 </p></li>
   </ul>
   
-  <p>安卓 c, 应用就是用java开发的  开源</p>
+  <p><strong>安卓 c, 应用就是用java开发的  开源</strong></p>
   
   <p>之前解决跨端的问题，还是比较复杂</p>
   
@@ -5201,12 +5343,14 @@ box1.onmouseenter = function(){ <br>
 <li><p>Hybrid</p></li>
 </ul>
 
-<p>REM适配:</p>
+<p><strong>REM适配:</strong></p>
 
 <blockquote>
   <p>em 单位  这个单位被自己或者父级的字体大小影响，最小为8px <br>
   rem 单位  root(根,html) em</p>
 </blockquote>
+
+
 
 <pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><div class="hljs-line">&lt;script&gt;
 </div><div class="hljs-line">    <span class="hljs-keyword">var</span> desW = <span class="hljs-number">640</span>; <span class="hljs-comment">//设计图</span>
