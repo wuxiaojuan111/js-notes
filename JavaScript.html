@@ -302,6 +302,14 @@
 <li><a href="#阴影">阴影</a></li>
 </ul>
 </li>
+<li><a href="#css3动画">CSS3动画</a><ul>
+<li><a href="#动画结束触发">动画结束触发</a></li>
+<li><a href="#2d变换">2d变换</a></li>
+<li><a href="#3d">3D</a></li>
+<li><a href="#关键帧运动">关键帧运动</a></li>
+</ul>
+</li>
+<li><a href="#移动端rem布局">移动端rem布局</a></li>
 </ul>
 </li>
 </ul>
@@ -2516,6 +2524,8 @@ fn{}  实例化对象</code>           </p></li></ul></li>
 } <br>
 fn.call('你的');</code></p>
 
+
+
 <h3 id="包装对象">包装对象：</h3>
 
 <blockquote>
@@ -4180,6 +4190,8 @@ box1.onmouseenter = function(){ <br>
 </div><div class="hljs-line">    }
 </div></code></pre>
 
+
+
 <h2 id="柯里化函数名字就是大高上currying">柯里化函数：名字就是大高上（Currying）</h2>
 
 <blockquote>
@@ -4305,11 +4317,13 @@ box1.onmouseenter = function(){ <br>
 </blockquote>
 
 <ul><li><p>原生对象转JQ对象 -&gt; $(原生对象)</p></li>
-<li><p>jQ对象转原生 -&gt; <span xmlns="http://www.w3.org/1999/xhtml" class="" rel="98ecce1d6148bf8d5779d9a5b7c9f107"><span class="MathJax_SVG" id="MathJax-Element-1-Frame" role="textbox" aria-readonly="true" style="font-size: 100%; display: inline-block;"><span><img type="image/png" width="133" height="18" longdesc="__SVG__undefined" src="data:image/png;base64,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" style="margin-top:0;margin-bottom:0;"></span></span></span>(“img”).get(0);</p></li>
+<li><p>jQ对象转原生 -&gt; <span class="" rel="98ecce1d6148bf8d5779d9a5b7c9f107"><span class="MathJax_SVG" id="MathJax-Element-2-Frame" role="textbox" aria-readonly="true" style="font-size: 100%; display: inline-block;"><span><img type="image/png" width="133" height="18" longdesc="__SVG__undefined" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQoAAAAkCAYAAABxGnQ7AAAU00lEQVR4Xu3dBbg1X1UG8BfFbrELERW7uwg7sQMbu7A7wAADG8EORMBWQmxRQexuQezu7nh+spfP/jYzc2ZO3HPvx13P8z33/z9nZs+ePXu/613vWnvOLXJt1yNw/hG4VZIHJnmNJF+Z5JOT/PP5u3XyHrxmkkcn+c0kn5Tk25P894FXvWWSZ03y5we2c8PptzhmY9dtXY/AniNQQPHMSd4lyeP2bOeynGaxflCSn0/yowudKqD4uiQfmeSvD7wB133/9u8Dd1x706X2BYp3S/KQJH+36WqnPfjZkrxJkq/f4zJPk+Q5F877lyR/tke7N/Mpz5vkKRZu8A+T/OfKASigcPg7J/mrleddxsNqsd4rya81wPjZmY4WUHxKkk+fOOYFknxakudeeaPm8csleYbGUt63gYXnBDieKcm/Jrlfkn/s2nzGJB+d5D+S/EFbQ//VX3MrUDxfkvu0zrxKkr9YeQMXcZgBQt0eleTDN6LzByd5n472PXkS/2p80Li3TPK3F3EjV+Aaz5PkG5MAZ/Y/bZL5yyyWe28A7YsCihdtYc1znHCM+8XqMj+Z5D2T/PrENXcBhVO0xzirfQ0QPCbJSyb5pTaXf6drzLj8Rpvv1hBWd8P1tgDFq7UH/w9J3iPJL+/b6xOe96pJ7p/k95LcNckfrbzWxyb5zDZQf5/kS5N8Xxcn/1OSX2kLYmWTN/VhT9acxVO2u8TG7twWRAHHhzansmYgtgKFeevfPvH8CzamA/z/fUXnajF/eXNAhyzY8XJrgGJFF3ceAih+LMlLtXDobZLMAcW3JHn3fYHiDZN8bVs475jkZ3Z27XwHGHwxH0ZAHPvTFV3pgeInkrz+QM1WNPEkfwh6jM3dtgHqMYECMGErxVh4WeLfdyRB6+vz8SG8YpK3TvJZSTi4fewaKDpqvTSABuqb27Fv2hBpnwG/yHMwi+9vLODNV8S8PVBMIupFdv6KXgsr+IHGNCzcYwEF5kC3ePEk4n7sjhMQ0wsZf2GGlgOXF0ly6yRflOTjWny+dXgvGiieNgl94N+2dnTh+JMzCjQNBTfgVNnPP2LnT93UPZN8QpKHt5jsBnFmuPg1UBz+NMT9wPllFhjFsye5R5IXHi5HbHvZ9tkvNr2jDqnvpPyEh3dv30uhotDv0IS7qTtwzLu2Y2Qg9rGLBAr3iP3Q/goU9+nzeM5JgcIDemiSN0ryyJZRoJheFePhfqhN3I9K8nkLHb8GisOf6hqgcBVhA22DFlQhw5JGUd85XsqxBPS1QLELTHbd+TGAArshaL79cDELmPanjoKuBkhfvh0DKI4FFicFCtTxC1unKf7SoVfNPibJZyf5rSRvnOTxMzdwDRSHP9m1QDF1pQIDqTnzri+2qu9+u7HaclZXCSjcM7B4uqZ9FUC+TpIfSTKXHj3kqcg8yXL8ahLhzEnETGkv3vilk/x4o+5HrfRaOQLi0zmhak0ThDUCG6HtS5J8yJMoUBw6jmvG+hhA8bsTmYUCChO9rzW4akAxNYbS+ML5YwMFkJC5wEg+N8lXtXqKo2c90KSvaXdGCPqwNTMlyfMneeUkr5Dkdkke3GobxtPftsWXPL2YtQcDOXrC1e3bX8r2gyauj+W8WRO3DPhUqgySfleSOyT5kyRoZJ8Wqmb3YRTaNonROjUl7luo9j1dX2VdUF/1J9T5Lxji7zr06Vs7/orV3bu26EOjmQQAj+ZCyTc2vfD11K1f4l39QmX1iVZT9mKtbkS/OISvmABkIKuwzrGyXEK3pXTkqYDCfFDerZ/nBAqhgZoIzFpfFOAd4sQURd23aSgjUCi0orHtW+/R13KYI5/TdJqjAgVF2aSiTTCLsEKQObwgdroxE5PKXCaufPVWoVaf8exizbL3axNV1ZhctZhtbEPmoi+FVcxDdygzgQz2lH1xxyQ+IMmXTRy0BSgsQG0ACf+t0IupdHOv6i14cH2yoAFJ2be2B1YLDh0lXr12i91v0x3/um1Cjt0l3il2YgQ6qVyVjCaeYrjnav9KHHQcoERxGTFQcZnKyjLVfz4ve+8kn5rEIi3T9t2mBrh9dghQeN4Az0KUnejrGzicb0rybWcGCnNTSpY46q+xV7PzvXvuq6j78pzMC5WRGFUZp2Ec5mo9ZIK+oRVHAdIlO4lGYbKieVU2Kvww+ZfM5FSE9bBWrcdDqfZi/SQEEgpz1LRTx9ldGvMAFACEJ4XUbr4mez9JUbX3aoNabYhrAcKUFb3z3Xe3MGoc/C1AYT+CNrEnOXr9ZgRfLAc4YmNYk7DHQ3qtdgwGpSalnxAv1BatGn1jwcTjFrcy6N4AkDGWpmYPaF7ff5tYMlOAnmhmIjKVeG/QPCBWAAQwBF6rsg/Smu6F96ls0Q8mwU6wsGoHKM2FoIcAxRwYuO5lAgrPXcGVbCAgxbiMmYVuXirZXlsEVgvdPWLtnhsNzdqRAt5lZweK12tpLh3lJYURj93V6+H7r26VkT5G/YGDxaze3EQ1oJiDyT0VVjgPwIhDmUlrEaLxPLDQ6KeaB6en2N+xVHRTBWIWqkWDRva2BSjqPMq9sMj+Egao3CMwNIaAU7iBVVTGhRdyH78/MZ5CsPLqQgUsatwrAXwxA8DMjKWxHk3dy9u1D/URCOgDAOGxvzMJJlf9As6YCsalH6gqcDbOxSbVKwCKv5yZC4cAhfBGn4WqUqC9FVDw3kK3snNrFE/VxvgzOgbMQRjfXVsbnGuMi6Fhw1gi4Dc3zJlde4vODhSVKfBATA4TdvRsM3Pl/z82MVFFxqN9fPOy2l67aQsdr3CDvmBRmLyAwlbktYZ1yM2XvVJbwP35+wAFRoFFiOUZXQFAeIA8DVbGPqJbkMANUI2b6YQgYl+aCzP5CiT7fvJiFWIBcZWHwK83DAbQCIOYjUH0jE9sjK00FAIXZsaAHDDmzUx0la2sP2YOvOrahwBFpSDtMRhpdAGFcLP/7txAUffNkRq/Yl42XJnnS6yg7gn7oCGVRlGLH4B7XqU9ARYbtnq2cnagEA9WvtciR5XXlEH3k5WH+OnGGHxuofLqFvtaE7eixEWPtYcJlKdc246F3G9bntJc9gEKGoL+MZkhwpQHjDEoAy/rx1MZvD0oownzgGLda68p1LFCHKFTAQCQwtTG0mShjHccaBOYYDaUbwCgL0yaDqsAbAy78L2woxgKwHHMHdsxxogXnLNDgOItGlACUUVbvQF61B5IXkag0FcaHSap/57HOzUmPTdWAJpOZE8RUC6g8Mw4UgBBC/mbFpJgmtaDvxW29kCBiclycETSoaOdRKOwe+yt2pVs/LIgdlGpsWOEPoKo8IKJuXnctZu0nNNnLPw/sBKb/9zCZJ36yuLrQyfVmiO93QcoepHUApSzRh37xUTPeES3uIGcST9a5dOXxqoWU507l+717DxDJkwx6YAsAa6s16GwNRqUGoZiGI7j9YC78JARbXtmNt7DIUABqOgrdB3Oqbc5tnFZGEX1FaAJH2TspphRHfcsDYyBOfHW3wIKGpRwRB0JNiecLvAA6pyD7z2vkVEo1pIOpXeMmuLRgQIFhk49o+DdINtW6wGHOgsht5pQQz0/8xAg9VbjYS3OqnibSvduBQqLR1xf3haDINDy8L2uADx853hAJ106lZ7t9RgUXwjSl5yjngDnTt3N02sKEPox6cfMwiY+aq8XcJ1bgIWlyZpwCP02eqBhsrI1DmNfoKD1CCeJ5sTc0SkVUBCEK5zTp8sGFPrEGSrwM3ZTnt0xxlnfMT2Zpx4ofD9ugKswntYEUGt8pkIP8wPoAN3+HRhHBwod1SH0ee0EmVu40pfiSkbQNDm3bnThgYlcDL1XXbn1ZTlCD4uvaL1JSTPpbStQ9KKiWJTAByRGjyuTgV4yYQNvP47BmI6eSvU6jy6DqbE50MHCAJjJyEwqae6RhfVsyDHCob7OwrkoMTrL+uzK3PPeFyiI0dr3voYxNepaxbauAlDor0yRZzwlrgv5MEEhqzBq1zbzOl74j6Wo3yibAgoORfhorIT5xSxOAhQ8jUXN9tUonNur+DQCk3dK7Z+beD5HszAAJvYjRI7i3dL5vhM/9ueYjFC/t61A4SH0gurchrkedD3Anv7X9XkVIUIvivY1Iyil7zGCShfPgU5fiap9WQJiam/YjX6VPmG3rIxHP7GFTMDVLlwmni52MTfe+wIFQVbKF3OcYkgWBIdDVO+95GVkFLvmojVgwcuOSaPvAgrHe1ZYIn2iZ6tzYmYJpUrd64U5JwEKHq0mNA9JF9iiLRgsXsDDF3MpBGJo+g/vGsnue8VbxDRUrF5TJyQysbfYCBSqTAt8qp2tQMEDeuBMZkiKVKzfm9jSYqtaD7R06v2JfXZnSsshgPK6/pXmMwc6PYDpj2uOqe1Re5h6Lr0YTRAF0DYuLdm+QIFOm9DCyqmwzIJQjDTuEr1qQGGxem6yIvW2qyWgUF0J6FXPeq5jQmEOKDBUWRd6hUya8VX7cfS9Hn38yotD/C11FCYMamXSo0LCBbZUPTlOQODiJoEEkKpCpKX9GnOTmBe2mMvcz0jFtwCF+wNglX2YK3G3SAsYl5hZD8yq/IBOpcGEHFKlGAsWUTYHukBF7MuAlLZGCtyX5xPTPJ9Rg+oBZy67Mo73PkBRZcxCt6mwwzUAgtjbwvjj7qJXDSgAnflMa6tnsgQUMijmOzZXVbX9mC+lR2ljHCph1bP030cHCvE3tbuYwJrKzP4GpHcsTjeqcEQ+mKFQVO1aBIqGCG1TlWyyEtgDIQf9VT7LLLza3+H/eVki4lI1nD0Y0kYM4CkaOqTgivrfv9uAQEk/Ga0PvTyoEogdb3yFEqN43IOpkERlJyCyv0OKs+4BY+NhUFOgZ6EbT0BTDMZYVy1L37eeDc3Va3iGJT734Az8iG9T7/bYByiwRteql8COY1hC50tMvHT3KgEF3UJSgAPtw4c5oBBumvMAgp40pXcsAUVf0KUdAqc6maPu9UB5KOxujK2JT+sBm1yoFU9mkvN8JcAIYwhrJrjyYV6Z9xvTYc6Vy+dhVOO5uXo/Z7+xy2BaGI6b2jxVfeKNa5HNFQ1tYRSOJYgyAEFoGmsZTHDxdpVa8+LEQSKTheEcoGVx61NpDxWeqJkArIRbrELFnzYYDQnoCAfsOSEa8/r9WGubFx4L5YyZOoW6nonqpau90SeIzwCNScsKIwmbruU6U9WZW4EC+KmNINBWafQIFCV0AvbxmKsEFE/sRp7wyRRQVIqUw14q3NpVcFXpdOuR07IOjwoUboBwonGmht1iGw1KEqAIhbwMT2violZVPQgQdLCEOpMX3UWjneM6WIeJgBo5zoICALUl3OSGhpgN885OHlo2RMahlPm5h9GXk/NcU1Wda4HCy3yERBVOzW2UUrWpz/QRRhcQoxobXhwA8hI9CFrcgALTcH/y7ViZ+BKoViaDOAmEquS5Sqz7tCjgBEaj9eHQXMpTX9VdYJSAWYjFo3sutX9laqy3AgWgI5DW3pOpNkuncm9j7QugoF3MvQpPe4qUiHpLb8Gamzf1+TFeXLMFKIyLOW1tLP3Oxy6gUCujLAEYS9EfPfSoAdY4j2ehCwHGtGRPYXkloGCCObaM15Cuq4VFzPOZyS+dSHCpenc3YrONBeP4/m1afarOa8XpFryNMGKpGMxiA0rCF4xGu6PoqK9rgWKsFp0TKMWG9rOUybJIOesLz1hmIQDOMmxBGheoYFYERM/AebVL1eLibewFqHAGAwEeVWchj1+vCegnqfGu1LAxLZbSH9OHasZZOyUoTmUl6twtQFFCHVEPtSbYqWr1LNFzzxhQEZ6JnOaKedTbzcgoiPYyIsLNQ/d6YCbaw/5O9uIaD0RnLWJpHJ6tn9CUVRO2hDPH0w94sXFnZl8L4TjKtgmtFLXfS+A7WoKQZ3wlutSYvHPpJtqw6Hcp8bIEpR8slSCvBYp+i7eCGinGqfJ2i1voUFkK92Yh9FvjfdYXZNUiAGgWRynjFYZUcZfjhBoYRsWuQARDk3en+/CC469tSYtiahVSzLErhWli4xpr92d8du3R2QIUWKEwTLu1J4JeY14AM2BVhl1R7kfB9WYEihrzMZS1JrA6zsdzVadhAx+2sFQFWmN4kvRoNQ7lLX7hwFTBjcUgv40hmExKo+d+80C61Y0qTUWdgQ9zLo/lL28i3JmrAjVZeHBMQ5pJVmWXlShHB7HQ5qjcWqAQ29cCFXKJ5edM2EGchOyqXYUPU4Z6A2JmItgzMrIkbM3YAILaV2KTUJlriUmJuu5xajctgQszADxCKJ587h2oQkppW0AskzKVthzvZS1QYFtCWSL3lNfkBQlwWMTSj+esBQrhifHt99/smjf99xcReljw/s3tgAai1o81ICwpQNHPKbY13h9GgQ0SyLFEbfRj7/MSWs0vz/8Gh7/rB4BU7InxLWzeU2gxmgm4puIS3ZwDEnrHmhf3rj1OH8V6Fic0JSoSV+dsLVBsmWCOXfsKOkBpkS9lb9a2tbWPc8dvvd4aoAB0HAogW2KDQkrZG8dNhZbmAYZm5yaPOuc0eGLMlQa279uoLgIo1v64kGdiXtNshNNrdqrW8wUuxk3WZcoZewmTSMEa7X9u8P/O3wUUjuHhvEdCia+Y+Ji/lHSsST22Y1AgJA1gzc8MnAooTnV/l7HdNUAh5JBa3hUy7ro/WSWhC8ax5iUvu9pb+l4YJFuHVR8COFPX0LYwk8BOl1kLZtgjVmhNrnHSh9z/aqDo9yLsU/B0cCf3aKBet2cnJxDYZde/FLZrhHZ/T1yWeqWXbP0BoN2tXx9x1hFYwyh0EFiIx4mVa96hec6bQsu8OIYYO/cezbF/PVDI7ojRiINiQ8Zr7VKhz3nP57g2Dat+e1TIJI1qAxwN5BoozvFETnjNtUChC45Ve063IECufTP3Cbt/Q9P6J2aThqxirbXXJrba6t2Ph9i2wixxMtHo+tfMnzCiXrpLoFXjwuhPUttlgIJoveulzGufz/VxZx6BLUBRXVUpaCFS0McU3DlvRxxpcmIHW38+zoRXvzAXIxJ3pEPXxpDnHIeLuPb4a+bjNX0v0/REothFdO76GscfgX2AQi8UMvGul23hrM3AHH8kr1u8HoGbeAT+F1Kuf3/+fjLAAAAAAElFTkSuQmCC" style="margin-top:0;margin-bottom:0;"></span></span></span>(“img”).get(0);</p></li>
 <li><p>$ 就是jquery对象</p></li>
 <li><p>divs.eq(数字)  div中的第某个元素，是个jquery对象</p></li>
 <li><p>index(‘缩小范围’)  自动去找某个元素基于父级的子级为第几个元素</p></li>
 </ul>
+
+
 
 <pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><div class="hljs-line"><span class="hljs-comment">//给所有按钮加点击事件函数</span>
 </div><div class="hljs-line">    btns.click(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
@@ -4396,6 +4410,8 @@ box1.onmouseenter = function(){ <br>
 <li><p><code>$('&lt;li&gt;&lt;/li&gt;')</code> 添加</p></li>
 </ul>
 
+
+
 <pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><div class="hljs-line">$(<span class="hljs-string">'#txt'</span>).keyup(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">ev</span>)</span>{
 </div><div class="hljs-line">        <span class="hljs-keyword">if</span>(ev.keyCode === <span class="hljs-number">13</span>){
 </div><div class="hljs-line">           <span class="hljs-keyword">let</span> val = $(<span class="hljs-string">'#txt'</span>)[<span class="hljs-number">0</span>].value;
@@ -4424,6 +4440,8 @@ box1.onmouseenter = function(){ <br>
 <li><p>delegate 的原理 <br>
 <code>事件委托 ——&gt;  $('ul').on('click','li',function(){})</code></p></li>
 </ul>
+
+
 
 <pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><div class="hljs-line"><span class="hljs-comment">// $('li').on('click',function(){</span>
 </div><div class="hljs-line">    <span class="hljs-comment">//     $(this).css('background','red');</span>
@@ -4542,6 +4560,8 @@ box1.onmouseenter = function(){ <br>
 </div><div class="hljs-line">    });
 </div></code></pre>
 
+
+
 <h3 id="订阅模式">订阅模式</h3>
 
 <blockquote>
@@ -4657,10 +4677,14 @@ box1.onmouseenter = function(){ <br>
 
 <h2 id="iterator-和-forof-循环">Iterator 和 for…of 循环</h2>
 
+
+
 <h3 id="for-of进行循环">for of进行循环</h3>
 
 <ul><li><p>在ES6中添加了别的数据结构(Set,Map)，他们都需要循环，所以专门通过for of来遍历这些数据结构（循环的统一标准）</p></li>
 </ul>
+
+
 
 <pre class="prettyprint hljs-dark"><code class="hljs fsharp"><div class="hljs-line">    <span class="hljs-keyword">let</span> arr = [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>];
 </div><div class="hljs-line"><wbr>
@@ -4720,6 +4744,8 @@ box1.onmouseenter = function(){ <br>
 </div><div class="hljs-line">let s = <span class="hljs-keyword">new</span> <span class="hljs-keyword">Set</span>([<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>,<span class="hljs-number">5</span>,<span class="hljs-number">5</span>]);  //<span class="hljs-keyword">set</span>{<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>,<span class="hljs-number">5</span>}
 </div></code></pre>
 
+
+
 <pre class="prettyprint hljs-dark"><code class="hljs lsl"><div class="hljs-line"><wbr>
 </div><div class="hljs-line">    写出一个方法join([<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>],[<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>])找出交集 <span class="hljs-comment">//[2,3]</span>
 </div><div class="hljs-line"><wbr>
@@ -4739,6 +4765,8 @@ box1.onmouseenter = function(){ <br>
     m.set(ele,’哈哈’); <br>
     console.log(m.get(ele));</p>
 
+
+
 <h3 id="iterator-遍历器只要数据中有symboliterator就能使用for-of">Iterator ,遍历器，只要数据中有Symbol.iterator就能使用for of</h3>
 
 <pre class="prettyprint hljs-dark"><code class="hljs ocaml"><div class="hljs-line">遍历接口返回一个对象，对象中有一个next方法
@@ -4754,11 +4782,15 @@ box1.onmouseenter = function(){ <br>
   <p>当使用for of的时候，内部会调用next方法，只要next的返回值done为false就一直调用next，直到为true就不调用next方法了</p>
 </blockquote>
 
+
+
 <h3 id="promise">promise</h3>
 
 <ul><li><p>promise解决把异步编程转成同步编程的。</p></li>
 <li><p>有三种状态，pending（初始化）、fulfilled（成功）、rejected（失败）</p></li>
 </ul>
+
+
 
 <pre class="prettyprint hljs-dark"><code class="hljs javascript"><div class="hljs-line">    <span class="hljs-keyword">let</span> p = <span class="hljs-keyword">new</span>  <span class="hljs-built_in">Promise</span>(<span class="hljs-function">(<span class="hljs-params">resolve,reject</span>)=&gt;</span>{
 </div><div class="hljs-line">        <span class="hljs-comment">//放异步代码</span>
@@ -4797,6 +4829,8 @@ box1.onmouseenter = function(){ <br>
 
 <ul><li><p>二是，函数体内部使用yield表达式，定义不同的内部状态（yield在英语里的意思就是“产出”）。</p></li>
 </ul>
+
+
 
 <pre class="prettyprint hljs-dark"><code class="hljs javascript"><div class="hljs-line"><span class="hljs-function"><span class="hljs-keyword">function</span>* <span class="hljs-title">fn</span>(<span class="hljs-params"></span>)</span>{
 </div><div class="hljs-line">    <span class="hljs-keyword">yield</span> <span class="hljs-number">4</span>;
@@ -4871,6 +4905,8 @@ box1.onmouseenter = function(){ <br>
 <li><p>第四步，协程A恢复执行。</p></li>
 </ul>
 
+
+
 <h1 id="html5-css3-移动端">html5 + css3 + 移动端</h1>
 
 <ul><li><p>块元素/行内元素/行内块元素</p></li>
@@ -4927,7 +4963,11 @@ box1.onmouseenter = function(){ <br>
 </div><div class="hljs-line"><wbr>
 </div></code></pre>
 
+
+
 <h2 id="html5的标签公司中对h5的理解就是移动端">html5的标签（公司中对H5的理解就是移动端）</h2>
+
+
 
 <pre class="prettyprint hljs-dark"><code class="hljs gauss"><div class="hljs-line"><span class="hljs-built_in">header</span>  : 头部
 </div><div class="hljs-line">section : 块
@@ -4975,14 +5015,10 @@ box1.onmouseenter = function(){ <br>
 </div><div class="hljs-line"><wbr>
 </div><div class="hljs-line">   autoplay 自动播放
 </div><div class="hljs-line"><wbr>
-</div><div class="hljs-line"><wbr>
-</div><div class="hljs-line"><wbr>
-</div><div class="hljs-line"><wbr>
-</div><div class="hljs-line"><wbr>
-</div><div class="hljs-line"><wbr>
-</div><div class="hljs-line"><wbr>
 </div><div class="hljs-line"><span class="hljs-comment">// 新增input的属性；</span>
 </div></code></pre>
+
+
 
 <h3 id="重绘">重绘</h3>
 
@@ -4990,11 +5026,15 @@ box1.onmouseenter = function(){ <br>
   <p>当改变页面中某个元素的边框、背景(非几何发生变化)，浏览器会重新对该元素进行渲染，会消耗性能</p>
 </blockquote>
 
+
+
 <h3 id="重排回流">重排(回流)</h3>
 
 <blockquote>
   <p>当修改某个元素的位置或者添加插入、删除某个(些)元素的时候(几何发生变化)，页面会进行重新渲染(局部、整个页面)，所以操作DOM非常影响性能</p>
 </blockquote>
+
+
 
 <pre class="prettyprint hljs-dark"><code class="hljs livescript"><div class="hljs-line">整个页面呈现，需要<span class="hljs-number">2</span>大部分渲染，DOM渲染，CSS渲染
 </div><div class="hljs-line"><wbr>
@@ -5007,13 +5047,19 @@ box1.onmouseenter = function(){ <br>
 </div><div class="hljs-line">渲染树<span class="hljs-function"><span class="hljs-params">(DOM树 + CSS树)</span> -&gt;</span> 结构应该在哪个位置
 </div></code></pre>
 
+
+
 <h3 id="渐变">渐变</h3>
 
 <blockquote>
   <p>linear-gradient</p>
 </blockquote>
 
+
+
 <h3 id="background-clip">background-clip</h3>
+
+
 
 <pre class="prettyprint hljs-dark"><code class="hljs maxima"><div class="hljs-line"><span class="hljs-built_in">border</span>-<span class="hljs-built_in">box</span>  默认值。背景绘制在边框方框内（剪切成边框方框）padding-<span class="hljs-built_in">box</span>  背景绘制在衬距方框内（剪切成衬距方框）。
 </div><div class="hljs-line"><span class="hljs-built_in">content</span>-<span class="hljs-built_in">box</span> 背景绘制在内容方框内（剪切成内容方框）。
@@ -5023,6 +5069,8 @@ box1.onmouseenter = function(){ <br>
 
 <h3 id="阴影">阴影</h3>
 
+
+
 <pre class="prettyprint hljs-dark"><code class="hljs groovy"><div class="hljs-line">box-<span class="hljs-string">shadow:</span> h  v  blur spread color inset;
 </div><div class="hljs-line">   <span class="hljs-string">h :</span>水平方向偏移
 </div><div class="hljs-line">   <span class="hljs-string">v :</span> 垂直方向偏移s
@@ -5030,4 +5078,153 @@ box1.onmouseenter = function(){ <br>
 </div><div class="hljs-line">   <span class="hljs-string">spread :</span> 扩展半径
 </div><div class="hljs-line">   <span class="hljs-string">color :</span> 颜色
 </div><div class="hljs-line">   <span class="hljs-string">inset :</span>加上这个表示内阴影 默认是外阴影
+</div></code></pre>
+
+
+
+<h2 id="css3动画">CSS3动画</h2>
+
+<blockquote>
+  <p>transition  过渡动画  加在运动物体身上 <br>
+  transition-property  过渡属性  all | [attr] <br>
+  transition-duration 过渡时间 <br>
+  transition-delay 延迟时间 <br>
+  transition-timing-function 运动类型 </p>
+</blockquote>
+
+<pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><div class="hljs-line">    如果transition第一个参数不写，默认为all(所有的方向)
+</div><div class="hljs-line">    也可以指定，如果为指定只有指定的属性才能享受到运动
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">    连写:
+</div><div class="hljs-line">        transition:运动属性 运动时间 运动的延迟
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">    小技巧:
+</div><div class="hljs-line">        在使用css3动画的时候，有可能会出现运动失效的情况，
+</div><div class="hljs-line">        可以通过定时器setTimeout，让运动进行异步运行，可以解决BUG
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">        box.style.display = <span class="hljs-string">'block'</span>;
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">        setTimeout(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+</div><div class="hljs-line">            box.style.transition = <span class="hljs-string">'1s'</span>;
+</div><div class="hljs-line">            box.style.width = <span class="hljs-string">'300px'</span>;
+</div><div class="hljs-line">            box.style.height = <span class="hljs-string">'300px'</span>;
+</div><div class="hljs-line">            box.style.opacity = <span class="hljs-number">.3</span>;
+</div><div class="hljs-line">        });
+</div><div class="hljs-line"><wbr>
+</div></code></pre>
+
+<h3 id="动画结束触发">动画结束触发</h3>
+
+<blockquote>
+  <p>transitionend   webkitTransitionEnd  mozTransitionEnd…. <br>
+  ele.addEventListener(‘webkitTransitionEnd’,function(){},false);</p>
+  
+  <p>注意:如果运动的属性有多个，那么每个运动完成时都会触发一次TransitionEnd，就可能导致在同一时间内执行了多次代码</p>
+</blockquote>
+
+<h3 id="2d变换">2d变换</h3>
+
+<pre class="prettyprint hljs-dark"><code class="hljs less"><div class="hljs-line">    <span class="hljs-selector-tag">transform</span>是可以连写的，但是在写的过程当中要注意先后顺序，不然会发生意想不到的惊喜。
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">    <span class="hljs-selector-tag">transform</span>: <span class="hljs-selector-tag">rotate</span>(-<span class="hljs-number">80deg</span>) <span class="hljs-selector-tag">translateX</span>(<span class="hljs-number">300px</span>) ; 先执行角度再执行位移
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">    <span class="hljs-selector-tag">transform</span>: <span class="hljs-selector-tag">translateX</span>(<span class="hljs-number">300px</span>)  <span class="hljs-selector-tag">rotate</span>(-<span class="hljs-number">80deg</span>);
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">    <span class="hljs-selector-tag">rotate</span>()  旋转函数
+</div><div class="hljs-line">    <span class="hljs-selector-tag">deg</span>  度数
+</div><div class="hljs-line">    <span class="hljs-selector-tag">transform-origin</span> 旋转的基点
+</div><div class="hljs-line">        默认为<span class="hljs-selector-tag">center</span> <span class="hljs-selector-tag">center</span>
+</div><div class="hljs-line">        可以设置<span class="hljs-selector-tag">left</span> <span class="hljs-selector-tag">top</span> <span class="hljs-selector-tag">bottom</span> <span class="hljs-selector-tag">right</span>
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">    <span class="hljs-selector-tag">skew</span>() 倾斜函数  <span class="hljs-selector-tag">deg</span>
+</div><div class="hljs-line">    <span class="hljs-selector-tag">skewX</span>()
+</div><div class="hljs-line">    <span class="hljs-selector-tag">skewY</span>()
+</div><div class="hljs-line">    <span class="hljs-selector-tag">scale</span>() 缩放函数 默认值是<span class="hljs-selector-tag">1</span> 
+</div><div class="hljs-line">    <span class="hljs-selector-tag">scaleX</span>()
+</div><div class="hljs-line">    <span class="hljs-selector-tag">scaleY</span>()
+</div><div class="hljs-line">    <span class="hljs-selector-tag">translate</span>() 位移函数
+</div><div class="hljs-line">    <span class="hljs-selector-tag">translateX</span>()  <span class="hljs-selector-tag">left</span>
+</div><div class="hljs-line">    <span class="hljs-selector-tag">translateY</span>()  <span class="hljs-selector-tag">top</span>
+</div><div class="hljs-line"><wbr>
+</div></code></pre>
+
+
+
+<h3 id="3d">3D</h3>
+
+<blockquote>
+  <p>transform-style : flat | preserve-3d (3D空间展示) 内容为3D  </p>
+  
+  <p>transform:perspective(800px) 景深  近大远小</p>
+</blockquote>
+
+<h3 id="关键帧运动">关键帧运动</h3>
+
+<blockquote>
+  <p>keyframes 自定义的名字 { <br>
+      0%{} <br>
+      100%{} <br>
+  }</p>
+  
+  <p>animation: 自定义的名字 1s </p>
+</blockquote>
+
+<h2 id="移动端rem布局">移动端rem布局</h2>
+
+<blockquote>
+  <p>布局 -&gt; 适配 -&gt; REM适配</p>
+  
+  <p>响应式布局</p>
+  
+  <p>苹果 ios  object-c  swift   闭源</p>
+  
+  <ul><li><p>需要APPstore审批，时间大概在7天左右，如果没有审核过又要等7天左右，当真正上线的时候有可能已经赚不到钱了 </p></li>
+  </ul>
+  
+  <p>安卓 c, 应用就是用java开发的  开源</p>
+  
+  <p>之前解决跨端的问题，还是比较复杂</p>
+  
+  <p>前端的移动端</p>
+  
+  <ul><li><p>套web，用浏览器套写好的html，打包好，用户去下载打包后的应用，打开应用就等同于打开浏览器</p></li>
+  </ul>
+  
+  <p>弊端:使用不了手机系统上自带的功能，摄像头、相册….</p>
+</blockquote>
+
+<ul><li><p>专门在原生应用上进行开发，把安卓和苹果的接口封装好暴露出去给js去调用</p></li>
+<li><p>微信JSSDK</p></li>
+<li><p>react-native</p></li>
+<li><p>Hybrid</p></li>
+</ul>
+
+<p>REM适配:</p>
+
+<blockquote>
+  <p>em 单位  这个单位被自己或者父级的字体大小影响，最小为8px <br>
+  rem 单位  root(根,html) em</p>
+</blockquote>
+
+<pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><div class="hljs-line">&lt;script&gt;
+</div><div class="hljs-line">    <span class="hljs-keyword">var</span> desW = <span class="hljs-number">640</span>; <span class="hljs-comment">//设计图</span>
+</div><div class="hljs-line">    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">refreshRem</span>(<span class="hljs-params"></span>) </span>{
+</div><div class="hljs-line">        <span class="hljs-keyword">let</span> doc = <span class="hljs-built_in">document</span>.documentElement; <span class="hljs-comment">//html</span>
+</div><div class="hljs-line">        <span class="hljs-comment">// alert(doc.nodeName);</span>
+</div><div class="hljs-line">        <span class="hljs-keyword">let</span> winW = doc.clientWidth;
+</div><div class="hljs-line">        <span class="hljs-comment">//设计图 / 可视区</span>
+</div><div class="hljs-line">        <span class="hljs-keyword">let</span> radio = desW / winW;  <span class="hljs-comment">//开发模拟器也要640的位置上</span>
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">        <span class="hljs-keyword">if</span> (winW &gt;= desW) {
+</div><div class="hljs-line">            <span class="hljs-comment">//100px为了好计算  100px -&gt; 1rem  55px -&gt; 0.55rem</span>
+</div><div class="hljs-line">            doc.style.fontSize = <span class="hljs-string">'100px'</span>;
+</div><div class="hljs-line">            <span class="hljs-keyword">return</span>;
+</div><div class="hljs-line">        }
+</div><div class="hljs-line">        doc.style.fontSize = <span class="hljs-number">100</span> / radio + <span class="hljs-string">'px'</span>;
+</div><div class="hljs-line">    }
+</div><div class="hljs-line">    refreshRem();
+</div><div class="hljs-line">    <span class="hljs-built_in">window</span>.addEventListener(<span class="hljs-string">'resize'</span>, refreshRem);
+</div><div class="hljs-line"><span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></span>
 </div></code></pre></div></body></html>
