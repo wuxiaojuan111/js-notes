@@ -346,6 +346,9 @@
 <li><a href="#ajax对象的常用属性和事件">ajax对象的常用属性和事件</a></li>
 </ul>
 </li>
+<li><a href="#面包屑">面包屑</a></li>
+<li><a href="#树形菜单">树形菜单</a></li>
+<li><a href="#移动到">移动到</a></li>
 </ul>
 </div>
 </div>
@@ -1127,8 +1130,6 @@ let str = '2345ndsja'; <br>
 <p><code>凡是能用点的地方都能用[] <br>
  不过[]内要么是变量，要么是属性名(字符串) <br>
 点 -&gt; 只有属性名才用.</code></p>
-
-
 
 <h4 id="匿名函数">匿名函数()</h4>
 
@@ -4235,34 +4236,31 @@ box1.onmouseenter = function(){ <br>
 
 
 
-<pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><div class="hljs-line"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fn</span>(<span class="hljs-params">x,y</span>)</span>{
-</div><div class="hljs-line">            <span class="hljs-built_in">console</span>.log(x,y)
-</div><div class="hljs-line">        }
+<pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><div class="hljs-line"><wbr>
+</div><div class="hljs-line">  <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fn</span>(<span class="hljs-params">x</span>)</span>{
+</div><div class="hljs-line">      <span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">y</span>)</span>{
+</div><div class="hljs-line">          <span class="hljs-built_in">console</span>.log(x,y)
+</div><div class="hljs-line">      }
+</div><div class="hljs-line">  }
 </div><div class="hljs-line"><wbr>
-</div><div class="hljs-line">        <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fn</span>(<span class="hljs-params">x</span>)</span>{
-</div><div class="hljs-line">            <span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">y</span>)</span>{
-</div><div class="hljs-line">                <span class="hljs-built_in">console</span>.log(x,y)
-</div><div class="hljs-line">            }
-</div><div class="hljs-line">        }
+</div><div class="hljs-line">  <span class="hljs-keyword">let</span> f = fn(<span class="hljs-string">'number'</span>)
 </div><div class="hljs-line"><wbr>
-</div><div class="hljs-line">        <span class="hljs-keyword">let</span> f = fn(<span class="hljs-string">'number'</span>)
+</div><div class="hljs-line">  <span class="hljs-keyword">let</span> f2 = fn(<span class="hljs-string">'string'</span>);
 </div><div class="hljs-line"><wbr>
-</div><div class="hljs-line">        <span class="hljs-keyword">let</span> f2 = fn(<span class="hljs-string">'string'</span>);
+</div><div class="hljs-line">  fn(<span class="hljs-string">'number'</span>,<span class="hljs-number">5</span>);
 </div><div class="hljs-line"><wbr>
-</div><div class="hljs-line">        fn(<span class="hljs-string">'number'</span>,<span class="hljs-number">5</span>);
+</div><div class="hljs-line">  fn = <span class="hljs-function">(<span class="hljs-params">a</span>) =&gt;</span> {
+</div><div class="hljs-line">      <span class="hljs-keyword">return</span> <span class="hljs-function">(<span class="hljs-params">b</span>)=&gt;</span>{
+</div><div class="hljs-line">         <span class="hljs-keyword">return</span> a+b;
+</div><div class="hljs-line">      }
+</div><div class="hljs-line">  } 
+</div><div class="hljs-line">  fn = <span class="hljs-function"><span class="hljs-params">a</span>=&gt;</span><span class="hljs-function"><span class="hljs-params">b</span>=&gt;</span>a+b
 </div><div class="hljs-line"><wbr>
-</div><div class="hljs-line">        fn = <span class="hljs-function">(<span class="hljs-params">a</span>) =&gt;</span> {
-</div><div class="hljs-line">            <span class="hljs-keyword">return</span> <span class="hljs-function">(<span class="hljs-params">b</span>)=&gt;</span>{
-</div><div class="hljs-line">               <span class="hljs-keyword">return</span> a+b;
-</div><div class="hljs-line">            }
-</div><div class="hljs-line">        } 
-</div><div class="hljs-line">        fn = <span class="hljs-function"><span class="hljs-params">a</span>=&gt;</span><span class="hljs-function"><span class="hljs-params">b</span>=&gt;</span>a+b
+</div><div class="hljs-line">  f(<span class="hljs-number">5</span>);
+</div><div class="hljs-line">  f(<span class="hljs-number">5</span>);
 </div><div class="hljs-line"><wbr>
-</div><div class="hljs-line">        f(<span class="hljs-number">5</span>);
-</div><div class="hljs-line">        f(<span class="hljs-number">5</span>);
-</div><div class="hljs-line"><wbr>
-</div><div class="hljs-line">        fn(<span class="hljs-string">'string'</span>,<span class="hljs-number">5</span>);
-</div><div class="hljs-line">        f2(<span class="hljs-string">'哈哈'</span>)
+</div><div class="hljs-line">  fn(<span class="hljs-string">'string'</span>,<span class="hljs-number">5</span>);
+</div><div class="hljs-line">  f2(<span class="hljs-string">'哈哈'</span>)
 </div><div class="hljs-line"><wbr>
 </div><div class="hljs-line"><wbr>
 </div><div class="hljs-line"><wbr>
@@ -4429,9 +4427,76 @@ box1.onmouseenter = function(){ <br>
 </div><div class="hljs-line"><span class="hljs-comment">        */</span>
 </div><div class="hljs-line">    })(<span class="hljs-keyword">typeof</span> <span class="hljs-built_in">window</span> !== <span class="hljs-string">'undefined'</span>?<span class="hljs-built_in">window</span>:<span class="hljs-keyword">this</span>,<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">global,noGlobal</span>)</span>{
 </div><div class="hljs-line">        <span class="hljs-comment">//noGlobal 为undefined，因为在低版本下undefined会被修改,函数不传参一定是undefined</span>
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">        <span class="hljs-comment">/*</span>
+</div><div class="hljs-line"><span class="hljs-comment">            如果自己调用自己，就递归了</span>
+</div><div class="hljs-line"><span class="hljs-comment">            如何才能让其不递归呢？</span>
+</div><div class="hljs-line"><span class="hljs-comment"></span>
+</div><div class="hljs-line"><span class="hljs-comment"></span>
+</div><div class="hljs-line"><span class="hljs-comment">            1.不自己调用自己就不会递归</span>
+</div><div class="hljs-line"><span class="hljs-comment">            2.还能使用jQuery原型上的方法</span>
+</div><div class="hljs-line"><span class="hljs-comment"></span>
+</div><div class="hljs-line"><span class="hljs-comment"></span>
+</div><div class="hljs-line"><span class="hljs-comment">            {</span>
+</div><div class="hljs-line"><span class="hljs-comment">                0:xxx,</span>
+</div><div class="hljs-line"><span class="hljs-comment">                1:xxx,</span>
+</div><div class="hljs-line"><span class="hljs-comment">                length:2</span>
+</div><div class="hljs-line"><span class="hljs-comment">            }</span>
+</div><div class="hljs-line"><span class="hljs-comment">        */</span>
+</div><div class="hljs-line">        <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">jQuery</span>(<span class="hljs-params">selector</span>)</span>{
+</div><div class="hljs-line">           <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> jQuery.fn(selector);
+</div><div class="hljs-line">        }
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">        jQuery.fn = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">selector</span>)</span>{
+</div><div class="hljs-line">            <span class="hljs-keyword">let</span> ele = <span class="hljs-built_in">document</span>.querySelectorAll(selector);
+</div><div class="hljs-line">            <span class="hljs-comment">// console.log(ele);</span>
+</div><div class="hljs-line">            <span class="hljs-comment">//循环获取的元素，把每个元素挂在实例上</span>
+</div><div class="hljs-line">            <span class="hljs-keyword">for</span>(<span class="hljs-keyword">let</span> i=<span class="hljs-number">0</span>;i&lt;ele.length;i++){
+</div><div class="hljs-line">                <span class="hljs-keyword">this</span>[i] = ele[i];
+</div><div class="hljs-line">            }
+</div><div class="hljs-line">            <span class="hljs-keyword">this</span>.length = ele.length;
+</div><div class="hljs-line">        }
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">        jQuery.prototype.trim = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">str</span>)</span>{
+</div><div class="hljs-line">            <span class="hljs-keyword">return</span> str.replace(<span class="hljs-regexp">/^\s+|\s+$/g</span>,<span class="hljs-string">''</span>);
+</div><div class="hljs-line">        }
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">        jQuery.prototype.css = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
+</div><div class="hljs-line">            <span class="hljs-keyword">let</span> arg = <span class="hljs-built_in">Array</span>.prototype.slice.call(<span class="hljs-built_in">arguments</span>);
+</div><div class="hljs-line">            <span class="hljs-comment">//如果参数为2个，就是设置，有可能是批量设置</span>
+</div><div class="hljs-line">            <span class="hljs-keyword">if</span>(arg.length === <span class="hljs-number">2</span>){
+</div><div class="hljs-line">                <span class="hljs-comment">//循环this的每一项</span>
+</div><div class="hljs-line">                <span class="hljs-keyword">for</span>(<span class="hljs-keyword">let</span> i=<span class="hljs-number">0</span>;i&lt;<span class="hljs-keyword">this</span>.length;i++){
+</div><div class="hljs-line">                    <span class="hljs-comment">//把每项的样式设置成参数值即可</span>
+</div><div class="hljs-line">                    <span class="hljs-keyword">this</span>[i].style[arg[<span class="hljs-number">0</span>]] = arg[<span class="hljs-number">1</span>];
+</div><div class="hljs-line">                }
+</div><div class="hljs-line">            }
+</div><div class="hljs-line">            <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
+</div><div class="hljs-line">            <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'进了css'</span>);
+</div><div class="hljs-line">        }
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">        <span class="hljs-comment">/*</span>
+</div><div class="hljs-line"><span class="hljs-comment">            让 jQuery.fn.prototype 等于 jQuery.prototype</span>
+</div><div class="hljs-line"><span class="hljs-comment"></span>
+</div><div class="hljs-line"><span class="hljs-comment">            当new jQuery.fn 这个实例时上面就有 jQuery原型下的所有方法</span>
+</div><div class="hljs-line"><span class="hljs-comment"></span>
+</div><div class="hljs-line"><span class="hljs-comment">        */</span>
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">        jQuery.fn.prototype = jQuery.prototype;
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">        <span class="hljs-comment">// 把jQuery暴露到了全局</span>
+</div><div class="hljs-line">        global.jQuery  = global.$ = jQuery;
+</div><div class="hljs-line">    });
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">    <span class="hljs-keyword">var</span> jQuery = <span class="hljs-number">10</span>;
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">    <span class="hljs-comment">// var lis = new $('li');  //$是个函数名</span>
+</div><div class="hljs-line">    <span class="hljs-keyword">var</span> lis = $(<span class="hljs-string">'li'</span>); <span class="hljs-comment">//不想在外面new</span>
+</div><div class="hljs-line">    lis.css(<span class="hljs-string">'background'</span>,<span class="hljs-string">'red'</span>).css(<span class="hljs-string">'width'</span>,<span class="hljs-string">'200px'</span>);
 </div></code></pre>
-
-
 
 <h3 id="jquery版dom">jquery版DOM</h3>
 
@@ -4820,11 +4885,20 @@ box1.onmouseenter = function(){ <br>
 
 <h3 id="promise">promise</h3>
 
-<ul><li><p>promise解决把异步编程转成同步编程的。</p></li>
-<li><p>有三种状态，pending（初始化）、fulfilled（成功）、rejected（失败）</p></li>
+<ul><li><p>promise解决把异步编程转成同步编程的，也就是让代码从上往下阅读即可。</p></li>
+<li><p>有三种状态，pending（初始化）、fulfilled（成功）、rejected（失败）</p>
+
+<blockquote>
+  <p>怎么用？ <br>
+  只要是嵌套多个回调函数就可以使用promise进行异步请求的时候使用 fetch <br>
+  <code>let p = new Promise((resolve,reject)=&gt;{ <br>
+          resolve(); <br>
+      }) <br>
+  p.then(()=&gt;{ <br>
+    执行这句话，resolve一定调用了 <br>
+  });</code></p>
+</blockquote></li>
 </ul>
-
-
 
 <pre class="prettyprint hljs-dark"><code class="hljs javascript"><div class="hljs-line">    <span class="hljs-keyword">let</span> p = <span class="hljs-keyword">new</span>  <span class="hljs-built_in">Promise</span>(<span class="hljs-function">(<span class="hljs-params">resolve,reject</span>)=&gt;</span>{
 </div><div class="hljs-line">        <span class="hljs-comment">//放异步代码</span>
@@ -4848,9 +4922,20 @@ box1.onmouseenter = function(){ <br>
 </div><div class="hljs-line"><wbr>
 </div><div class="hljs-line">（<span class="hljs-number">2</span>）只要p1、p2、p3之中有一个被rejected，p的状态就变成rejected，此时第一个被reject的实例的返回值，会传递给p的回调函数。
 </div><div class="hljs-line"><wbr>
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">代码如下：
+</div><div class="hljs-line"><span class="hljs-keyword">let</span> p = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>(<span class="hljs-function">(<span class="hljs-params">resolve,reject</span>)=&gt;</span>{
+</div><div class="hljs-line">            resolve(<span class="hljs-number">1</span>);
+</div><div class="hljs-line">            reject(<span class="hljs-number">2</span>);
+</div><div class="hljs-line">        });
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">        p.then(<span class="hljs-function">(<span class="hljs-params">val</span>)=&gt;</span>{
+</div><div class="hljs-line">            <span class="hljs-built_in">console</span>.log(val)
+</div><div class="hljs-line">        },(val2)=&gt;{
+</div><div class="hljs-line">            <span class="hljs-built_in">console</span>.log(val2)
+</div><div class="hljs-line">        })
+</div><div class="hljs-line"><wbr>
 </div></code></pre>
-
-
 
 <h2 id="generator">Generator</h2>
 
@@ -5546,6 +5631,7 @@ border:@x solid @c; <br>
   
   </blockquote>
 
+
 <h1 id="node安装">NODE安装</h1>
 
 <blockquote>
@@ -5567,6 +5653,8 @@ XML -&gt;  <br>
 &lt;/person&gt;</code></p></li></ul></li>
 </ul>
 
+
+
 <h1 id="ajax">AJAX</h1>
 
 <blockquote>
@@ -5576,7 +5664,11 @@ XML -&gt;  <br>
   <p>前后端数据交互的技术</p>
 </blockquote>
 
+
+
 <h3 id="目的从后台拿数据">目的：从后台拿数据</h3>
+
+
 
 <h3 id="难点">难点</h3>
 
@@ -5588,7 +5680,11 @@ XML -&gt;  <br>
 <li><p>js引擎、gui引擎、事件引擎、请求引擎</p></li></ul></li>
 </ul>
 
+
+
 <h2 id="url">url</h2>
+
+
 
 <pre class="prettyprint hljs-dark"><code class="hljs dts"><div class="hljs-line"><span class="hljs-symbol">    url:</span>
 </div><div class="hljs-line"><span class="hljs-symbol">        http:</span><span class="hljs-comment">//localhost:80/3_ajax.html?page=1#hash=xy;</span>
@@ -5618,6 +5714,8 @@ XML -&gt;  <br>
 </div><div class="hljs-line">    hash信息:
 </div><div class="hljs-line">        <span class="hljs-meta">#hash=xy</span>
 </div></code></pre>
+
+
 
 <h3 id="输入url回车之后发生了什么事">输入url回车之后发生了什么事?</h3>
 
@@ -5661,6 +5759,8 @@ XML -&gt;  <br>
 </div><div class="hljs-line"><span class="hljs-tag">&lt;/<span class="hljs-name">form</span>&gt;</span>
 </div></code></pre>
 
+
+
 <h2 id="ajax的交互模型打电话模式">ajax的交互模型(打电话模式)</h2>
 
 <blockquote>
@@ -5670,6 +5770,8 @@ XML -&gt;  <br>
   4.等待 <br>
   5.通话</p>
 </blockquote>
+
+
 
 <h2 id="get和post">get和post</h2>
 
@@ -5688,6 +5790,8 @@ xhr.open('get','/s?wd=zhufeng')</code></p></li>
 <ul>
 <li><p>速度快 -&gt; 3步就能请求到数据</p></li></ul></li></ul></li>
 </ul>
+
+
 
 <pre class="prettyprint hljs-dark"><code class="hljs javascript"><div class="hljs-line"><span class="hljs-comment">//原生js，fetch请求</span>
 </div><div class="hljs-line">user.onblur = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
@@ -5761,6 +5865,8 @@ xhr.open('get','/s?wd=zhufeng')</code></p></li>
   <li><p>第三方库已经把ajax封装起来了，看不见send</p></li></ul>
 </blockquote></li>
 </ul>
+
+
 
 <pre class="prettyprint hljs-dark"><code class="language-java hljs"><div class="hljs-line">用户名:&lt;input type=<span class="hljs-string">"text"</span> id=<span class="hljs-string">"un"</span> name=<span class="hljs-string">"user"</span>/&gt;
 </div><div class="hljs-line">        密 码:&lt;input type=<span class="hljs-string">"password"</span> name=<span class="hljs-string">"pw"</span>/&gt;
@@ -5925,6 +6031,8 @@ xhr.open('get','/s?wd=zhufeng')</code></p></li>
 <li><p><strong>事件绑定在send之前，能够监听建立连接，也就是在异步的情况下，能够多监听一步</strong></p></li></ul></li>
 </ul>
 
+
+
 <pre class="prettyprint hljs-dark"><code class="hljs javascript"><div class="hljs-line"><span class="hljs-comment">//**onreadystatechange 监听状态的变化  所有浏览器都兼容**</span>
 </div><div class="hljs-line">un.onblur = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
 </div><div class="hljs-line">    <span class="hljs-comment">//虽然IE6以上浏览器支持XMLHttpRequest对象，但是每个版本会有差距</span>
@@ -5961,4 +6069,147 @@ xhr.open('get','/s?wd=zhufeng')</code></p></li>
 </div><div class="hljs-line">};
 </div><div class="hljs-line"><wbr>
 </div><div class="hljs-line"><span class="hljs-comment">// console.log(Array.prototype.push);</span>
-</div></code></pre></div></body></html>
+</div></code></pre>
+
+
+
+<h1 id="面包屑">面包屑</h1>
+
+<ul><li><p>获得当前页面的id，通过这个id向上找pid，直到找到-1为止</p></li>
+</ul>
+
+<blockquote>
+  <p>比如:周杰伦 id:3  pid:2  传入的是3  data[3].pid -&gt; 2  data[2].pid -&gt; 0 data[0].pid -&gt; -1 </p>
+</blockquote>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="hljs zephir"><div class="hljs-line">    <span class="hljs-number">1.</span>先找到一个父级
+</div><div class="hljs-line">    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getParent</span><span class="hljs-params">(id)</span></span>{
+</div><div class="hljs-line">        <span class="hljs-comment">//有这个数据并且pid不等于-1</span>
+</div><div class="hljs-line">        <span class="hljs-keyword">if</span>(data[id] &amp;&amp; data[id].pid != <span class="hljs-number">-1</span>){
+</div><div class="hljs-line">            <span class="hljs-keyword">return</span> data[id].pid;
+</div><div class="hljs-line">        }<span class="hljs-keyword">else</span>{
+</div><div class="hljs-line">            <span class="hljs-keyword">return</span> <span class="hljs-keyword">null</span>;
+</div><div class="hljs-line">        }
+</div><div class="hljs-line">    }
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">    <span class="hljs-number">2.</span>获取一堆的父级   <span class="hljs-comment">//有问题</span>
+</div><div class="hljs-line">    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getParents</span><span class="hljs-params">(id)</span></span>{ <span class="hljs-comment">//3</span>
+</div><div class="hljs-line">        <span class="hljs-keyword">let</span> <span class="hljs-keyword">parent</span> = getParent(id); <span class="hljs-comment">// 我的音乐</span>
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">        <span class="hljs-keyword">let</span> arr = [];
+</div><div class="hljs-line">        arr.push(data[id]); <span class="hljs-comment">//周杰伦   [周杰伦]</span>
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">        <span class="hljs-keyword">while</span>(<span class="hljs-keyword">parent</span>){
+</div><div class="hljs-line">            arr.unshift(<span class="hljs-keyword">parent</span>); <span class="hljs-comment">//[微云,我的音乐,周杰伦]</span>
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">            <span class="hljs-keyword">parent</span> = getParent(data[id].pid);  
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">            <span class="hljs-comment">//data[3].pid -&gt; 2   </span>
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">            <span class="hljs-keyword">parent</span> = getParent(<span class="hljs-number">2</span>)  <span class="hljs-comment">//微云</span>
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">        }
+</div><div class="hljs-line">        <span class="hljs-keyword">return</span> arr;
+</div><div class="hljs-line">    }
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">    getParents(<span class="hljs-number">3</span>)
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getParents</span><span class="hljs-params">(id)</span></span>{ <span class="hljs-comment">//3</span>
+</div><div class="hljs-line">        <span class="hljs-keyword">let</span> arr = [];
+</div><div class="hljs-line">        <span class="hljs-keyword">let</span> now = data[id]; <span class="hljs-comment">// data[3]  -&gt; 周杰伦</span>
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">        <span class="hljs-keyword">while</span>(now){
+</div><div class="hljs-line">            arr.unshift(now); <span class="hljs-comment">//[我的音乐,周杰伦]</span>
+</div><div class="hljs-line">            now = getParent(now.id); <span class="hljs-comment">//3 </span>
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">            <span class="hljs-comment">//  now = {id:2,我的音乐}</span>
+</div><div class="hljs-line">            getParent(<span class="hljs-number">2</span>);
+</div><div class="hljs-line">            <span class="hljs-comment">//  now = {id:0,微云}</span>
+</div><div class="hljs-line">        }
+</div><div class="hljs-line">    }
+</div><div class="hljs-line"><wbr>
+</div></code></pre>
+
+
+
+<h1 id="树形菜单">树形菜单</h1>
+
+<ul><li><p>如果传入一个0，拿到0和0的子级</p></li>
+<li><p>子级是否有子级，如果有子级添加tree-title tree-ico close，如果没有就添加tree-title tree-ico-none</p></li>
+<li><p>第一个是open</p></li>
+</ul>
+
+
+
+<h1 id="移动到">移动到</h1>
+
+<ul><li><p>点击确定的时候，判断选中的id，是否在移动到的数据或者数据的子孙级上，如果是就不能让其移动</p></li>
+</ul>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="hljs javascript"><div class="hljs-line">    <span class="hljs-comment">//当点击的时候获取移动到的id</span>
+</div><div class="hljs-line">    <span class="hljs-keyword">let</span> id = li.dataset.id * <span class="hljs-number">1</span>;
+</div><div class="hljs-line">    <span class="hljs-keyword">let</span> ary = getChild(globalId);
+</div><div class="hljs-line">    <span class="hljs-keyword">let</span> arr = ary.filter(<span class="hljs-function"><span class="hljs-params">item</span>=&gt;</span>item.checked);
+</div><div class="hljs-line">    <span class="hljs-keyword">let</span> len = arr.length;
+</div><div class="hljs-line">    <span class="hljs-keyword">if</span>(len &lt; <span class="hljs-number">1</span>){
+</div><div class="hljs-line">        <span class="hljs-keyword">return</span>;
+</div><div class="hljs-line">    }
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">    <span class="hljs-comment">//[{id:0},{id:1}]</span>
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">    <span class="hljs-comment">//[{id:0},{id:2,pid:0},{id:1}]</span>
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">    <span class="hljs-keyword">let</span> onoff = <span class="hljs-literal">false</span>;
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fn</span>(<span class="hljs-params">id</span>)</span>{
+</div><div class="hljs-line">        <span class="hljs-keyword">let</span> arr = getChild(id);
+</div><div class="hljs-line">        <span class="hljs-keyword">if</span>(arr &amp;&amp; arr.length){
+</div><div class="hljs-line">            arr.forEach(<span class="hljs-function"><span class="hljs-params">e</span>=&gt;</span>{
+</div><div class="hljs-line">                <span class="hljs-keyword">if</span>(id === e.id){
+</div><div class="hljs-line">                    onoff = <span class="hljs-literal">true</span>;
+</div><div class="hljs-line">                    <span class="hljs-keyword">return</span>;
+</div><div class="hljs-line">                }<span class="hljs-keyword">else</span>{
+</div><div class="hljs-line">                fn(e.id)
+</div><div class="hljs-line">                }
+</div><div class="hljs-line">            });
+</div><div class="hljs-line">        }
+</div><div class="hljs-line">    }
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">    fn(globalId);
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">    <span class="hljs-keyword">if</span>(onoff){
+</div><div class="hljs-line">        <span class="hljs-comment">//移动不合法</span>
+</div><div class="hljs-line">    }<span class="hljs-keyword">else</span>{
+</div><div class="hljs-line">        <span class="hljs-comment">//开始移动</span>
+</div><div class="hljs-line">    }
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">    <span class="hljs-keyword">let</span> ary = getChild(选中的id);
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">    ary.push(data[id]);
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">    ary.forEach(<span class="hljs-function"><span class="hljs-params">e</span>=&gt;</span>{
+</div><div class="hljs-line">        <span class="hljs-keyword">if</span>(e.id === id){
+</div><div class="hljs-line">            onoff = <span class="hljs-literal">true</span>;
+</div><div class="hljs-line">            <span class="hljs-keyword">return</span>;
+</div><div class="hljs-line">        }
+</div><div class="hljs-line">    })
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">    <span class="hljs-keyword">if</span>(onoff){
+</div><div class="hljs-line">        <span class="hljs-comment">//移动不合法</span>
+</div><div class="hljs-line">    }<span class="hljs-keyword">else</span>{
+</div><div class="hljs-line">        <span class="hljs-comment">//开始移动</span>
+</div><div class="hljs-line">    }
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line"><wbr>
+</div></code></pre>
+
+<ul><li><p>核心思想就是把选中数据的pid换成移动到数据的id</p></li>
+</ul></div></body></html>
