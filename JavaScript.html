@@ -339,6 +339,7 @@
 </li>
 <li><a href="#传统的交互方式">传统的交互方式</a></li>
 <li><a href="#ajax的交互模型打电话模式">ajax的交互模型(打电话模式)</a></li>
+<li><a href="#fetch请求数据">fetch请求数据</a></li>
 <li><a href="#get和post">get和post</a><ul>
 <li><a href="#获取xml的数据">获取XML的数据</a></li>
 </ul>
@@ -346,9 +347,32 @@
 <li><a href="#ajax对象的常用属性和事件">ajax对象的常用属性和事件</a></li>
 </ul>
 </li>
+<li><a href="#cookie">cookie</a><ul>
+<li><ul>
+<li><a href="#cookie读写">cookie读写</a></li>
+<li><a href="#cookie的小特性">cookie的小特性</a></li>
+<li><a href="#能够把对象转成url格式的内置对象">能够把对象转成url格式的内置对象</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#localstorage本地存储-前端小型的数据库">localStorage(本地存储)-&gt; 前端小型的数据库</a><ul>
+<li><ul>
+<li><a href="#localstorage事件">localStorage事件</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#跨域">跨域</a><ul>
+<li><a href="#解决">解决:</a></li>
+</ul>
+</li>
+<li><a href="#云思路">云思路</a><ul>
 <li><a href="#面包屑">面包屑</a></li>
 <li><a href="#树形菜单">树形菜单</a></li>
 <li><a href="#移动到">移动到</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
@@ -1130,6 +1154,8 @@ let str = '2345ndsja'; <br>
 <p><code>凡是能用点的地方都能用[] <br>
  不过[]内要么是变量，要么是属性名(字符串) <br>
 点 -&gt; 只有属性名才用.</code></p>
+
+
 
 <h4 id="匿名函数">匿名函数()</h4>
 
@@ -4498,6 +4524,8 @@ box1.onmouseenter = function(){ <br>
 </div><div class="hljs-line">    lis.css(<span class="hljs-string">'background'</span>,<span class="hljs-string">'red'</span>).css(<span class="hljs-string">'width'</span>,<span class="hljs-string">'200px'</span>);
 </div></code></pre>
 
+
+
 <h3 id="jquery版dom">jquery版DOM</h3>
 
 <ul><li><p>append 后添加</p></li>
@@ -4900,6 +4928,8 @@ box1.onmouseenter = function(){ <br>
 </blockquote></li>
 </ul>
 
+
+
 <pre class="prettyprint hljs-dark"><code class="hljs javascript"><div class="hljs-line">    <span class="hljs-keyword">let</span> p = <span class="hljs-keyword">new</span>  <span class="hljs-built_in">Promise</span>(<span class="hljs-function">(<span class="hljs-params">resolve,reject</span>)=&gt;</span>{
 </div><div class="hljs-line">        <span class="hljs-comment">//放异步代码</span>
 </div><div class="hljs-line"><wbr>
@@ -4936,6 +4966,8 @@ box1.onmouseenter = function(){ <br>
 </div><div class="hljs-line">        })
 </div><div class="hljs-line"><wbr>
 </div></code></pre>
+
+
 
 <h2 id="generator">Generator</h2>
 
@@ -5773,6 +5805,24 @@ XML -&gt;  <br>
 
 
 
+<h2 id="fetch请求数据">fetch请求数据</h2>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="hljs less"><div class="hljs-line">   <span class="hljs-selector-tag">fetch</span>(<span class="hljs-string">'/post'</span>,{
+</div><div class="hljs-line">       <span class="hljs-attribute">method</span>:<span class="hljs-string">'post'</span>,
+</div><div class="hljs-line">       <span class="hljs-attribute">body</span>:<span class="hljs-string">''</span>+new URLSearchParams({
+</div><div class="hljs-line">           <span class="hljs-attribute">user</span>:this.value <span class="hljs-comment">//'user='+this.value,</span>
+</div><div class="hljs-line">       }),
+</div><div class="hljs-line">       <span class="hljs-attribute">headers</span>:{
+</div><div class="hljs-line">           <span class="hljs-string">'content-type'</span>:<span class="hljs-string">'application/x-www-form-urlencoded'</span>
+</div><div class="hljs-line">       }
+</div><div class="hljs-line">   })<span class="hljs-selector-class">.then</span>(d=&gt;d.json())
+</div><div class="hljs-line">   <span class="hljs-selector-class">.then</span>(d=&gt;{
+</div><div class="hljs-line">       <span class="hljs-selector-tag">console</span><span class="hljs-selector-class">.log</span>(d);
+</div><div class="hljs-line">   });
+</div></code></pre>
+
 <h2 id="get和post">get和post</h2>
 
 <ul><li><p><strong>1.get请求：参数在url上（get一般用于数据展示）</strong>     </p>
@@ -6073,7 +6123,171 @@ xhr.open('get','/s?wd=zhufeng')</code></p></li>
 
 
 
-<h1 id="面包屑">面包屑</h1>
+<h1 id="cookie">cookie</h1>
+
+<blockquote>
+  <p>一种浏览器缓存，但是它起源又是为了解决后台存储的，cookie是一个后端技术。不过它还可以是前端的技术</p>
+  
+  <p>常用的猜你喜欢、刷新登录、7天免登录…</p>
+  
+  <p>当用户登录成功之后，再次刷新页面，页面还是会显示让用户再次登录，默认服务器不会保留用户的登录状态</p>
+  
+  <p>当用户登录之后，服务器给浏览器设置了一个名为cookie的一种浏览器缓存（切换浏览器之前在另一个浏览器上设置的cookie就无效了），再次刷新的时候浏览器会携带一个cookie码传给服务器，服务器通过这个cookie值进行验证等操作就能判断用户是否登录过。</p>
+</blockquote>
+
+
+
+<h3 id="cookie读写">cookie读写</h3>
+
+<blockquote>
+  <p>1.读  document.cookie;  如果有多个值，那么一对存储值和另一对存储值由; (分号+空格)分割</p>
+  
+  <p>2.写  document.cookie = ‘key=value’  ** 如果存储值为对象，那么会默认调用toString方法</p>
+</blockquote>
+
+
+
+<h3 id="cookie的小特性">cookie的小特性</h3>
+
+<blockquote>
+  <p>1.cookie在每个域名中的体积，根据浏览器的规则来定，浏览器的品牌不一样，个数就不一样(对于高版本浏览器据说有5M)</p>
+</blockquote>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="hljs lsl"><div class="hljs-line">    Microsoft指出InternetExplorer8增加cookie限制为每个域名<span class="hljs-number">50</span>个，但IE7似乎也允许每个域名<span class="hljs-number">50</span>个cookie。
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">    　　Firefox每个域名cookie限制为<span class="hljs-number">50</span>个。
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">    　　Opera每个域名cookie限制为<span class="hljs-number">30</span>个。
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">    　　Safari/WebKit貌似没有cookie限制。但是如果cookie很多，则会使header大小超过服务器的处理的限制，会导致错误发生。
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">　　注：“每个域名cookie限制为<span class="hljs-number">20</span>个”将不再正确！
+</div></code></pre>
+
+<blockquote>
+  <p>2.生命周期（临时、永久或可控）</p>
+</blockquote>
+
+<pre class="prettyprint hljs-dark"><code class="hljs gcode"><div class="hljs-line"><span class="hljs-comment">(1)</span>默认生命周期为浏览器关闭
+</div><div class="hljs-line"><span class="hljs-comment">(2)</span>Expires=要设置的时间  这样就可以让cookie在指定时间内死亡
+</div></code></pre>
+
+
+
+<h3 id="能够把对象转成url格式的内置对象">能够把对象转成url格式的内置对象</h3>
+
+<blockquote>
+  <p>new URLSearchParams</p>
+</blockquote>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="hljs groovy"><div class="hljs-line"><span class="hljs-string">''</span>+ <span class="hljs-keyword">new</span> URLSearchParams({<span class="hljs-string">user:</span><span class="hljs-string">'tony'</span>,<span class="hljs-string">pass:</span><span class="hljs-number">123</span>})
+</div></code></pre>
+
+<h1 id="localstorage本地存储-前端小型的数据库">localStorage(本地存储)-&gt; 前端小型的数据库</h1>
+
+<blockquote>
+  <p>体积: 5M左右  <br>
+  读写等操作</p>
+</blockquote>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="hljs q"><div class="hljs-line">    写:
+</div><div class="hljs-line">        localStorage.setItem(<span class="hljs-built_in">key</span>,<span class="hljs-built_in">value</span>)
+</div><div class="hljs-line">        注意:
+</div><div class="hljs-line">            <span class="hljs-built_in">value</span> -&gt; 会自动转成字符串，用数组或者对象的时候
+</div><div class="hljs-line">            要用JSON.stringify(<span class="hljs-built_in">value</span>)
+</div><div class="hljs-line">    读:
+</div><div class="hljs-line">        localStorage.getItem(<span class="hljs-built_in">key</span>);
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">    清除:
+</div><div class="hljs-line">        localStorage.clear();
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line"><wbr>
+</div></code></pre>
+
+<blockquote>
+  <p>生命周期:只要不清除就一直在</p>
+</blockquote>
+
+
+
+<h3 id="localstorage事件">localStorage事件</h3>
+
+<blockquote>
+  <p>window.onstorage 当localStorage的值发生的变化就触发（是兄弟页面触发，自己不触发）</p>
+</blockquote>
+
+
+
+<h1 id="跨域">跨域</h1>
+
+<blockquote>
+  <p>跨域(源) <br>
+  同源策略:是一种约定，它是浏览器最核心也最基本的安全功能，如果缺少了同源策略，则浏览器的正常功能可能都会受到影响。可以说Web是构建在同源策略基础之上的，浏览器只是针对同源策略的一种实现。</p>
+  
+  <p>源:域名、端口、协议</p>
+  
+  <p>同源:同域名、端口、协议 <br>
+  跨域:不同域名|不同端口|不同协议，只要有一个不同就跨域</p>
+</blockquote>
+
+<p>Access to XMLHttpRequest at ‘<a href="http://localhost:8080/kuayu?user=cc" target="_blank">http://localhost:8080/kuayu?user=cc</a>’ from origin ‘<a href="http://localhost" target="_blank">http://localhost</a>’ has been blocked by CORS policy: No ‘Access-Control-Allow-Origin’ header is present on the requested resource.</p>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="hljs dts"><div class="hljs-line"><span class="hljs-symbol">    https:</span><span class="hljs-comment">//www.taobao.com:80</span>
+</div><div class="hljs-line"><span class="hljs-symbol">    https:</span><span class="hljs-comment">//www.daohao.com:80</span>
+</div><div class="hljs-line"><span class="hljs-symbol"></span>
+</div><div class="hljs-line"><span class="hljs-symbol"></span>
+</div><div class="hljs-line"><span class="hljs-symbol">    https:</span><span class="hljs-comment">//www.taobao.com:80</span>
+</div><div class="hljs-line"><span class="hljs-symbol">    https:</span><span class="hljs-comment">//www.taobao.com:81</span>
+</div><div class="hljs-line"><span class="hljs-symbol"></span>
+</div><div class="hljs-line"><span class="hljs-symbol"></span>
+</div><div class="hljs-line"><span class="hljs-symbol">    https:</span><span class="hljs-comment">//www.taobao.com:80</span>
+</div><div class="hljs-line"><span class="hljs-symbol">    file:</span><span class="hljs-comment">//www.taobao.com:80</span>
+</div><div class="hljs-line"><wbr>
+</div></code></pre>
+
+
+
+<h2 id="解决">解决:</h2>
+
+<blockquote>
+  <p>常见的解决跨域问题(CORS、服务器代理、jsonp)</p>
+  
+  <p>1.CORS进行跨域 <br>
+      . 需要高版本浏览器下使用XMLHttpRequest去进行请求 <br>
+      . 需要服务器端在响应头上设置一个白名单 <br>
+          Access-Control-Allow-Origin:’*’ <br>
+  . 这种解决方案是个趋势，低版本不兼容</p>
+</blockquote>
+
+<p>2.服务器代理 <br>
+    . A能访问B（同域），但是A不能访问C（跨域），B又能访问C（服务器操作） <br>
+    . A去访问B，就等同于能够访问C</p>
+
+<p>3.jsonp JSON + Padding  内填充的数据 <br>
+    . 兼容低版本 <br>
+    . 前后端操作都不复杂</p>
+
+<pre class="prettyprint hljs-dark"><code class="hljs lsl"><div class="hljs-line">    script标签可以尽量去解析js代码，而且支持跨域
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">    <span class="hljs-number">1.</span>必须在全局暴露一个函数
+</div><div class="hljs-line">        function fn(data){
+</div><div class="hljs-line">            console.log(data);
+</div><div class="hljs-line">        }
+</div><div class="hljs-line">    <span class="hljs-number">2.</span>服务器传输的数据必须是函数名 + 括号 在括号中填充数据的这种格式
+</div><div class="hljs-line">        fn([<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>,<span class="hljs-number">5</span>]);
+</div></code></pre>
+
+<h1 id="云思路">云思路</h1>
+
+<h2 id="面包屑">面包屑</h2>
 
 <ul><li><p>获得当前页面的id，通过这个id向上找pid，直到找到-1为止</p></li>
 </ul>
@@ -6081,8 +6295,6 @@ xhr.open('get','/s?wd=zhufeng')</code></p></li>
 <blockquote>
   <p>比如:周杰伦 id:3  pid:2  传入的是3  data[3].pid -&gt; 2  data[2].pid -&gt; 0 data[0].pid -&gt; -1 </p>
 </blockquote>
-
-
 
 <pre class="prettyprint hljs-dark"><code class="hljs zephir"><div class="hljs-line">    <span class="hljs-number">1.</span>先找到一个父级
 </div><div class="hljs-line">    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getParent</span><span class="hljs-params">(id)</span></span>{
@@ -6133,23 +6345,18 @@ xhr.open('get','/s?wd=zhufeng')</code></p></li>
 </div><div class="hljs-line"><wbr>
 </div></code></pre>
 
-
-
-<h1 id="树形菜单">树形菜单</h1>
+<h2 id="树形菜单">树形菜单</h2>
 
 <ul><li><p>如果传入一个0，拿到0和0的子级</p></li>
 <li><p>子级是否有子级，如果有子级添加tree-title tree-ico close，如果没有就添加tree-title tree-ico-none</p></li>
 <li><p>第一个是open</p></li>
 </ul>
 
-
-
-<h1 id="移动到">移动到</h1>
+<h2 id="移动到">移动到</h2>
 
 <ul><li><p>点击确定的时候，判断选中的id，是否在移动到的数据或者数据的子孙级上，如果是就不能让其移动</p></li>
+<li><p>核心思想就是把选中数据的pid换成移动到数据的id</p></li>
 </ul>
-
-
 
 <pre class="prettyprint hljs-dark"><code class="hljs javascript"><div class="hljs-line">    <span class="hljs-comment">//当点击的时候获取移动到的id</span>
 </div><div class="hljs-line">    <span class="hljs-keyword">let</span> id = li.dataset.id * <span class="hljs-number">1</span>;
@@ -6209,7 +6416,4 @@ xhr.open('get','/s?wd=zhufeng')</code></p></li>
 </div><div class="hljs-line">    }
 </div><div class="hljs-line"><wbr>
 </div><div class="hljs-line"><wbr>
-</div></code></pre>
-
-<ul><li><p>核心思想就是把选中数据的pid换成移动到数据的id</p></li>
-</ul></div></body></html>
+</div></code></pre></div></body></html>
