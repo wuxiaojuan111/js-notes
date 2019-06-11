@@ -248,6 +248,12 @@
 </li>
 </ul>
 </li>
+</ul>
+</li>
+<li><a href="#云思路">云思路</a><ul>
+<li><a href="#面包屑">面包屑</a></li>
+<li><a href="#树形菜单">树形菜单</a></li>
+<li><a href="#移动到">移动到</a></li>
 <li><a href="#柯里化函数名字就是大高上currying">柯里化函数：名字就是大高上（Currying）</a></li>
 </ul>
 </li>
@@ -318,8 +324,8 @@
 <li><a href="#移动端rem布局">移动端rem布局</a></li>
 <li><a href="#less">LESS</a></li>
 <li><a href="#手机的三大事件">手机的三大事件</a><ul>
-<li><ul>
-<li><a href="#移动端点透">移动端点透</a></li>
+<li><a href="#移动端点透">移动端点透</a><ul>
+<li><a href="#解决">解决:</a></li>
 </ul>
 </li>
 </ul>
@@ -350,27 +356,34 @@
 <li><a href="#cookie">cookie</a><ul>
 <li><ul>
 <li><a href="#cookie读写">cookie读写</a></li>
-<li><a href="#cookie的小特性">cookie的小特性</a></li>
+<li><a href="#cookie的小特性">cookie的小特性</a><ul>
 <li><a href="#能够把对象转成url格式的内置对象">能够把对象转成url格式的内置对象</a></li>
 </ul>
 </li>
 </ul>
 </li>
 <li><a href="#localstorage本地存储-前端小型的数据库">localStorage(本地存储)-&gt; 前端小型的数据库</a><ul>
-<li><ul>
+<li><a href="#读写操作">读写操作</a></li>
 <li><a href="#localstorage事件">localStorage事件</a></li>
 </ul>
 </li>
 </ul>
 </li>
 <li><a href="#跨域">跨域</a><ul>
-<li><a href="#解决">解决:</a></li>
+<li><a href="#解决跨域问题">解决跨域问题:</a></li>
 </ul>
 </li>
-<li><a href="#云思路">云思路</a><ul>
-<li><a href="#面包屑">面包屑</a></li>
-<li><a href="#树形菜单">树形菜单</a></li>
-<li><a href="#移动到">移动到</a></li>
+<li><a href="#node">node</a><ul>
+<li><ul>
+<li><a href="#服务器语言">服务器语言</a></li>
+<li><a href="#通过node更好的去理解前端做的事情">通过node更好的去理解前端做的事情</a></li>
+<li><a href="#node的优势">node的优势</a></li>
+<li><a href="#npm-全球最大的包管理平台下载资源学习平台">npm 全球最大的包管理平台（下载资源、学习平台）</a></li>
+<li><a href="#find-数组方法返回值">find -&gt;数组方法(返回值)</a></li>
+<li><a href="#findindex-数组方法返回索引">findIndex -&gt;数组方法(返回索引)</a></li>
+<li><a href="#fs-filesystem-文件管理">fs - FileSystem 文件管理</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -4253,6 +4266,149 @@ box1.onmouseenter = function(){ <br>
 
 
 
+<h1 id="云思路">云思路</h1>
+
+
+
+<h2 id="面包屑">面包屑</h2>
+
+<ul><li><p>获得当前页面的id，通过这个id向上找pid，直到找到-1为止</p></li>
+</ul>
+
+<blockquote>
+  <p>比如:周杰伦 id:3  pid:2  传入的是3  data[3].pid -&gt; 2  data[2].pid -&gt; 0 data[0].pid -&gt; -1 </p>
+</blockquote>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="hljs zephir"><div class="hljs-line">    <span class="hljs-number">1.</span>先找到一个父级
+</div><div class="hljs-line">    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getParent</span><span class="hljs-params">(id)</span></span>{
+</div><div class="hljs-line">        <span class="hljs-comment">//有这个数据并且pid不等于-1</span>
+</div><div class="hljs-line">        <span class="hljs-keyword">if</span>(data[id] &amp;&amp; data[id].pid != <span class="hljs-number">-1</span>){
+</div><div class="hljs-line">            <span class="hljs-keyword">return</span> data[id].pid;
+</div><div class="hljs-line">        }<span class="hljs-keyword">else</span>{
+</div><div class="hljs-line">            <span class="hljs-keyword">return</span> <span class="hljs-keyword">null</span>;
+</div><div class="hljs-line">        }
+</div><div class="hljs-line">    }
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">    <span class="hljs-number">2.</span>获取一堆的父级   <span class="hljs-comment">//有问题</span>
+</div><div class="hljs-line">    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getParents</span><span class="hljs-params">(id)</span></span>{ <span class="hljs-comment">//3</span>
+</div><div class="hljs-line">        <span class="hljs-keyword">let</span> <span class="hljs-keyword">parent</span> = getParent(id); <span class="hljs-comment">// 我的音乐</span>
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">        <span class="hljs-keyword">let</span> arr = [];
+</div><div class="hljs-line">        arr.push(data[id]); <span class="hljs-comment">//周杰伦   [周杰伦]</span>
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">        <span class="hljs-keyword">while</span>(<span class="hljs-keyword">parent</span>){
+</div><div class="hljs-line">            arr.unshift(<span class="hljs-keyword">parent</span>); <span class="hljs-comment">//[微云,我的音乐,周杰伦]</span>
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">            <span class="hljs-keyword">parent</span> = getParent(data[id].pid);  
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">            <span class="hljs-comment">//data[3].pid -&gt; 2   </span>
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">            <span class="hljs-keyword">parent</span> = getParent(<span class="hljs-number">2</span>)  <span class="hljs-comment">//微云</span>
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">        }
+</div><div class="hljs-line">        <span class="hljs-keyword">return</span> arr;
+</div><div class="hljs-line">    }
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">    getParents(<span class="hljs-number">3</span>)
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getParents</span><span class="hljs-params">(id)</span></span>{ <span class="hljs-comment">//3</span>
+</div><div class="hljs-line">        <span class="hljs-keyword">let</span> arr = [];
+</div><div class="hljs-line">        <span class="hljs-keyword">let</span> now = data[id]; <span class="hljs-comment">// data[3]  -&gt; 周杰伦</span>
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">        <span class="hljs-keyword">while</span>(now){
+</div><div class="hljs-line">            arr.unshift(now); <span class="hljs-comment">//[我的音乐,周杰伦]</span>
+</div><div class="hljs-line">            now = getParent(now.id); <span class="hljs-comment">//3 </span>
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">            <span class="hljs-comment">//  now = {id:2,我的音乐}</span>
+</div><div class="hljs-line">            getParent(<span class="hljs-number">2</span>);
+</div><div class="hljs-line">            <span class="hljs-comment">//  now = {id:0,微云}</span>
+</div><div class="hljs-line">        }
+</div><div class="hljs-line">    }
+</div><div class="hljs-line"><wbr>
+</div></code></pre>
+
+
+
+<h2 id="树形菜单">树形菜单</h2>
+
+<ul><li><p>如果传入一个0，拿到0和0的子级</p></li>
+<li><p>子级是否有子级，如果有子级添加tree-title tree-ico close，如果没有就添加tree-title tree-ico-none</p></li>
+<li><p>第一个是open</p></li>
+</ul>
+
+
+
+<h2 id="移动到">移动到</h2>
+
+<ul><li><p>点击确定的时候，判断选中的id，是否在移动到的数据或者数据的子孙级上，如果是就不能让其移动</p></li>
+<li><p>核心思想就是把选中数据的pid换成移动到数据的id</p></li>
+</ul>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="hljs javascript"><div class="hljs-line">    <span class="hljs-comment">//当点击的时候获取移动到的id</span>
+</div><div class="hljs-line">    <span class="hljs-keyword">let</span> id = li.dataset.id * <span class="hljs-number">1</span>;
+</div><div class="hljs-line">    <span class="hljs-keyword">let</span> ary = getChild(globalId);
+</div><div class="hljs-line">    <span class="hljs-keyword">let</span> arr = ary.filter(<span class="hljs-function"><span class="hljs-params">item</span>=&gt;</span>item.checked);
+</div><div class="hljs-line">    <span class="hljs-keyword">let</span> len = arr.length;
+</div><div class="hljs-line">    <span class="hljs-keyword">if</span>(len &lt; <span class="hljs-number">1</span>){
+</div><div class="hljs-line">        <span class="hljs-keyword">return</span>;
+</div><div class="hljs-line">    }
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">    <span class="hljs-comment">//[{id:0},{id:1}]</span>
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">    <span class="hljs-comment">//[{id:0},{id:2,pid:0},{id:1}]</span>
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">    <span class="hljs-keyword">let</span> onoff = <span class="hljs-literal">false</span>;
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fn</span>(<span class="hljs-params">id</span>)</span>{
+</div><div class="hljs-line">        <span class="hljs-keyword">let</span> arr = getChild(id);
+</div><div class="hljs-line">        <span class="hljs-keyword">if</span>(arr &amp;&amp; arr.length){
+</div><div class="hljs-line">            arr.forEach(<span class="hljs-function"><span class="hljs-params">e</span>=&gt;</span>{
+</div><div class="hljs-line">                <span class="hljs-keyword">if</span>(id === e.id){
+</div><div class="hljs-line">                    onoff = <span class="hljs-literal">true</span>;
+</div><div class="hljs-line">                    <span class="hljs-keyword">return</span>;
+</div><div class="hljs-line">                }<span class="hljs-keyword">else</span>{
+</div><div class="hljs-line">                fn(e.id)
+</div><div class="hljs-line">                }
+</div><div class="hljs-line">            });
+</div><div class="hljs-line">        }
+</div><div class="hljs-line">    }
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">    fn(globalId);
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">    <span class="hljs-keyword">if</span>(onoff){
+</div><div class="hljs-line">        <span class="hljs-comment">//移动不合法</span>
+</div><div class="hljs-line">    }<span class="hljs-keyword">else</span>{
+</div><div class="hljs-line">        <span class="hljs-comment">//开始移动</span>
+</div><div class="hljs-line">    }
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">    <span class="hljs-keyword">let</span> ary = getChild(选中的id);
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">    ary.push(data[id]);
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">    ary.forEach(<span class="hljs-function"><span class="hljs-params">e</span>=&gt;</span>{
+</div><div class="hljs-line">        <span class="hljs-keyword">if</span>(e.id === id){
+</div><div class="hljs-line">            onoff = <span class="hljs-literal">true</span>;
+</div><div class="hljs-line">            <span class="hljs-keyword">return</span>;
+</div><div class="hljs-line">        }
+</div><div class="hljs-line">    })
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">    <span class="hljs-keyword">if</span>(onoff){
+</div><div class="hljs-line">        <span class="hljs-comment">//移动不合法</span>
+</div><div class="hljs-line">    }<span class="hljs-keyword">else</span>{
+</div><div class="hljs-line">        <span class="hljs-comment">//开始移动</span>
+</div><div class="hljs-line">    }
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line"><wbr>
+</div></code></pre>
+
 <h2 id="柯里化函数名字就是大高上currying">柯里化函数：名字就是大高上（Currying）</h2>
 
 <blockquote>
@@ -4971,14 +5127,14 @@ box1.onmouseenter = function(){ <br>
 
 <h2 id="generator">Generator</h2>
 
-<ul><li><p>特征一是，function关键字与函数名之间有一个星号；</p></li>
+<ul><li><p>特征一：function关键字与函数名之间有一个星号；</p></li>
 </ul>
 
 <blockquote>
   <p>function* fn(){}</p>
 </blockquote>
 
-<ul><li><p>二是，函数体内部使用yield表达式，定义不同的内部状态（yield在英语里的意思就是“产出”）。</p></li>
+<ul><li><p>特征二：函数体内部使用yield表达式，定义不同的内部状态（yield在英语里的意思就是“产出”）。</p></li>
 </ul>
 
 
@@ -5643,7 +5799,7 @@ border:@x solid @c; <br>
 
 
 
-<h4 id="移动端点透">移动端点透</h4>
+<h3 id="移动端点透">移动端点透</h3>
 
 <blockquote>
   <p>在移动端三事件是比PC的事件快大约300ms左右</p>
@@ -5651,17 +5807,21 @@ border:@x solid @c; <br>
   <p>苹果之前出了一个用户体验非常好的效果，在屏幕某个位置300ms左右连续点击2次就会触发放大缩小的效果。</p>
   
   <p>在移动端中点击某个物体(盒子),如果盒子下方有焦点（input,a..）元素，那么如果在300ms之内，上方的盒子消失或者偏移，那么就会触发下面的焦点元素行为。</p>
-  
-  <p>解决:</p>
-  
-  <ul><li><p>1.不放焦点元素,如果要跳转，使用js操作。</p></li>
-  <li><p>弊端:对seo优化有影响</p></li>
-  <li><p>2.使用焦点元素,javascript:void(0);</p></li>
-  <li><p>3.通过阻止全局的默认行为，阻止焦点元素的行为，然后单另在焦点元素上绑跳转。<em>*</em></p></li>
-  <li><p>4.把消失或者偏移的时间放缓些，尽量超过300ms</p></li>
-  </ul>
-  
-  </blockquote>
+</blockquote>
+
+
+
+<h4 id="解决">解决:</h4>
+
+<ul><li><p>1.不放焦点元素,如果要跳转，使用js操作。</p>
+
+<ul>
+<li><p>弊端：对seo优化有影响</p></li></ul></li>
+<li><p>2.使用焦点元素,javascript:void(0);</p></li>
+<li><p>3.<strong>通过阻止全局的默认行为，阻止焦点元素的行为，然后单另在焦点元素上绑跳转。</strong></p></li>
+<li><p>4.把消失或者偏移的时间放缓些，尽量超过300ms</p></li>
+</ul>
+
 
 
 <h1 id="node安装">NODE安装</h1>
@@ -5822,6 +5982,8 @@ XML -&gt;  <br>
 </div><div class="hljs-line">       <span class="hljs-selector-tag">console</span><span class="hljs-selector-class">.log</span>(d);
 </div><div class="hljs-line">   });
 </div></code></pre>
+
+
 
 <h2 id="get和post">get和post</h2>
 
@@ -6125,101 +6287,69 @@ xhr.open('get','/s?wd=zhufeng')</code></p></li>
 
 <h1 id="cookie">cookie</h1>
 
-<blockquote>
-  <p>一种浏览器缓存，但是它起源又是为了解决后台存储的，cookie是一个后端技术。不过它还可以是前端的技术</p>
-  
-  <p>常用的猜你喜欢、刷新登录、7天免登录…</p>
-  
-  <p>当用户登录成功之后，再次刷新页面，页面还是会显示让用户再次登录，默认服务器不会保留用户的登录状态</p>
-  
-  <p>当用户登录之后，服务器给浏览器设置了一个名为cookie的一种浏览器缓存（切换浏览器之前在另一个浏览器上设置的cookie就无效了），再次刷新的时候浏览器会携带一个cookie码传给服务器，服务器通过这个cookie值进行验证等操作就能判断用户是否登录过。</p>
-</blockquote>
+<ul><li><p>一种浏览器缓存，但是它起源又是为了解决后台存储的，cookie是一个后端技术。不过它还可以是前端的技术</p></li>
+<li><p>常用的猜你喜欢、刷新登录、7天免登录…</p></li>
+<li><p>当用户登录成功之后，再次刷新页面，页面还是会显示让用户再次登录，默认服务器不会保留用户的登录状态</p></li>
+<li><p>当用户登录之后，服务器给浏览器设置了一个名为cookie的一种浏览器缓存（切换浏览器之前在另一个浏览器上设置的cookie就无效了），再次刷新的时候浏览器会携带一个cookie码传给服务器，服务器通过这个cookie值进行验证等操作就能判断用户是否登录过。</p></li>
+<li><h3 id="cookie读写">cookie读写</h3>
 
+<ul>
+<li><p>1.读  document.cookie;  如果有多个值，那么一对存储值和另一对存储值由; (分号+空格)分割</p></li>
+<li><p>2.写  document.cookie = ‘key=value’  ** 如果存储值为对象，那么会默认调用toString方法</p></li></ul></li>
+<li><h3 id="cookie的小特性">cookie的小特性</h3>
 
+<ul>
+<li><p>1.cookie在每个域名中的体积，根据浏览器的规则来定，浏览器的品牌不一样，个数就不一样(对于高版本浏览器据说有5M)</p>
 
-<h3 id="cookie读写">cookie读写</h3>
-
-<blockquote>
-  <p>1.读  document.cookie;  如果有多个值，那么一对存储值和另一对存储值由; (分号+空格)分割</p>
-  
-  <p>2.写  document.cookie = ‘key=value’  ** 如果存储值为对象，那么会默认调用toString方法</p>
-</blockquote>
-
-
-
-<h3 id="cookie的小特性">cookie的小特性</h3>
+<ul>
+<li><p>Microsoft指出InternetExplorer8增加cookie限制为每个域名50个，但IE7似乎也允许每个域名50个cookie。</p></li>
+<li><p>Firefox每个域名cookie限制为50个。</p></li>
+<li><p>Opera每个域名cookie限制为30个。</p></li>
+<li><p>Safari/WebKit貌似没有cookie限制。但是如果cookie很多，则会使header大小超过服务器的处理的限制，会导致错误发生。</p>
 
 <blockquote>
-  <p>1.cookie在每个域名中的体积，根据浏览器的规则来定，浏览器的品牌不一样，个数就不一样(对于高版本浏览器据说有5M)</p>
-</blockquote>
+  <p>注：“每个域名cookie限制为20个”将不再正确！</p>
+</blockquote></li></ul></li>
+<li><p>2.<strong>生命周期（临时、永久或可控）</strong></p>
 
+<ul>
+<li><p>(1)默认生命周期为浏览器关闭</p></li>
+<li><p>(2)Expires=要设置的时间  这样就可以让cookie在指定时间内死亡</p></li></ul></li></ul></li>
+</ul>
 
+<h4 id="能够把对象转成url格式的内置对象">能够把对象转成url格式的内置对象</h4>
 
-<pre class="prettyprint hljs-dark"><code class="hljs lsl"><div class="hljs-line">    Microsoft指出InternetExplorer8增加cookie限制为每个域名<span class="hljs-number">50</span>个，但IE7似乎也允许每个域名<span class="hljs-number">50</span>个cookie。
-</div><div class="hljs-line"><wbr>
-</div><div class="hljs-line">    　　Firefox每个域名cookie限制为<span class="hljs-number">50</span>个。
-</div><div class="hljs-line"><wbr>
-</div><div class="hljs-line">    　　Opera每个域名cookie限制为<span class="hljs-number">30</span>个。
-</div><div class="hljs-line"><wbr>
-</div><div class="hljs-line">    　　Safari/WebKit貌似没有cookie限制。但是如果cookie很多，则会使header大小超过服务器的处理的限制，会导致错误发生。
-</div><div class="hljs-line"><wbr>
-</div><div class="hljs-line">　　注：“每个域名cookie限制为<span class="hljs-number">20</span>个”将不再正确！
-</div></code></pre>
+<ul><li><p>new URLSearchParams <br>
+<code>''+ new URLSearchParams({user:'tony',pass:123})</code></p></li>
+</ul>
 
-<blockquote>
-  <p>2.生命周期（临时、永久或可控）</p>
-</blockquote>
-
-<pre class="prettyprint hljs-dark"><code class="hljs gcode"><div class="hljs-line"><span class="hljs-comment">(1)</span>默认生命周期为浏览器关闭
-</div><div class="hljs-line"><span class="hljs-comment">(2)</span>Expires=要设置的时间  这样就可以让cookie在指定时间内死亡
-</div></code></pre>
-
-
-
-<h3 id="能够把对象转成url格式的内置对象">能够把对象转成url格式的内置对象</h3>
+<h2 id="localstorage本地存储-前端小型的数据库">localStorage(本地存储)-&gt; 前端小型的数据库</h2>
 
 <blockquote>
-  <p>new URLSearchParams</p>
+  <p>体积: 5M左右 ，读写等操作</p>
 </blockquote>
 
+<ul><li><h3 id="读写操作">读写操作</h3>
 
-
-<pre class="prettyprint hljs-dark"><code class="hljs groovy"><div class="hljs-line"><span class="hljs-string">''</span>+ <span class="hljs-keyword">new</span> URLSearchParams({<span class="hljs-string">user:</span><span class="hljs-string">'tony'</span>,<span class="hljs-string">pass:</span><span class="hljs-number">123</span>})
-</div></code></pre>
-
-<h1 id="localstorage本地存储-前端小型的数据库">localStorage(本地存储)-&gt; 前端小型的数据库</h1>
+<ul>
+<li><p>写: <br>
+<code>localStorage.setItem(key,value)</code></p>
 
 <blockquote>
-  <p>体积: 5M左右  <br>
-  读写等操作</p>
-</blockquote>
-
-
-
-<pre class="prettyprint hljs-dark"><code class="hljs q"><div class="hljs-line">    写:
-</div><div class="hljs-line">        localStorage.setItem(<span class="hljs-built_in">key</span>,<span class="hljs-built_in">value</span>)
-</div><div class="hljs-line">        注意:
-</div><div class="hljs-line">            <span class="hljs-built_in">value</span> -&gt; 会自动转成字符串，用数组或者对象的时候
-</div><div class="hljs-line">            要用JSON.stringify(<span class="hljs-built_in">value</span>)
-</div><div class="hljs-line">    读:
-</div><div class="hljs-line">        localStorage.getItem(<span class="hljs-built_in">key</span>);
-</div><div class="hljs-line"><wbr>
-</div><div class="hljs-line">    清除:
-</div><div class="hljs-line">        localStorage.clear();
-</div><div class="hljs-line"><wbr>
-</div><div class="hljs-line"><wbr>
-</div></code></pre>
-
-<blockquote>
-  <p>生命周期:只要不清除就一直在</p>
-</blockquote>
-
-
+  <p>注意: <br>
+  value -&gt; 会自动转成字符串，用数组或者对象的时候要用JSON.stringify(value)</p>
+</blockquote></li>
+<li><p>读: <br>
+<code>localStorage.getItem(key);</code></p></li>
+<li><p>清除: <br>
+<code>localStorage.clear();</code></p></li></ul></li>
+<li><p><strong>生命周期:只要不清除就一直在</strong></p></li>
+</ul>
 
 <h3 id="localstorage事件">localStorage事件</h3>
 
 <blockquote>
-  <p>window.onstorage 当localStorage的值发生的变化就触发（是兄弟页面触发，自己不触发）</p>
+  <p><strong>window.onstorage</strong> 当localStorage的值发生的变化就触发（是兄弟页面触发，自己不触发）</p>
 </blockquote>
 
 
@@ -6255,165 +6385,210 @@ xhr.open('get','/s?wd=zhufeng')</code></p></li>
 
 
 
-<h2 id="解决">解决:</h2>
+<h2 id="解决跨域问题">解决跨域问题:</h2>
+
+<ul><li><p>常见的解决跨域问题(CORS、服务器代理、jsonp)</p>
+
+<ul>
+<li><p><strong>1.CORS进行跨域</strong></p>
+
+<ul>
+<li><p>需要高版本浏览器下使用XMLHttpRequest去进行请求</p></li>
+<li><p>需要服务器端在响应头上设置一个白名单 <br>
+<code>Access-Control-Allow-Origin:'*'</code></p></li>
+<li><p><strong>这种解决方案是个趋势，低版本不兼容</strong></p></li></ul></li>
+<li><p><strong>2.服务器代理</strong></p>
+
+<ul>
+<li><p>A能访问B（同域），但是A不能访问C（跨域），B又能访问C（服务器操作）</p></li>
+<li><p>A去访问B，就等同于能够访问C</p></li></ul></li>
+<li><p><strong>3.jsonp JSON + Padding  内填充的数据</strong></p>
+
+<ul>
+<li><p>兼容低版本</p></li>
+<li><p>前后端操作都不复杂</p></li>
+<li><p>script标签可以尽量去解析js代码，而且支持跨域 <br>
+<code>1.必须在全局暴露一个函数 <br>
+function fn(data){ <br>
+  console.log(data); <br>
+} <br>
+2.服务器传输的数据必须是函数名 + 括号 在括号中填充数据的这种格式 <br>
+fn([1,2,3,4,5]);</code></p></li></ul></li></ul></li>
+</ul>
+
+
+
+<h1 id="node">node</h1>
+
+
+
+<h3 id="服务器语言">服务器语言</h3>
+
+<ul><li><p>1、编译性语言</p>
+
+<ul>
+<li><p>（1）只须编译一次就可以把源代码编译成机器语言，后面的执行无须重新编译，直接使用之前的编译结果就可以；因此其执行的效率比较高；</p></li>
+<li><p>（2）编译性语言代表：C、C++、Pascal/Object Pascal（Delphi）；</p></li>
+<li><p>（3）程序执行效率比较高，但比较依赖编译器，因此跨平台性差一些；</p></li></ul></li>
+<li><p>2、解释性语言</p>
+
+<ul>
+<li><p>（1）源代码不能直接翻译成机器语言，而是先翻译成中间代码，再由解释器对中间代码进行解释运行；</p></li>
+<li><p>（2）程序不需要编译，程序在运行时才翻译成机器语言，每执行一次都要翻译一次</p>
 
 <blockquote>
-  <p>常见的解决跨域问题(CORS、服务器代理、jsonp)</p>
-  
-  <p>1.CORS进行跨域 <br>
-      . 需要高版本浏览器下使用XMLHttpRequest去进行请求 <br>
-      . 需要服务器端在响应头上设置一个白名单 <br>
-          Access-Control-Allow-Origin:’*’ <br>
-  . 这种解决方案是个趋势，低版本不兼容</p>
-</blockquote>
-
-<p>2.服务器代理 <br>
-    . A能访问B（同域），但是A不能访问C（跨域），B又能访问C（服务器操作） <br>
-    . A去访问B，就等同于能够访问C</p>
-
-<p>3.jsonp JSON + Padding  内填充的数据 <br>
-    . 兼容低版本 <br>
-    . 前后端操作都不复杂</p>
-
-<pre class="prettyprint hljs-dark"><code class="hljs lsl"><div class="hljs-line">    script标签可以尽量去解析js代码，而且支持跨域
-</div><div class="hljs-line"><wbr>
-</div><div class="hljs-line">    <span class="hljs-number">1.</span>必须在全局暴露一个函数
-</div><div class="hljs-line">        function fn(data){
-</div><div class="hljs-line">            console.log(data);
-</div><div class="hljs-line">        }
-</div><div class="hljs-line">    <span class="hljs-number">2.</span>服务器传输的数据必须是函数名 + 括号 在括号中填充数据的这种格式
-</div><div class="hljs-line">        fn([<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>,<span class="hljs-number">5</span>]);
-</div></code></pre>
-
-<h1 id="云思路">云思路</h1>
-
-<h2 id="面包屑">面包屑</h2>
-
-<ul><li><p>获得当前页面的id，通过这个id向上找pid，直到找到-1为止</p></li>
+  <p>源代码—&gt;中间代码—&gt;机器语言</p>
+</blockquote></li></ul></li>
+<li><p>后台管理（vue全家桶、react全家桶） + node + 数据库</p></li>
 </ul>
+
+<h3 id="通过node更好的去理解前端做的事情">通过node更好的去理解前端做的事情</h3>
 
 <blockquote>
-  <p>比如:周杰伦 id:3  pid:2  传入的是3  data[3].pid -&gt; 2  data[2].pid -&gt; 0 data[0].pid -&gt; -1 </p>
+  <p>Node.js是基于Chrome的V8 JavaScript引擎构建的JavaScript运行环境</p>
 </blockquote>
 
-<pre class="prettyprint hljs-dark"><code class="hljs zephir"><div class="hljs-line">    <span class="hljs-number">1.</span>先找到一个父级
-</div><div class="hljs-line">    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getParent</span><span class="hljs-params">(id)</span></span>{
-</div><div class="hljs-line">        <span class="hljs-comment">//有这个数据并且pid不等于-1</span>
-</div><div class="hljs-line">        <span class="hljs-keyword">if</span>(data[id] &amp;&amp; data[id].pid != <span class="hljs-number">-1</span>){
-</div><div class="hljs-line">            <span class="hljs-keyword">return</span> data[id].pid;
-</div><div class="hljs-line">        }<span class="hljs-keyword">else</span>{
-</div><div class="hljs-line">            <span class="hljs-keyword">return</span> <span class="hljs-keyword">null</span>;
-</div><div class="hljs-line">        }
-</div><div class="hljs-line">    }
+
+
+<h3 id="node的优势">node的优势</h3>
+
+<ul><li><p>单线程</p></li>
+<li><p>事件驱动</p></li>
+<li><p>非阻塞I/O</p></li>
+</ul>
+
+
+
+<h3 id="npm-全球最大的包管理平台下载资源学习平台">npm 全球最大的包管理平台（下载资源、学习平台）</h3>
+
+<ul><li><p><strong>node的模块化管理</strong></p>
+
+<ul>
+<li><p>通过require(‘http’)引入文件 如果不写路径说明要么node中，要么在node_modules中,否则要加路径如require(‘./3’)</p></li>
+<li><p>通过module.exports = {key:value} 去导出</p></li></ul></li>
+</ul>
+
+<p><strong>写一个人生中第一个服务器</strong></p>
+
+<pre class="prettyprint hljs-dark"><code class="hljs javascript"><div class="hljs-line"><span class="hljs-keyword">const</span> http = <span class="hljs-built_in">require</span>(<span class="hljs-string">'http'</span>); <span class="hljs-comment">//引包</span>
 </div><div class="hljs-line"><wbr>
-</div><div class="hljs-line">    <span class="hljs-number">2.</span>获取一堆的父级   <span class="hljs-comment">//有问题</span>
-</div><div class="hljs-line">    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getParents</span><span class="hljs-params">(id)</span></span>{ <span class="hljs-comment">//3</span>
-</div><div class="hljs-line">        <span class="hljs-keyword">let</span> <span class="hljs-keyword">parent</span> = getParent(id); <span class="hljs-comment">// 我的音乐</span>
-</div><div class="hljs-line"><wbr>
-</div><div class="hljs-line">        <span class="hljs-keyword">let</span> arr = [];
-</div><div class="hljs-line">        arr.push(data[id]); <span class="hljs-comment">//周杰伦   [周杰伦]</span>
-</div><div class="hljs-line"><wbr>
-</div><div class="hljs-line">        <span class="hljs-keyword">while</span>(<span class="hljs-keyword">parent</span>){
-</div><div class="hljs-line">            arr.unshift(<span class="hljs-keyword">parent</span>); <span class="hljs-comment">//[微云,我的音乐,周杰伦]</span>
-</div><div class="hljs-line"><wbr>
-</div><div class="hljs-line">            <span class="hljs-keyword">parent</span> = getParent(data[id].pid);  
-</div><div class="hljs-line"><wbr>
-</div><div class="hljs-line">            <span class="hljs-comment">//data[3].pid -&gt; 2   </span>
-</div><div class="hljs-line"><wbr>
-</div><div class="hljs-line">            <span class="hljs-keyword">parent</span> = getParent(<span class="hljs-number">2</span>)  <span class="hljs-comment">//微云</span>
-</div><div class="hljs-line"><wbr>
-</div><div class="hljs-line">        }
-</div><div class="hljs-line">        <span class="hljs-keyword">return</span> arr;
-</div><div class="hljs-line">    }
-</div><div class="hljs-line"><wbr>
-</div><div class="hljs-line">    getParents(<span class="hljs-number">3</span>)
-</div><div class="hljs-line"><wbr>
-</div><div class="hljs-line"><wbr>
-</div><div class="hljs-line">    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getParents</span><span class="hljs-params">(id)</span></span>{ <span class="hljs-comment">//3</span>
-</div><div class="hljs-line">        <span class="hljs-keyword">let</span> arr = [];
-</div><div class="hljs-line">        <span class="hljs-keyword">let</span> now = data[id]; <span class="hljs-comment">// data[3]  -&gt; 周杰伦</span>
-</div><div class="hljs-line"><wbr>
-</div><div class="hljs-line">        <span class="hljs-keyword">while</span>(now){
-</div><div class="hljs-line">            arr.unshift(now); <span class="hljs-comment">//[我的音乐,周杰伦]</span>
-</div><div class="hljs-line">            now = getParent(now.id); <span class="hljs-comment">//3 </span>
-</div><div class="hljs-line"><wbr>
-</div><div class="hljs-line">            <span class="hljs-comment">//  now = {id:2,我的音乐}</span>
-</div><div class="hljs-line">            getParent(<span class="hljs-number">2</span>);
-</div><div class="hljs-line">            <span class="hljs-comment">//  now = {id:0,微云}</span>
-</div><div class="hljs-line">        }
-</div><div class="hljs-line">    }
-</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line"><span class="hljs-comment">//创建服务器</span>
+</div><div class="hljs-line"><span class="hljs-comment">/*</span>
+</div><div class="hljs-line"><span class="hljs-comment">    request  请求  客户端请求</span>
+</div><div class="hljs-line"><span class="hljs-comment">    response 响应  发送给客户端</span>
+</div><div class="hljs-line"><span class="hljs-comment">*/</span>
+</div><div class="hljs-line"><span class="hljs-comment">//创建服务</span>
+</div><div class="hljs-line"><span class="hljs-keyword">const</span> app = http.createServer(<span class="hljs-function">(<span class="hljs-params">request,response</span>)=&gt;</span>{
+</div><div class="hljs-line">    <span class="hljs-built_in">console</span>.log(<span class="hljs-number">1</span>);
+</div><div class="hljs-line">    <span class="hljs-comment">//发送给客户端</span>
+</div><div class="hljs-line">    response.write(<span class="hljs-string">"{code:1,msg:'abc'}"</span>);
+</div><div class="hljs-line">    <span class="hljs-comment">//结束发送</span>
+</div><div class="hljs-line">    response.end();
+</div><div class="hljs-line">});
+</div><div class="hljs-line"><span class="hljs-comment">//80监听</span>
+</div><div class="hljs-line">app.listen(<span class="hljs-number">80</span>);
 </div></code></pre>
 
-<h2 id="树形菜单">树形菜单</h2>
 
-<ul><li><p>如果传入一个0，拿到0和0的子级</p></li>
-<li><p>子级是否有子级，如果有子级添加tree-title tree-ico close，如果没有就添加tree-title tree-ico-none</p></li>
-<li><p>第一个是open</p></li>
+
+<h3 id="find-数组方法返回值">find -&gt;数组方法(返回值)</h3>
+
+<ul><li><p><strong>当回调函数中的条件成立的时候返回符合条件的那项；如果找不到，就返回undefined</strong> <br>
+<code>Array arr.find(function(item,i,all){})</code></p></li>
 </ul>
 
-<h2 id="移动到">移动到</h2>
+<pre class="prettyprint hljs-dark"><code class="hljs javascript"><div class="hljs-line"><span class="hljs-keyword">let</span> ary = [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>];
+</div><div class="hljs-line"><span class="hljs-keyword">let</span> a=ary.find(<span class="hljs-function"><span class="hljs-params">e</span>=&gt;</span>e&gt;<span class="hljs-number">1</span>) 
+</div><div class="hljs-line"><span class="hljs-built_in">console</span>.log(a);<span class="hljs-comment">//=&gt; 2</span>
+</div></code></pre>
 
-<ul><li><p>点击确定的时候，判断选中的id，是否在移动到的数据或者数据的子孙级上，如果是就不能让其移动</p></li>
-<li><p>核心思想就是把选中数据的pid换成移动到数据的id</p></li>
+<p><code>xxx.com?user=abc&amp;pass=123&amp;cb=fn&amp;wd=警察叔叔</code></p>
+
+<h3 id="findindex-数组方法返回索引">findIndex -&gt;数组方法(返回索引)</h3>
+
+<ul><li><p><strong>返回传入一个测试条件（函数）符合条件的数组第一个元素位置</strong></p></li>
+<li><p>当数组中的元素在测试条件时返回 true 时, findIndex() 返回符合条件的元素的索引位置，之后的值不会再调用执行函数。</p></li>
+<li><p>如果没有符合条件的元素返回 -1 <br>
+<code>array.findIndex(function(currentValue, index, arr), thisValue)</code></p></li>
 </ul>
 
-<pre class="prettyprint hljs-dark"><code class="hljs javascript"><div class="hljs-line">    <span class="hljs-comment">//当点击的时候获取移动到的id</span>
-</div><div class="hljs-line">    <span class="hljs-keyword">let</span> id = li.dataset.id * <span class="hljs-number">1</span>;
-</div><div class="hljs-line">    <span class="hljs-keyword">let</span> ary = getChild(globalId);
-</div><div class="hljs-line">    <span class="hljs-keyword">let</span> arr = ary.filter(<span class="hljs-function"><span class="hljs-params">item</span>=&gt;</span>item.checked);
-</div><div class="hljs-line">    <span class="hljs-keyword">let</span> len = arr.length;
-</div><div class="hljs-line">    <span class="hljs-keyword">if</span>(len &lt; <span class="hljs-number">1</span>){
-</div><div class="hljs-line">        <span class="hljs-keyword">return</span>;
-</div><div class="hljs-line">    }
+<pre class="prettyprint hljs-dark"><code class="hljs javascript"><div class="hljs-line"><span class="hljs-keyword">let</span> arr = [<span class="hljs-number">10</span>,<span class="hljs-number">20</span>,<span class="hljs-number">30</span>];
+</div><div class="hljs-line"><span class="hljs-keyword">let</span> aa = arr.findIndex(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">item, i, all</span>) </span>{
+</div><div class="hljs-line"><span class="hljs-keyword">return</span> item &gt; <span class="hljs-number">10</span>;
+</div><div class="hljs-line">})
+</div><div class="hljs-line"><span class="hljs-built_in">console</span>.log(aa); <span class="hljs-comment">//=&gt;1</span>
+</div></code></pre>
+
+<h3 id="fs-filesystem-文件管理">fs - FileSystem 文件管理</h3>
+
+<blockquote>
+  <p>到www目录下找1.txt文件 <br>
+  <strong>const fs = require(‘fs’);</strong></p>
+</blockquote>
+
+<ul><li><p><strong>读文件操作：fs.readFile / fs.readFileSync</strong></p></li>
+</ul>
+
+<pre class="prettyprint hljs-dark"><code class="hljs javascript"><div class="hljs-line"><span class="hljs-keyword">const</span> fs = <span class="hljs-built_in">require</span>(<span class="hljs-string">'fs'</span>);
 </div><div class="hljs-line"><wbr>
-</div><div class="hljs-line">    <span class="hljs-comment">//[{id:0},{id:1}]</span>
-</div><div class="hljs-line"><wbr>
-</div><div class="hljs-line">    <span class="hljs-comment">//[{id:0},{id:2,pid:0},{id:1}]</span>
-</div><div class="hljs-line"><wbr>
-</div><div class="hljs-line">    <span class="hljs-keyword">let</span> onoff = <span class="hljs-literal">false</span>;
-</div><div class="hljs-line"><wbr>
-</div><div class="hljs-line">    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fn</span>(<span class="hljs-params">id</span>)</span>{
-</div><div class="hljs-line">        <span class="hljs-keyword">let</span> arr = getChild(id);
-</div><div class="hljs-line">        <span class="hljs-keyword">if</span>(arr &amp;&amp; arr.length){
-</div><div class="hljs-line">            arr.forEach(<span class="hljs-function"><span class="hljs-params">e</span>=&gt;</span>{
-</div><div class="hljs-line">                <span class="hljs-keyword">if</span>(id === e.id){
-</div><div class="hljs-line">                    onoff = <span class="hljs-literal">true</span>;
-</div><div class="hljs-line">                    <span class="hljs-keyword">return</span>;
-</div><div class="hljs-line">                }<span class="hljs-keyword">else</span>{
-</div><div class="hljs-line">                fn(e.id)
-</div><div class="hljs-line">                }
-</div><div class="hljs-line">            });
-</div><div class="hljs-line">        }
-</div><div class="hljs-line">    }
-</div><div class="hljs-line"><wbr>
-</div><div class="hljs-line">    fn(globalId);
-</div><div class="hljs-line"><wbr>
-</div><div class="hljs-line">    <span class="hljs-keyword">if</span>(onoff){
-</div><div class="hljs-line">        <span class="hljs-comment">//移动不合法</span>
-</div><div class="hljs-line">    }<span class="hljs-keyword">else</span>{
-</div><div class="hljs-line">        <span class="hljs-comment">//开始移动</span>
-</div><div class="hljs-line">    }
+</div><div class="hljs-line"><span class="hljs-comment">// fs.readFile('./www/1.txt', (error, data) =&gt; { </span>
+</div><div class="hljs-line"><span class="hljs-comment">//     if (error) {</span>
+</div><div class="hljs-line"><span class="hljs-comment">//         console.log(404);</span>
+</div><div class="hljs-line"><span class="hljs-comment">//     } else { </span>
+</div><div class="hljs-line"><span class="hljs-comment">//         console.log(data.toString());</span>
+</div><div class="hljs-line"><span class="hljs-comment">//     }</span>
+</div><div class="hljs-line"><span class="hljs-comment">// });</span>
 </div><div class="hljs-line"><wbr>
 </div><div class="hljs-line"><wbr>
+</div><div class="hljs-line"> <span class="hljs-keyword">try</span> {
+</div><div class="hljs-line">     <span class="hljs-keyword">let</span> data = fs.readFileSync(<span class="hljs-string">'./www/1.txt'</span>);
+</div><div class="hljs-line">     <span class="hljs-built_in">console</span>.log(data.toString())
+</div><div class="hljs-line"> } <span class="hljs-keyword">catch</span> (error) { 
+</div><div class="hljs-line">     <span class="hljs-built_in">console</span>.log(<span class="hljs-number">404</span>);
+</div><div class="hljs-line"> }
+</div></code></pre>
+
+<ul><li><p><strong>写入文件操作：fs.writeFile / fs.writeFileSync</strong></p></li>
+</ul>
+
+<pre class="prettyprint hljs-dark"><code class="hljs coffeescript"><div class="hljs-line">const fs = <span class="hljs-built_in">require</span>(<span class="hljs-string">'fs'</span>);
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line"><span class="hljs-regexp">//</span> fs.writeFile(<span class="hljs-string">'./www/2.txt'</span>, <span class="hljs-string">'wojiaosha'</span>, <span class="hljs-function"><span class="hljs-params">(error)</span> =&gt;</span> { 
+</div><div class="hljs-line"><span class="hljs-regexp">//</span>     <span class="hljs-keyword">if</span> (error) {
+</div><div class="hljs-line"><span class="hljs-regexp">//</span>         <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'失败'</span>);
+</div><div class="hljs-line"><span class="hljs-regexp">//</span>     } <span class="hljs-keyword">else</span> { 
+</div><div class="hljs-line"><span class="hljs-regexp">//</span>         <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'成功'</span>);
+</div><div class="hljs-line"><span class="hljs-regexp">//</span>     }
+</div><div class="hljs-line"><span class="hljs-regexp">//</span> });
 </div><div class="hljs-line"><wbr>
 </div><div class="hljs-line"><wbr>
-</div><div class="hljs-line">    <span class="hljs-keyword">let</span> ary = getChild(选中的id);
+</div><div class="hljs-line"><span class="hljs-keyword">try</span> { 
+</div><div class="hljs-line">    fs.writeFileSync(<span class="hljs-string">'./www/3.txt'</span>, <span class="hljs-string">'qwerrtt'</span>)
+</div><div class="hljs-line">    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'成功'</span>);
+</div><div class="hljs-line">}<span class="hljs-keyword">catch</span>(error){ 
+</div><div class="hljs-line">    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'失败'</span>);
+</div><div class="hljs-line">}
+</div></code></pre>
+
+<ul><li><p><strong>删除文件操作：fs.unlink / fs.unlinkSync</strong></p></li>
+</ul>
+
+<pre class="prettyprint hljs-dark"><code class="hljs coffeescript"><div class="hljs-line">const fs = <span class="hljs-built_in">require</span>(<span class="hljs-string">'fs'</span>);
 </div><div class="hljs-line"><wbr>
-</div><div class="hljs-line">    ary.push(data[id]);
+</div><div class="hljs-line"><span class="hljs-regexp">//</span> fs.unlink(<span class="hljs-string">'./www/3.txt'</span>, <span class="hljs-function"><span class="hljs-params">(error)</span> =&gt;</span> { 
+</div><div class="hljs-line"><span class="hljs-regexp">//</span>     <span class="hljs-keyword">if</span> (error) {
+</div><div class="hljs-line"><span class="hljs-regexp">//</span>         <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'失败'</span>);
+</div><div class="hljs-line"><span class="hljs-regexp">//</span>     } <span class="hljs-keyword">else</span> { 
+</div><div class="hljs-line"><span class="hljs-regexp">//</span>         <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'成功'</span>);
+</div><div class="hljs-line"><span class="hljs-regexp">//</span>     }
 </div><div class="hljs-line"><wbr>
-</div><div class="hljs-line">    ary.forEach(<span class="hljs-function"><span class="hljs-params">e</span>=&gt;</span>{
-</div><div class="hljs-line">        <span class="hljs-keyword">if</span>(e.id === id){
-</div><div class="hljs-line">            onoff = <span class="hljs-literal">true</span>;
-</div><div class="hljs-line">            <span class="hljs-keyword">return</span>;
-</div><div class="hljs-line">        }
-</div><div class="hljs-line">    })
-</div><div class="hljs-line"><wbr>
-</div><div class="hljs-line">    <span class="hljs-keyword">if</span>(onoff){
-</div><div class="hljs-line">        <span class="hljs-comment">//移动不合法</span>
-</div><div class="hljs-line">    }<span class="hljs-keyword">else</span>{
-</div><div class="hljs-line">        <span class="hljs-comment">//开始移动</span>
-</div><div class="hljs-line">    }
+</div><div class="hljs-line"><span class="hljs-regexp">//</span> });
 </div><div class="hljs-line"><wbr>
 </div><div class="hljs-line"><wbr>
+</div><div class="hljs-line"><span class="hljs-keyword">try</span> {
+</div><div class="hljs-line">    fs.unlinkSync(<span class="hljs-string">'./www/3.txt'</span>)
+</div><div class="hljs-line">    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'成功'</span>);
+</div><div class="hljs-line">} <span class="hljs-keyword">catch</span> (error) { 
+</div><div class="hljs-line">    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'失败'</span>);
+</div><div class="hljs-line">}
 </div></code></pre></div></body></html>
