@@ -332,7 +332,6 @@
 </li>
 </ul>
 </li>
-<li><a href="#node安装">NODE安装</a></li>
 <li><a href="#ajax">AJAX</a><ul>
 <li><ul>
 <li><a href="#目的从后台拿数据">目的：从后台拿数据</a></li>
@@ -373,15 +372,29 @@
 <li><a href="#解决跨域问题">解决跨域问题:</a></li>
 </ul>
 </li>
-<li><a href="#node">node</a><ul>
-<li><ul>
+<li><a href="#node含义">NODE含义</a><ul>
+<li><a href="#node安装">NODE安装</a><ul>
 <li><a href="#服务器语言">服务器语言</a></li>
 <li><a href="#通过node更好的去理解前端做的事情">通过node更好的去理解前端做的事情</a></li>
 <li><a href="#node的优势">node的优势</a></li>
-<li><a href="#npm-全球最大的包管理平台下载资源学习平台">npm 全球最大的包管理平台（下载资源、学习平台）</a></li>
+<li><a href="#npmnode-package-manager">npm(Node Package Manager)</a></li>
 <li><a href="#find-数组方法返回值">find -&gt;数组方法(返回值)</a></li>
 <li><a href="#findindex-数组方法返回索引">findIndex -&gt;数组方法(返回索引)</a></li>
 <li><a href="#fs-filesystem-文件管理">fs - FileSystem 文件管理</a></li>
+</ul>
+</li>
+<li><a href="#express">express</a><ul>
+<li><a href="#post">post</a></li>
+<li><a href="#路由路径切换寻址">路由(路径切换，寻址)</a></li>
+<li><a href="#express使用路由最多还是写2级就行了">express使用路由最多还是写2级就行了</a></li>
+<li><a href="#swig">swig</a></li>
+<li><a href="#express-脚手架一个配好的运行环境不需要自己配置">express 脚手架(一个配好的运行环境,不需要自己配置)</a></li>
+<li><a href="#webpack">webpack</a></li>
+<li><a href="#自动化构建工具">自动化构建工具</a><ul>
+<li><a href="#dirname-当前路径">__dirname 当前路径</a></li>
+<li><a href="#new-formdata专门处理二进制数据它下面只有一个方法appendkeyvalue">new FormData专门处理二进制数据，它下面只有一个方法，append(key,value)</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -2428,7 +2441,8 @@ fn{}  实例化对象</code>           </p></li></ul></li>
 <li><p>1.直接在全局输出this</p></li>
 <li><p>2.函数打印this,并且直接调用</p></li>
 <li><p>3.定时器中普通函数this为window</p></li>
-<li><p>4.匿名函数自执行</p></li></ul></li>
+<li><p>4.匿名函数自执行</p></li>
+<li><p>5.某些回调</p></li></ul></li>
 <li><p><strong>事件中的this:</strong></p>
 
 <ul>
@@ -2444,10 +2458,17 @@ fn{}  实例化对象</code>           </p></li></ul></li>
 <li><p>this就走定义箭头函数的域</p></li>
 <li><p>箭头函数不能new，一new就报错</p></li>
 <li><p>箭头函数也没有arguments</p></li></ul></li>
-<li><p><strong>对象中的this</strong></p>
-
-<ul>
-<li><p>let obj = {fn:function(){console.log(this)}}     </p></li></ul></li>
+<li><p><strong>方法的this就是“.”前面的对象</strong> <br>
+<code>arr.fn = function(){ <br>
+    console.log(this); <br>
+} <br>
+arr.fn(); //[1,2,3,4]</code></p></li>
+<li><p>在严格模式下为undefined <br>
+<code>function fn(){ <br>
+    "use strict" <br>
+    console.log(this); <br>
+} <br>
+fn();</code></p></li>
 </ul>
 
 
@@ -2846,7 +2867,7 @@ console.log(w);</code></p></li></ul></li>
   懒惰性：\d 让它找一个一定不会找第二个 <br>
   贪婪性：\d+ 有多少就尽量匹配多少</p>
 </blockquote></li>
-<li><p><strong>简写</strong>：<strong>/ 不带引号的字符串 /</strong> -&gt; /a/ 找字符串’a’</p></li>
+<li><p><strong>字面量–//</strong>：<strong>/ 不带引号的字符串 /</strong> -&gt; /a/ 找字符串’a’</p></li>
 <li><p><strong>实例化</strong>：<strong>new RegExp(‘字符串’,’修饰符’)</strong>，里面可以放变量，返回的是正则    </p>
 
 <ul>
@@ -3100,7 +3121,18 @@ str.match(/^1[89]$/)</code></p>
 <ul>
 <li><p>width/height/left/right/top/bottom/x/y</p></li>
 <li><p><strong>注意：是跟滚动条走的。</strong></p></li></ul></li>
-<li><p><strong>clientLeft/clientTop  边框尺寸</strong></p></li>
+<li><p><strong>clientLeft/clientTop  边框尺寸</strong></p>
+
+<ul>
+<li><p>获得绝对位置： <br>
+<code>let obj = div1; <br>
+let ot = obj.clientTop <br>
+let t = 0; <br>
+while(obj){ <br>
+t += obj.offsetTop + obj.clientTop; <br>
+obj = obj.offsetParent; <br>
+} <br>
+t - ot</code></p></li></ul></li>
 </ul>
 
 
@@ -3183,7 +3215,11 @@ str.match(/^1[89]$/)</code></p>
 
 <h4 id="延迟加载">延迟加载</h4>
 
-<ul><li><p>防抖：高频率不触发，停下来才触发</p></li>
+<ul><li><p>延迟加载的原理：</p>
+
+<ul>
+<li><p>可视区的高度 + 滚动条的高度如果大于等于图片的绝对位置，就加载把图片的src赋值。</p></li></ul></li>
+<li><p>防抖：高频率不触发，停下来才触发</p></li>
 <li><p>节流：每隔一段时间触发                </p></li>
 </ul>
 
@@ -4409,6 +4445,8 @@ box1.onmouseenter = function(){ <br>
 </div><div class="hljs-line"><wbr>
 </div></code></pre>
 
+
+
 <h2 id="柯里化函数名字就是大高上currying">柯里化函数：名字就是大高上（Currying）</h2>
 
 <blockquote>
@@ -4531,7 +4569,7 @@ box1.onmouseenter = function(){ <br>
 </blockquote>
 
 <ul><li><p>原生对象转JQ对象 -&gt; $(原生对象)</p></li>
-<li><p>jQ对象转原生 -&gt; <span class="" rel="98ecce1d6148bf8d5779d9a5b7c9f107"><span class="MathJax_SVG" id="MathJax-Element-1-Frame" role="textbox" aria-readonly="true" style="font-size: 100%; display: inline-block;"><span><img type="image/png" width="125" height="21" longdesc="__SVG__undefined" src="data:image/png;base64,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" style="margin-top:0;margin-bottom:0;"></span></span></span>(“img”).get(0);</p></li>
+<li><p>jQ对象转原生 -&gt; <span class="" rel="98ecce1d6148bf8d5779d9a5b7c9f107"><span class="MathJax_SVG" id="MathJax-Element-1-Frame" role="textbox" aria-readonly="true" style="font-size: 100%; display: inline-block;"><span><img type="image/png" width="125" height="17" longdesc="__SVG__undefined" src="data:image/png;base64,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" style="margin-top:0;margin-bottom:0;"></span></span></span>(“img”).get(0);</p></li>
 <li><p>$ 就是jquery对象</p></li>
 <li><p>divs.eq(数字)  div中的第某个元素，是个jquery对象</p></li>
 <li><p>index(‘缩小范围’)  自动去找某个元素基于父级的子级为第几个元素</p></li>
@@ -5824,29 +5862,6 @@ border:@x solid @c; <br>
 
 
 
-<h1 id="node安装">NODE安装</h1>
-
-<blockquote>
-  <p>安装node网址：<a href="https://nodejs.org/en/" target="_blank">https://nodejs.org/en/</a></p>
-</blockquote>
-
-<ul><li><p>1.在服务器下千万不要建中文的文件夹</p></li>
-<li><p>2.运行的时候，使用localhost/xx.html运行，千万不要双击或者直接用编辑器打开（<strong>只有把文件放到public目录下才能使用localhost</strong>）</p></li>
-<li><p>3.运行文件的时候，一定要开服务器。</p>
-
-<ul>
-<li><p>找到当前文件夹按住shift + 鼠标右键  输入node app</p></li>
-<li><p>把当前文件夹放到vscode中，然后点击感叹号，找到终端 输入node app <br>
-<code>json  -&gt; '{"name":"于海洋"}'  || '[1,2,"3"]' <br>
-XML -&gt;  <br>
-&lt;person&gt; <br>
-&lt;name&gt;于海洋&lt;/name&gt; <br>
-&lt;hobby&gt;跟着倪老师学习js&lt;/hobby&gt; <br>
-&lt;/person&gt;</code></p></li></ul></li>
-</ul>
-
-
-
 <h1 id="ajax">AJAX</h1>
 
 <blockquote>
@@ -6317,11 +6332,15 @@ xhr.open('get','/s?wd=zhufeng')</code></p></li>
 <li><p>(2)Expires=要设置的时间  这样就可以让cookie在指定时间内死亡</p></li></ul></li></ul></li>
 </ul>
 
+
+
 <h4 id="能够把对象转成url格式的内置对象">能够把对象转成url格式的内置对象</h4>
 
 <ul><li><p>new URLSearchParams <br>
 <code>''+ new URLSearchParams({user:'tony',pass:123})</code></p></li>
 </ul>
+
+
 
 <h2 id="localstorage本地存储-前端小型的数据库">localStorage(本地存储)-&gt; 前端小型的数据库</h2>
 
@@ -6345,6 +6364,8 @@ xhr.open('get','/s?wd=zhufeng')</code></p></li>
 <code>localStorage.clear();</code></p></li></ul></li>
 <li><p><strong>生命周期:只要不清除就一直在</strong></p></li>
 </ul>
+
+
 
 <h3 id="localstorage事件">localStorage事件</h3>
 
@@ -6418,7 +6439,33 @@ fn([1,2,3,4,5]);</code></p></li></ul></li></ul></li>
 
 
 
-<h1 id="node">node</h1>
+<h1 id="node含义">NODE含义</h1>
+
+<ul><li><p>基于V8引擎（谷歌浏览器的引擎）渲染JS的工具或者环境</p></li>
+</ul>
+
+
+
+<h2 id="node安装">NODE安装</h2>
+
+<blockquote>
+  <p>安装node网址：<a href="https://nodejs.org/en/" target="_blank">https://nodejs.org/en/</a></p>
+</blockquote>
+
+<ul><li><p>1.在服务器下千万不要建中文的文件夹</p></li>
+<li><p>2.运行的时候，使用localhost/xx.html运行，千万不要双击或者直接用编辑器打开（<strong>只有把文件放到public目录下才能使用localhost</strong>）</p></li>
+<li><p>3.运行文件的时候，一定要开服务器。</p>
+
+<ul>
+<li><p>找到当前文件夹按住shift + 鼠标右键  输入node app</p></li>
+<li><p>把当前文件夹放到vscode中，然后点击感叹号，找到终端 输入node app <br>
+<code>json  -&gt; '{"name":"于海洋"}'  || '[1,2,"3"]' <br>
+XML -&gt;  <br>
+&lt;person&gt; <br>
+&lt;name&gt;于海洋&lt;/name&gt; <br>
+&lt;hobby&gt;跟着倪老师学习js&lt;/hobby&gt; <br>
+&lt;/person&gt;</code></p></li></ul></li>
+</ul>
 
 
 
@@ -6442,6 +6489,8 @@ fn([1,2,3,4,5]);</code></p></li></ul></li></ul></li>
 <li><p>后台管理（vue全家桶、react全家桶） + node + 数据库</p></li>
 </ul>
 
+
+
 <h3 id="通过node更好的去理解前端做的事情">通过node更好的去理解前端做的事情</h3>
 
 <blockquote>
@@ -6459,9 +6508,12 @@ fn([1,2,3,4,5]);</code></p></li></ul></li></ul></li>
 
 
 
-<h3 id="npm-全球最大的包管理平台下载资源学习平台">npm 全球最大的包管理平台（下载资源、学习平台）</h3>
+<h3 id="npmnode-package-manager">npm(Node Package Manager)</h3>
 
-<ul><li><p><strong>node的模块化管理</strong></p>
+<ul><li><p>全球最大的包管理平台（下载资源、学习平台）</p></li>
+<li><p>一个JS模块（所有封装好可以供其他人调取使用的都可以称之为模块或者包）管理的工具，基于npm可以安装下载JS模块，他会生成一个node执行的命令（可以在DOS窗口或者终端命令中执行）：node xxx.js</p></li>
+<li><p>如果不成功，可以找相同电脑配置的人员，把安装成功的NODE文件夹拷贝到自己的电脑上，通过配置环境变量，来实现NODE安装</p></li>
+<li><p><strong>node的模块化管理</strong></p>
 
 <ul>
 <li><p>通过require(‘http’)引入文件 如果不写路径说明要么node中，要么在node_modules中,否则要加路径如require(‘./3’)</p></li>
@@ -6469,6 +6521,8 @@ fn([1,2,3,4,5]);</code></p></li></ul></li></ul></li>
 </ul>
 
 <p><strong>写一个人生中第一个服务器</strong></p>
+
+
 
 <pre class="prettyprint hljs-dark"><code class="hljs javascript"><div class="hljs-line"><span class="hljs-keyword">const</span> http = <span class="hljs-built_in">require</span>(<span class="hljs-string">'http'</span>); <span class="hljs-comment">//引包</span>
 </div><div class="hljs-line"><wbr>
@@ -6497,12 +6551,16 @@ fn([1,2,3,4,5]);</code></p></li></ul></li></ul></li>
 <code>Array arr.find(function(item,i,all){})</code></p></li>
 </ul>
 
+
+
 <pre class="prettyprint hljs-dark"><code class="hljs javascript"><div class="hljs-line"><span class="hljs-keyword">let</span> ary = [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>];
 </div><div class="hljs-line"><span class="hljs-keyword">let</span> a=ary.find(<span class="hljs-function"><span class="hljs-params">e</span>=&gt;</span>e&gt;<span class="hljs-number">1</span>) 
 </div><div class="hljs-line"><span class="hljs-built_in">console</span>.log(a);<span class="hljs-comment">//=&gt; 2</span>
 </div></code></pre>
 
 <p><code>xxx.com?user=abc&amp;pass=123&amp;cb=fn&amp;wd=警察叔叔</code></p>
+
+
 
 <h3 id="findindex-数组方法返回索引">findIndex -&gt;数组方法(返回索引)</h3>
 
@@ -6512,12 +6570,16 @@ fn([1,2,3,4,5]);</code></p></li></ul></li></ul></li>
 <code>array.findIndex(function(currentValue, index, arr), thisValue)</code></p></li>
 </ul>
 
+
+
 <pre class="prettyprint hljs-dark"><code class="hljs javascript"><div class="hljs-line"><span class="hljs-keyword">let</span> arr = [<span class="hljs-number">10</span>,<span class="hljs-number">20</span>,<span class="hljs-number">30</span>];
 </div><div class="hljs-line"><span class="hljs-keyword">let</span> aa = arr.findIndex(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">item, i, all</span>) </span>{
 </div><div class="hljs-line"><span class="hljs-keyword">return</span> item &gt; <span class="hljs-number">10</span>;
 </div><div class="hljs-line">})
 </div><div class="hljs-line"><span class="hljs-built_in">console</span>.log(aa); <span class="hljs-comment">//=&gt;1</span>
 </div></code></pre>
+
+
 
 <h3 id="fs-filesystem-文件管理">fs - FileSystem 文件管理</h3>
 
@@ -6528,6 +6590,8 @@ fn([1,2,3,4,5]);</code></p></li></ul></li></ul></li>
 
 <ul><li><p><strong>读文件操作：fs.readFile / fs.readFileSync</strong></p></li>
 </ul>
+
+
 
 <pre class="prettyprint hljs-dark"><code class="hljs javascript"><div class="hljs-line"><span class="hljs-keyword">const</span> fs = <span class="hljs-built_in">require</span>(<span class="hljs-string">'fs'</span>);
 </div><div class="hljs-line"><wbr>
@@ -6551,6 +6615,8 @@ fn([1,2,3,4,5]);</code></p></li></ul></li></ul></li>
 <ul><li><p><strong>写入文件操作：fs.writeFile / fs.writeFileSync</strong></p></li>
 </ul>
 
+
+
 <pre class="prettyprint hljs-dark"><code class="hljs coffeescript"><div class="hljs-line">const fs = <span class="hljs-built_in">require</span>(<span class="hljs-string">'fs'</span>);
 </div><div class="hljs-line"><wbr>
 </div><div class="hljs-line"><span class="hljs-regexp">//</span> fs.writeFile(<span class="hljs-string">'./www/2.txt'</span>, <span class="hljs-string">'wojiaosha'</span>, <span class="hljs-function"><span class="hljs-params">(error)</span> =&gt;</span> { 
@@ -6573,6 +6639,8 @@ fn([1,2,3,4,5]);</code></p></li></ul></li></ul></li>
 <ul><li><p><strong>删除文件操作：fs.unlink / fs.unlinkSync</strong></p></li>
 </ul>
 
+
+
 <pre class="prettyprint hljs-dark"><code class="hljs coffeescript"><div class="hljs-line">const fs = <span class="hljs-built_in">require</span>(<span class="hljs-string">'fs'</span>);
 </div><div class="hljs-line"><wbr>
 </div><div class="hljs-line"><span class="hljs-regexp">//</span> fs.unlink(<span class="hljs-string">'./www/3.txt'</span>, <span class="hljs-function"><span class="hljs-params">(error)</span> =&gt;</span> { 
@@ -6591,4 +6659,189 @@ fn([1,2,3,4,5]);</code></p></li></ul></li></ul></li>
 </div><div class="hljs-line">} <span class="hljs-keyword">catch</span> (error) { 
 </div><div class="hljs-line">    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'失败'</span>);
 </div><div class="hljs-line">}
-</div></code></pre></div></body></html>
+</div></code></pre>
+
+
+
+<h2 id="express">express</h2>
+
+<blockquote>
+  <p><a href="http://www.expressjs.com.cn/" target="_blank">http://www.expressjs.com.cn/</a> <br>
+  Express 是一个简洁而灵活的 node.js Web应用框架, 提供了一系列强大特性帮助你创建各种 Web 应用，和丰富的 HTTP 工具。使用 Express 可以快速地搭建一个完整功能的网站。</p>
+</blockquote>
+
+<p><strong>项目初始化</strong></p>
+
+<ul><li><p><strong>npm init</strong>  如果没有特殊情况无脑回车，走默认配置</p></li>
+<li><p><strong>npm init -y</strong></p></li>
+</ul>
+
+<p><strong>安装express</strong>：npm install express –save</p>
+
+<ul><li><p><strong>创建一个js文件</strong></p>
+
+<ul>
+<li><p>引包 const express = require(‘express’)</p></li>
+<li><p>调用express  const app = express()</p></li>
+<li><p>监听 app.listen(80)</p></li>
+<li><p>如果是get -&gt; app.get(‘路径’,(request,response)=&gt;{})    </p>
+
+<ul>
+<li><p>request.query  获取参数对象 </p></li>
+<li><p>response.send()  response.json() 发送</p></li></ul></li></ul></li>
+<li><p><strong>中间件</strong>：  一堆功能函数，能让使用的对象更加强大（让对象拥有功能函数的功能）</p>
+
+<ul>
+<li><p>需要use去关联 比如:app.use(express.static(‘www’)) 管理静态文件</p></li></ul></li>
+</ul>
+
+
+
+<h3 id="post">post</h3>
+
+<ul><li><p><strong>const bodyParser = require(‘body-parser’);</strong></p></li>
+<li><p><strong>app.use(bodyParser.urlencoded({ extended: false }));</strong></p></li>
+<li><p><strong>req.body 获取参数</strong></p></li>
+</ul>
+
+<h3 id="路由路径切换寻址">路由(路径切换，寻址)</h3>
+
+<blockquote>
+  <p><strong>/根</strong> -&gt; /user -&gt; /post -&gt; /get <br>
+  <a href="http://www.baidu.com/home" target="_blank">http://www.baidu.com/home</a>  一般默认找home文件夹下的index.html <br>
+  <a href="http://www.baidu.com/works" target="_blank">http://www.baidu.com/works</a> 一般默认找works文件夹下的index.html</p>
+</blockquote>
+
+<h3 id="express使用路由最多还是写2级就行了">express使用路由最多还是写2级就行了</h3>
+
+<p>app.use(‘/user’,require(‘./routers/users’));</p>
+
+<blockquote>
+  <p>users.js的内容如下:</p>
+</blockquote>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="hljs javascript"><div class="hljs-line"><span class="hljs-keyword">const</span> express = <span class="hljs-built_in">require</span>(<span class="hljs-string">'express'</span>);
+</div><div class="hljs-line"><span class="hljs-keyword">const</span> router = express.Router();
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">router.get(<span class="hljs-string">'/'</span>,<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">req,res</span>)</span>{       <span class="hljs-comment">//  /user</span>
+</div><div class="hljs-line">    res.send(<span class="hljs-string">'{code:0,msg:"/user"}'</span>);
+</div><div class="hljs-line">});
+</div><div class="hljs-line">router.get(<span class="hljs-string">'/add'</span>,<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">req,res</span>)</span>{
+</div><div class="hljs-line">    res.send(<span class="hljs-string">'{code:0,msg:"/user/add"}'</span>);  <span class="hljs-comment">// /add -&gt; /user/add </span>
+</div><div class="hljs-line">});
+</div><div class="hljs-line">router.get(<span class="hljs-string">'/rm'</span>,<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">req,res</span>)</span>{
+</div><div class="hljs-line">    res.send(<span class="hljs-string">'{code:0,msg:"/user/rm"}'</span>);
+</div><div class="hljs-line">});
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line"><span class="hljs-built_in">module</span>.exports = router;
+</div></code></pre>
+
+
+
+<h3 id="swig">swig</h3>
+
+<ul><li><p>安装 npm i swig -S</p></li>
+<li><p>引包 require(‘swig’);</p></li>
+<li><p>配置 </p></li>
+</ul>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="hljs less"><div class="hljs-line"><span class="hljs-selector-tag">app</span><span class="hljs-selector-class">.set</span>(<span class="hljs-string">'views'</span>,<span class="hljs-string">'./www'</span>);  <span class="hljs-selector-tag">www</span>就是你模板放置的路径
+</div><div class="hljs-line"><span class="hljs-selector-tag">app</span><span class="hljs-selector-class">.set</span>(<span class="hljs-string">'view engine'</span>,<span class="hljs-string">'html'</span>);
+</div><div class="hljs-line"><span class="hljs-selector-tag">app</span><span class="hljs-selector-class">.engine</span>(<span class="hljs-string">'html'</span>, swig.renderFile);
+</div></code></pre>
+
+<ul><li><p>指定路由模板 <br>
+app.use(‘/’,require(‘./routers/index’));</p></li>
+<li><p>index文件中</p></li>
+</ul>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="hljs less"><div class="hljs-line">    <span class="hljs-selector-tag">router</span><span class="hljs-selector-class">.get</span>(<span class="hljs-string">'/'</span>,(req,res)=&gt;{
+</div><div class="hljs-line">        <span class="hljs-selector-tag">res</span><span class="hljs-selector-class">.render</span>(<span class="hljs-string">'index'</span>,{
+</div><div class="hljs-line">            <span class="hljs-attribute">title</span>:<span class="hljs-string">'首页'</span>,
+</div><div class="hljs-line">            <span class="hljs-attribute">data</span>:[<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>]
+</div><div class="hljs-line">        })
+</div><div class="hljs-line">    });
+</div></code></pre>
+
+<ul><li><p>index.html中</p></li>
+</ul>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="hljs django"><div class="hljs-line"><span class="xml">    输出数据:</span>
+</div><div class="hljs-line"><span class="xml">        </span><span class="hljs-template-variable">{{ 数据的名称 }}</span><span class="xml">  如:</span><span class="hljs-template-variable">{{title}}</span><span class="xml"> -&gt; 首页</span>
+</div><div class="hljs-line"><span class="xml"></span>
+</div><div class="hljs-line"><span class="xml">    循环数据:</span>
+</div><div class="hljs-line"><span class="xml">        </span><span class="hljs-template-tag">{%<span class="hljs-name"><span class="hljs-name">for</span></span> key,val <span class="hljs-keyword">in</span> data%}</span><span class="xml"></span>
+</div><div class="hljs-line"><span class="xml">        </span><span class="hljs-template-tag">{%<span class="hljs-name"><span class="hljs-name">endfor</span></span>%}</span><span class="xml"></span>
+</div><div class="hljs-line"><span class="xml"></span>
+</div><div class="hljs-line"><span class="xml">    判断:</span>
+</div><div class="hljs-line"><span class="xml">        </span><span class="hljs-template-tag">{%<span class="hljs-name"><span class="hljs-name">if</span></span> 条件%}</span><span class="xml"></span>
+</div><div class="hljs-line"><span class="xml">            执行语句一</span>
+</div><div class="hljs-line"><span class="xml">        </span><span class="hljs-template-tag">{%<span class="hljs-name"><span class="hljs-name">else</span></span>%}</span><span class="xml"></span>
+</div><div class="hljs-line"><span class="xml">            执行语句二</span>
+</div><div class="hljs-line"><span class="xml">        </span><span class="hljs-template-tag">{%<span class="hljs-name"><span class="hljs-name">endif</span></span>%}</span><span class="xml"></span>
+</div></code></pre>
+
+
+
+<h3 id="express-脚手架一个配好的运行环境不需要自己配置">express 脚手架(一个配好的运行环境,不需要自己配置)</h3>
+
+<ul><li><p>npm install express-generator -g</p></li>
+<li><p>express –view=pug myapp</p></li>
+<li><p>cd myapp</p></li>
+<li><p>npm install</p></li>
+<li><p>npm start 启动</p></li>
+</ul>
+
+
+
+<h3 id="webpack">webpack</h3>
+
+<ul><li><p>懵，不懂，难，恶心，带有人类的逆反心理，难点是英语(报错是英语报错)</p></li>
+<li><p>多练，多报错多翻译，弄到报错眼熟你就学会了，见过就会没见过就不会</p></li>
+<li><p>安装、安装、安装，翻文档看配置，进行配置</p></li>
+<li><p>优化</p></li>
+</ul>
+
+
+
+<h3 id="自动化构建工具">自动化构建工具</h3>
+
+<ul><li><p>开发依赖主要是为了维护（给程序员看的）</p></li>
+</ul>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="hljs dust"><div class="hljs-line"><span class="xml"> <span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"1.js"</span>&gt;</span><span class="handlebars"><span class="xml"></span></span></span>
+</div><div class="hljs-line"><span class="xml">     <span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"2.js"</span>&gt;</span><span class="javascript"></span></span>
+</div><div class="hljs-line"><span class="xml"></span>
+</div><div class="hljs-line"><span class="xml">     CommonJS 用到既加载（规范） </span>
+</div><div class="hljs-line"><span class="xml">     模块化开发</span>
+</div><div class="hljs-line"><span class="xml">     CMD   seajs</span>
+</div><div class="hljs-line"><span class="xml">     AMD   先加载后使用（规范）  <span class="hljs-built_in">require</span></span>
+</div><div class="hljs-line"><span class="xml"></span>
+</div><div class="hljs-line"><span class="xml">     glup</span>
+</div><div class="hljs-line"><span class="xml"></span>
+</div><div class="hljs-line"><span class="xml">     引入  -&gt; <span class="hljs-built_in">require</span></span>
+</div><div class="hljs-line"><span class="xml">     导出 -&gt; <span class="hljs-built_in">module</span>.exports</span>
+</div><div class="hljs-line"><span class="xml"></span>
+</div><div class="hljs-line"><span class="xml">     ES6:引入:</span>
+</div><div class="hljs-line"><span class="xml">         <span class="hljs-keyword">import</span> </span><span class="hljs-template-variable">{ fn }</span><span class="xml"><span class="javascript"> <span class="hljs-keyword">from</span> <span class="hljs-string">'1.js'</span> <span class="hljs-comment">//'模块名称';</span></span></span>
+</div><div class="hljs-line"><span class="xml">         <span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fn</span>(<span class="hljs-params"></span>)</span></span><span class="hljs-template-variable">{}</span><span class="xml"><span class="actionscript">   <span class="hljs-comment">//1.js </span></span></span>
+</div></code></pre>
+
+<ul><li><p>生产依赖主要给用户使用的(体积小)</p></li>
+</ul>
+
+<h4 id="dirname-当前路径">__dirname 当前路径</h4>
+
+
+
+<h4 id="new-formdata专门处理二进制数据它下面只有一个方法appendkeyvalue">new FormData专门处理二进制数据，它下面只有一个方法，append(key,value)</h4></div></body></html>
