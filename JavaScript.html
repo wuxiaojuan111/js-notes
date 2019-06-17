@@ -389,15 +389,15 @@
 <li><a href="#express使用路由最多还是写2级就行了">express使用路由最多还是写2级就行了</a></li>
 <li><a href="#swig">swig</a></li>
 <li><a href="#express-脚手架一个配好的运行环境不需要自己配置">express 脚手架(一个配好的运行环境,不需要自己配置)</a></li>
-<li><a href="#webpack">webpack</a></li>
+</ul>
+</li>
+<li><a href="#webpack">webpack</a><ul>
 <li><a href="#自动化构建工具">自动化构建工具</a><ul>
 <li><a href="#dirname-当前路径">__dirname 当前路径</a></li>
 <li><a href="#new-formdata专门处理二进制数据它下面只有一个方法appendkeyvalue">new FormData专门处理二进制数据，它下面只有一个方法，append(key,value)</a></li>
 </ul>
 </li>
-</ul>
-</li>
-<li><a href="#webpack-自动化构建工具项目构建打包处理转换让浏览器支持的语法">webpack 自动化构建工具、项目构建、打包处理、转换让浏览器支持的语法</a><ul>
+<li><a href="#webpack-自动化构建工具项目构建打包处理转换让浏览器支持的语法">webpack 自动化构建工具、项目构建、打包处理、转换让浏览器支持的语法</a></li>
 <li><a href="#四个核心概念">四个核心概念</a></li>
 <li><a href="#安装">安装</a></li>
 <li><a href="#配置">配置</a></li>
@@ -406,6 +406,14 @@
 <li><a href="#webpack常用的插件安装命令">webpack常用的插件安装命令：</a></li>
 </ul>
 </li>
+<li><a href="#webpack-dev-server">webpack-dev-server</a></li>
+</ul>
+</li>
+<li><a href="#es6的导入导出">ES6的导入导出</a><ul>
+<li><a href="#第一组变量导出引入">第一组(变量导出引入)</a></li>
+<li><a href="#第二组默认">第二组(默认)</a></li>
+<li><a href="#第三组批量导出">第三组(批量导出)</a></li>
+<li><a href="#第四组批量引用">第四组(批量引用)</a></li>
 </ul>
 </li>
 </ul>
@@ -6817,15 +6825,13 @@ app.use(‘/’,require(‘./routers/index’));</p></li>
 
 
 
-<h3 id="webpack">webpack</h3>
+<h2 id="webpack">webpack</h2>
 
 <ul><li><p>懵，不懂，难，恶心，带有人类的逆反心理，难点是英语(报错是英语报错)</p></li>
 <li><p>多练，多报错多翻译，弄到报错眼熟你就学会了，见过就会没见过就不会</p></li>
 <li><p>安装、安装、安装，翻文档看配置，进行配置</p></li>
 <li><p>优化</p></li>
 </ul>
-
-
 
 <h3 id="自动化构建工具">自动化构建工具</h3>
 
@@ -6865,7 +6871,7 @@ app.use(‘/’,require(‘./routers/index’));</p></li>
 
 
 
-<h2 id="webpack-自动化构建工具项目构建打包处理转换让浏览器支持的语法">webpack 自动化构建工具、项目构建、打包处理、转换让浏览器支持的语法</h2>
+<h3 id="webpack-自动化构建工具项目构建打包处理转换让浏览器支持的语法">webpack 自动化构建工具、项目构建、打包处理、转换让浏览器支持的语法</h3>
 
 <p><a href="https://www.webpackjs.com/concepts/" target="_blank">https://www.webpackjs.com/concepts/</a> 官网</p>
 
@@ -6874,10 +6880,8 @@ app.use(‘/’,require(‘./routers/index’));</p></li>
   目标:当学完之后，希望大家都能够自己手动配置webpack <br>
   一般结果 -&gt; 学完之后，啥东西？干啥的？我是谁？我在哪？</p>
   
-  <div id="box"></div> -&gt; <div id="box"></div>
+  <p><code>&lt;div id="box"&gt;&lt;/div&gt; -&gt; &lt;div id=box&gt;&lt;/div&gt;</code></p>
 </blockquote>
-
-
 
 <h3 id="四个核心概念">四个核心概念</h3>
 
@@ -6972,11 +6976,7 @@ rules:[ <br>
 
 <ul><li><p>1：npm install html-webpack-plugin –save-dev //自动快速的帮我们生成HTML。</p></li>
 <li><p>2：npm install css-loader style-loader –save-dev//样式文件，我们需要两种loader，css-loader 和 style－loader，css-loader会遍历css文件，找到所有的url(…)并且处理。style-loader会把所有的样式插入到你页面的一个style tag中。</p></li>
-<li><p>3:npm install babel-loader css-loader style-loader –save-dev// 安装加载器(babel-loader 进行转码</p>
-
-<ul>
-<li><p>css-loader 对 css 文件进行打包</p></li>
-<li><p>style-loader 将样式添加进 DOM 中)</p></li></ul></li>
+<li><p>3:npm install babel-loader css-loader style-loader –save-dev// 安装加载器(babel-loader 进行转码，css-loader 对 css 文件进行打包；style-loader 将样式添加进 DOM 中)</p></li>
 <li><p>4：npm install sass-loader node-sass –save-dev//css预编译程序，还需要添加node-sass来解析sass文件</p></li>
 <li><p>5：npm install url-loader –save-dev//图片自动转成base64编码的</p></li>
 <li><p>6:npm install jquery moment –save-dev//添加第三方库(jquery和moment)</p></li>
@@ -6991,4 +6991,90 @@ rules:[ <br>
 <li><p>15: npm install autoprefixer-loader –save-dev//</p></li>
 <li><p>16: npm install vue –save-dev//</p></li>
 <li><p>17: npm install -d //将项目中package.json依赖的包全部下载到该项目中</p></li>
-</ul></div></body></html>
+</ul>
+
+
+
+<h3 id="webpack-dev-server">webpack-dev-server</h3>
+
+<ul><li><p>npm i webpack-dev-server -D</p></li>
+<li><p>配置</p></li>
+</ul>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="hljs less"><div class="hljs-line"><span class="hljs-attribute">devServer</span>: {
+</div><div class="hljs-line">        <span class="hljs-attribute">clientLogLevel</span>: <span class="hljs-string">'warning'</span>,
+</div><div class="hljs-line">        <span class="hljs-attribute">hot</span>: true,
+</div><div class="hljs-line">        <span class="hljs-attribute">compress</span>: true,
+</div><div class="hljs-line">        <span class="hljs-attribute">host</span>: <span class="hljs-string">'localhost'</span>,
+</div><div class="hljs-line">        <span class="hljs-attribute">port</span>: <span class="hljs-number">80</span>,
+</div><div class="hljs-line">        <span class="hljs-attribute">open</span>:true,
+</div><div class="hljs-line">        <span class="hljs-attribute">proxy</span>: {   <span class="hljs-comment">//服务器跨域</span>
+</div><div class="hljs-line">            <span class="hljs-string">'/api'</span>: {
+</div><div class="hljs-line">                <span class="hljs-attribute">target</span>: <span class="hljs-string">'http://www.yijianbaoshui.com/acc/queryAll.do'</span>,
+</div><div class="hljs-line">                <span class="hljs-comment">// changeOrigin: true,</span>
+</div><div class="hljs-line">                <span class="hljs-attribute">pathRewrite</span>: {
+</div><div class="hljs-line">                    <span class="hljs-string">'^/api'</span>: <span class="hljs-string">''</span>
+</div><div class="hljs-line">                }
+</div><div class="hljs-line">            }
+</div><div class="hljs-line">        }
+</div><div class="hljs-line">    },
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">    <span class="hljs-comment">//前端只需要请求/api这个接口就等同于访问http://www.yijianbaoshui.com/acc/queryAll.do</span>
+</div><div class="hljs-line">    例子如下:
+</div><div class="hljs-line">    <span class="hljs-selector-tag">fetch</span>(<span class="hljs-string">'/api?orgid=bc97556b69a34ec2b885c6db0eab9acf&amp;orgName=&amp;loginType=0&amp;curRoleId=2&amp;groupId=811fa6641f974b9ab2855268ff59b27f'</span>)
+</div><div class="hljs-line">    <span class="hljs-selector-class">.then</span>(e=&gt;e.json())
+</div><div class="hljs-line">    <span class="hljs-selector-class">.then</span>(d=&gt;{
+</div><div class="hljs-line">        <span class="hljs-selector-tag">console</span><span class="hljs-selector-class">.log</span>(d);
+</div><div class="hljs-line">    })
+</div></code></pre>
+
+<h2 id="es6的导入导出">ES6的导入导出</h2>
+
+<h3 id="第一组变量导出引入">第一组(变量导出引入)</h3>
+
+<pre class="prettyprint hljs-dark"><code class="hljs javascript"><div class="hljs-line"><span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fn</span>(<span class="hljs-params"></span>)</span>{
+</div><div class="hljs-line">}
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line"><span class="hljs-keyword">import</span> {fn} <span class="hljs-keyword">from</span> <span class="hljs-string">'./xx'</span>;
+</div><div class="hljs-line"><wbr>
+</div></code></pre>
+
+<h3 id="第二组默认">第二组(默认)</h3>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="hljs coffeescript"><div class="hljs-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> fn(){
+</div><div class="hljs-line">}
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line"><span class="hljs-keyword">import</span> fn <span class="hljs-keyword">from</span> <span class="hljs-string">'./xx'</span>;
+</div><div class="hljs-line"><wbr>
+</div></code></pre>
+
+<!-- &#21513; -->
+
+<h3 id="第三组批量导出">第三组(批量导出)</h3>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="hljs clean"><div class="hljs-line"><span class="hljs-keyword">export</span> * <span class="hljs-keyword">from</span> <span class="hljs-string">'./xx'</span>;
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line"><span class="hljs-keyword">import</span> {} <span class="hljs-keyword">from</span> <span class="hljs-string">'./xx'</span>;
+</div><div class="hljs-line"><wbr>
+</div></code></pre>
+
+
+
+<h3 id="第四组批量引用">第四组(批量引用)</h3>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="hljs coffeescript"><div class="hljs-line"><wbr>
+</div><div class="hljs-line"><span class="hljs-keyword">as</span>能改名字
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line"><span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> obj <span class="hljs-keyword">from</span> <span class="hljs-string">'./xx'</span>;
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line"><span class="hljs-built_in">console</span>.log(obj.fn);
+</div><div class="hljs-line"><wbr>
+</div></code></pre></div></body></html>
