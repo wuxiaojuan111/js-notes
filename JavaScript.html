@@ -397,6 +397,17 @@
 </li>
 </ul>
 </li>
+<li><a href="#webpack-自动化构建工具项目构建打包处理转换让浏览器支持的语法">webpack 自动化构建工具、项目构建、打包处理、转换让浏览器支持的语法</a><ul>
+<li><a href="#四个核心概念">四个核心概念</a></li>
+<li><a href="#安装">安装</a></li>
+<li><a href="#配置">配置</a></li>
+<li><a href="#设置packagejson-文件">设置package.json 文件</a></li>
+<li><a href="#mode设置">mode设置</a><ul>
+<li><a href="#webpack常用的插件安装命令">webpack常用的插件安装命令：</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -6704,6 +6715,8 @@ XML -&gt;  <br>
 <li><p><strong>req.body 获取参数</strong></p></li>
 </ul>
 
+
+
 <h3 id="路由路径切换寻址">路由(路径切换，寻址)</h3>
 
 <blockquote>
@@ -6711,6 +6724,8 @@ XML -&gt;  <br>
   <a href="http://www.baidu.com/home" target="_blank">http://www.baidu.com/home</a>  一般默认找home文件夹下的index.html <br>
   <a href="http://www.baidu.com/works" target="_blank">http://www.baidu.com/works</a> 一般默认找works文件夹下的index.html</p>
 </blockquote>
+
+
 
 <h3 id="express使用路由最多还是写2级就行了">express使用路由最多还是写2级就行了</h3>
 
@@ -6840,8 +6855,140 @@ app.use(‘/’,require(‘./routers/index’));</p></li>
 <ul><li><p>生产依赖主要给用户使用的(体积小)</p></li>
 </ul>
 
+
+
 <h4 id="dirname-当前路径">__dirname 当前路径</h4>
 
 
 
-<h4 id="new-formdata专门处理二进制数据它下面只有一个方法appendkeyvalue">new FormData专门处理二进制数据，它下面只有一个方法，append(key,value)</h4></div></body></html>
+<h4 id="new-formdata专门处理二进制数据它下面只有一个方法appendkeyvalue">new FormData专门处理二进制数据，它下面只有一个方法，append(key,value)</h4>
+
+
+
+<h2 id="webpack-自动化构建工具项目构建打包处理转换让浏览器支持的语法">webpack 自动化构建工具、项目构建、打包处理、转换让浏览器支持的语法</h2>
+
+<p><a href="https://www.webpackjs.com/concepts/" target="_blank">https://www.webpackjs.com/concepts/</a> 官网</p>
+
+<blockquote>
+  <p>难点-&gt; 英文 <br>
+  目标:当学完之后，希望大家都能够自己手动配置webpack <br>
+  一般结果 -&gt; 学完之后，啥东西？干啥的？我是谁？我在哪？</p>
+  
+  <div id="box"></div> -&gt; <div id="box"></div>
+</blockquote>
+
+
+
+<h3 id="四个核心概念">四个核心概念</h3>
+
+<ul><li><p><strong>入口(entry)</strong></p></li>
+</ul>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="hljs less"><div class="hljs-line">    <span class="hljs-attribute">entry</span>:<span class="hljs-string">'./2.js'</span>,  字符串，单入口
+</div><div class="hljs-line">    <span class="hljs-attribute">entry</span>:[<span class="hljs-string">'./2'</span>,<span class="hljs-string">'./1'</span>], <span class="hljs-comment">//多入口单出口</span>
+</div><div class="hljs-line">    <span class="hljs-attribute">output</span>:{
+</div><div class="hljs-line">        <span class="hljs-attribute">filename</span>:<span class="hljs-string">'haha.js'</span>
+</div><div class="hljs-line">    }
+</div><div class="hljs-line">    <span class="hljs-comment">//多入口多出口</span>
+</div><div class="hljs-line">    <span class="hljs-attribute">entry</span>:{
+</div><div class="hljs-line">        <span class="hljs-attribute">index</span>:<span class="hljs-string">'./2'</span>,
+</div><div class="hljs-line">        <span class="hljs-attribute">aa</span>:<span class="hljs-string">'./1'</span>
+</div><div class="hljs-line">    },
+</div><div class="hljs-line">    <span class="hljs-attribute">output</span>:{
+</div><div class="hljs-line">        <span class="hljs-attribute">filename</span>:<span class="hljs-string">'[name].[hash:8].js'</span>  
+</div><div class="hljs-line">    }
+</div><div class="hljs-line">    <span class="hljs-selector-tag">name</span>就表示<span class="hljs-selector-tag">entry</span>的<span class="hljs-selector-tag">key</span>
+</div><div class="hljs-line"><wbr>
+</div></code></pre>
+
+<ul><li><p><strong>输出(output)</strong></p></li>
+<li><p><strong>loader：模块的源代码进行转换</strong> <br>
+<code>module:{ <br>
+rules:[ <br>
+    { <br>
+        test:/\.css$/,  //处理上面文件 <br>
+        use:[需要的模块] <br>
+    } <br>
+] <br>
+}</code></p></li>
+<li><p><strong>插件(plugins)</strong> <br>
+<code>plugins:[new HTML({}),new Xxx()]</code></p></li>
+</ul>
+
+
+
+<h3 id="安装">安装</h3>
+
+<ul><li><p>npm i webpack webpack-cli –golbal  （第一次安装需要那么做）</p></li>
+<li><p>项目目录名称千万不要写webpack</p></li>
+<li><p>npm init -y(到你项目的目录中输入)</p></li>
+<li><p>npm i webpack webpack-cli –save   （只要安装过，就不用安装上面那句话了）</p></li>
+</ul>
+
+
+
+<h3 id="配置">配置</h3>
+
+<ul><li><p>自己手动创建一个webpack.config.js的文件</p></li>
+</ul>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="hljs ebnf"><div class="hljs-line"><span class="hljs-attribute">const path</span> = require(<span class="hljs-string">'path'</span>);
+</div><div class="hljs-line"><span class="hljs-attribute">const obj</span> = {
+</div><div class="hljs-line">    entry:<span class="hljs-string">'./2.js'</span>,
+</div><div class="hljs-line">    output:{
+</div><div class="hljs-line">        filename:<span class="hljs-string">'2.js'</span>,
+</div><div class="hljs-line">        path:path.relove(__dirname,<span class="hljs-string">'./build'</span>)
+</div><div class="hljs-line">    }
+</div><div class="hljs-line">}
+</div><div class="hljs-line">module.exports = obj;
+</div><div class="hljs-line"><wbr>
+</div></code></pre>
+
+
+
+<h3 id="设置packagejson-文件">设置package.json 文件</h3>
+
+<blockquote>
+  <p>找到scripts 设置值为 “build（自定义名称）”:”webpack” <br>
+  到命令行输入npm run build</p>
+</blockquote>
+
+
+
+<h3 id="mode设置">mode设置</h3>
+
+<blockquote>
+  <p>production  生产环境   让用户看的 <br>
+  development 开发环境   让程序员看的</p>
+</blockquote>
+
+
+
+<h4 id="webpack常用的插件安装命令">webpack常用的插件安装命令：</h4>
+
+<ul><li><p>1：npm install html-webpack-plugin –save-dev //自动快速的帮我们生成HTML。</p></li>
+<li><p>2：npm install css-loader style-loader –save-dev//样式文件，我们需要两种loader，css-loader 和 style－loader，css-loader会遍历css文件，找到所有的url(…)并且处理。style-loader会把所有的样式插入到你页面的一个style tag中。</p></li>
+<li><p>3:npm install babel-loader css-loader style-loader –save-dev// 安装加载器(babel-loader 进行转码</p>
+
+<ul>
+<li><p>css-loader 对 css 文件进行打包</p></li>
+<li><p>style-loader 将样式添加进 DOM 中)</p></li></ul></li>
+<li><p>4：npm install sass-loader node-sass –save-dev//css预编译程序，还需要添加node-sass来解析sass文件</p></li>
+<li><p>5：npm install url-loader –save-dev//图片自动转成base64编码的</p></li>
+<li><p>6:npm install jquery moment –save-dev//添加第三方库(jquery和moment)</p></li>
+<li><p>7:npm install babel-preset-es2015 –save-dev//添加ES6的支持</p></li>
+<li><p>8:npm install babel-preset-es2015 babel-preset-react –save-dev//安装转码规则</p></li>
+<li><p>9：npm install webpack-dev-middleware –save-dev//服务器端使用的是express框架，你还可以直接安装express的middleware，webpack配合express</p></li>
+<li><p>10: npm install react –save-dev//安装并引用 React 模块</p></li>
+<li><p>11：npm install react react-dom –save-dev//添加react和react-dom</p></li>
+<li><p>12：npm install react-hot-loader –save-dev//react-hot-loader 是一款非常好用的 React 热插拔的加载插件，通过它可以实现修改-运行同步的效果，配合 webpack-dev-server 使用更佳！</p></li>
+<li><p>13：npm install –save-dev autoprefixer postcss-loader –save-dev//</p></li>
+<li><p>14：npm install babel-loader coffee-loader –save-dev//</p></li>
+<li><p>15: npm install autoprefixer-loader –save-dev//</p></li>
+<li><p>16: npm install vue –save-dev//</p></li>
+<li><p>17: npm install -d //将项目中package.json依赖的包全部下载到该项目中</p></li>
+</ul></div></body></html>
