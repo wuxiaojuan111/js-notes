@@ -418,6 +418,24 @@
 </li>
 </ul>
 </li>
+<li><a href="#react框架">react框架</a><ul>
+<li><ul>
+<li><a href="#react-安装">react 安装</a><ul>
+<li><a href="#hello-world">Hello World</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#jsx-js-xml-可扩展的js语法">jsx -&gt; js xml 可扩展的js语法</a><ul>
+<li><a href="#创建组件">创建组件</a></li>
+<li><a href="#状态-state-在react中的所有数据只要是在state下的这些数据发生变化就会让视图更新">状态 state 在react中的所有数据，只要是在state下的，这些数据发生变化就会让视图更新</a></li>
+<li><a href="#受控组件">受控组件</a></li>
+<li><a href="#非受控组件">非受控组件</a></li>
+<li><a href="#父子组件传递">父子组件传递</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
@@ -6833,6 +6851,8 @@ app.use(‘/’,require(‘./routers/index’));</p></li>
 <li><p>优化</p></li>
 </ul>
 
+
+
 <h3 id="自动化构建工具">自动化构建工具</h3>
 
 <ul><li><p>开发依赖主要是为了维护（给程序员看的）</p></li>
@@ -6883,6 +6903,8 @@ app.use(‘/’,require(‘./routers/index’));</p></li>
   <p><code>&lt;div id="box"&gt;&lt;/div&gt; -&gt; &lt;div id=box&gt;&lt;/div&gt;</code></p>
 </blockquote>
 
+
+
 <h3 id="四个核心概念">四个核心概念</h3>
 
 <ul><li><p><strong>入口(entry)</strong></p></li>
@@ -6927,7 +6949,7 @@ rules:[ <br>
 
 <ul><li><p>npm i webpack webpack-cli –golbal  （第一次安装需要那么做）</p></li>
 <li><p>项目目录名称千万不要写webpack</p></li>
-<li><p>npm init -y(到你项目的目录中输入)</p></li>
+<li><p>npm init -y(到你项目的目录中输入，//初始化默认的package.json文件)</p></li>
 <li><p>npm i webpack webpack-cli –save   （只要安装过，就不用安装上面那句话了）</p></li>
 </ul>
 
@@ -7030,9 +7052,15 @@ rules:[ <br>
 </div><div class="hljs-line">    })
 </div></code></pre>
 
+
+
 <h2 id="es6的导入导出">ES6的导入导出</h2>
 
+
+
 <h3 id="第一组变量导出引入">第一组(变量导出引入)</h3>
+
+
 
 <pre class="prettyprint hljs-dark"><code class="hljs javascript"><div class="hljs-line"><span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fn</span>(<span class="hljs-params"></span>)</span>{
 </div><div class="hljs-line">}
@@ -7040,6 +7068,8 @@ rules:[ <br>
 </div><div class="hljs-line"><span class="hljs-keyword">import</span> {fn} <span class="hljs-keyword">from</span> <span class="hljs-string">'./xx'</span>;
 </div><div class="hljs-line"><wbr>
 </div></code></pre>
+
+
 
 <h3 id="第二组默认">第二组(默认)</h3>
 
@@ -7053,6 +7083,8 @@ rules:[ <br>
 </div></code></pre>
 
 <!-- &#21513; -->
+
+
 
 <h3 id="第三组批量导出">第三组(批量导出)</h3>
 
@@ -7077,4 +7109,210 @@ rules:[ <br>
 </div><div class="hljs-line"><wbr>
 </div><div class="hljs-line"><span class="hljs-built_in">console</span>.log(obj.fn);
 </div><div class="hljs-line"><wbr>
+</div></code></pre>
+
+<blockquote>
+  <p>angular   谷歌  粘性很强，强主张  TS-&gt; typeScript,脏值检查</p>
+</blockquote>
+
+
+
+<h1 id="react框架">react框架</h1>
+
+<blockquote>
+  <p>react     facebook   虚拟DOM，让开发者专注于数据处理，并且根据数据的变化去操作DOM(性能优化的去操作)，生态(手机端)</p>
+</blockquote>
+
+<ul><li><p>用于构建用户界面的 JavaScript 库，react是V层框架，专注于视图层</p>
+
+<ul>
+<li><p>M：Model    数据</p></li>
+<li><p>V：View       视图</p></li>
+<li><p>C：Controller  控制器</p></li></ul></li>
+<li><p>用对象去模拟DOM树</p></li>
+</ul>
+
+<pre class="prettyprint hljs-dark"><code class="hljs less"><div class="hljs-line"><span class="hljs-selector-tag">createElement</span>(<span class="hljs-string">'li'</span>,{<span class="hljs-attribute">className</span>:<span class="hljs-string">'active'</span>,<span class="hljs-attribute">id</span>:<span class="hljs-string">'box'</span>,<span class="hljs-attribute">children</span>:[
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">    ]},'哈哈')
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">    {
+</div><div class="hljs-line">        <span class="hljs-attribute">tagName</span>:<span class="hljs-string">'li'</span>,
+</div><div class="hljs-line">        <span class="hljs-attribute">attr</span>:{
+</div><div class="hljs-line">            <span class="hljs-attribute">className</span>:<span class="hljs-string">'active'</span>,
+</div><div class="hljs-line">            <span class="hljs-attribute">id</span>:<span class="hljs-string">'box'</span>,
+</div><div class="hljs-line">            <span class="hljs-attribute">children</span>:[
+</div><div class="hljs-line">                {
+</div><div class="hljs-line">                    <span class="hljs-attribute">tagName</span>:<span class="hljs-string">'div'</span>,
+</div><div class="hljs-line">                    <span class="hljs-attribute">attr</span>:{<span class="hljs-attribute">id</span>:<span class="hljs-string">'div1'</span>},
+</div><div class="hljs-line">                    <span class="hljs-attribute">text</span>:<span class="hljs-string">'呵呵'</span>
+</div><div class="hljs-line">                }
+</div><div class="hljs-line">            ]
+</div><div class="hljs-line">        }
+</div><div class="hljs-line">        <span class="hljs-attribute">text</span>:<span class="hljs-string">'哈哈'</span>
+</div><div class="hljs-line">    }
+</div><div class="hljs-line"><wbr>
+</div></code></pre>
+
+
+
+<h3 id="react-安装">react 安装</h3>
+
+<blockquote>
+  <p><a href="https://react.docschina.org/docs/getting-started.html" target="_blank">https://react.docschina.org/docs/getting-started.html</a></p>
+</blockquote>
+
+<ul><li><p>npx create-react-app 文件名</p></li>
+<li><p>cd 文件名</p></li>
+<li><p>npm start <br>
+or</p></li>
+<li><p>yarn 安装</p></li>
+</ul>
+
+<h4 id="hello-world">Hello World</h4>
+
+<ul><li><p>import React from ‘react’;</p></li>
+<li><p>import ReactDOM from ‘react-dom’;</p></li>
+<li><p>ReactDOM.render(document.getElementById(‘root’));</p></li>
+</ul>
+
+<pre class="prettyprint hljs-dark"><code class="hljs applescript"><div class="hljs-line">ReactDOM.render() 有三个参数
+</div><div class="hljs-line"><span class="hljs-number">1.</span>结构
+</div><div class="hljs-line"><span class="hljs-number">2.</span>根元素，默认为root
+</div><div class="hljs-line"><span class="hljs-number">3.</span>渲染完之后的回调函数
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">注意:
+</div><div class="hljs-line">    结构的顶层只能有<span class="hljs-number">1</span>个元素
+</div><div class="hljs-line">    比如：
+</div><div class="hljs-line">        &lt;<span class="hljs-keyword">div</span>&gt;你好&lt;/<span class="hljs-keyword">div</span>&gt;&lt;<span class="hljs-keyword">div</span>&gt;haha&lt;/<span class="hljs-keyword">div</span>&gt;  报错
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">        &lt;<span class="hljs-keyword">div</span>&gt;
+</div><div class="hljs-line">            &lt;<span class="hljs-keyword">div</span>&gt;你好&lt;/<span class="hljs-keyword">div</span>&gt;&lt;<span class="hljs-keyword">div</span>&gt;haha&lt;/<span class="hljs-keyword">div</span>&gt;  对的
+</div><div class="hljs-line">        &lt;/<span class="hljs-keyword">div</span>&gt;
+</div></code></pre>
+
+<h2 id="jsx-js-xml-可扩展的js语法">jsx -&gt; js xml 可扩展的js语法</h2>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="hljs sqf"><div class="hljs-line">不用jsx的语法
+</div><div class="hljs-line">    const H1 = React.createElement(
+</div><div class="hljs-line">     <span class="hljs-string">'h1'</span>,
+</div><div class="hljs-line">     {<span class="hljs-built_in">className</span>: <span class="hljs-string">'greeting'</span>},
+</div><div class="hljs-line">     <span class="hljs-string">'Hello, world!'</span>
+</div><div class="hljs-line">   );
+</div><div class="hljs-line">用jsx的语法
+</div><div class="hljs-line">&lt;h1 <span class="hljs-built_in">className</span>=<span class="hljs-string">"greeting"</span>&gt;Hello, world&lt;/h1&gt;
+</div></code></pre>
+
+<ul><li><p>class必须写成className</p></li>
+<li><p>标签必须是闭合状态 包括单标签 <code>&lt;input /&gt;</code></p></li>
+<li><p>{ }</p>
+
+<ul>
+<li><p>可以执行js语句</p></li>
+<li><p>如果花括号内部有数组，默认展开</p></li>
+<li><p>如果元素属性是一个变量需要花括号  <code>src={obj.xx}</code></p></li>
+<li><p>受控组件、非受控组件</p></li></ul></li>
+<li><p>事件</p>
+
+<ul>
+<li><p><code>onClick、onMouseOver...</code></p></li></ul></li>
+</ul>
+
+<pre class="prettyprint hljs-dark"><code class="hljs kotlin"><div class="hljs-line">    onClick = {()=&gt;{
+</div><div class="hljs-line">        事件干的事情
+</div><div class="hljs-line">    }}
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">    myClick(){
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">    }
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">    onClick = {<span class="hljs-keyword">this</span>.myClick.bind(<span class="hljs-keyword">this</span>)}
+</div></code></pre>
+
+<ul><li><p>事件函数的this默认为undefined,所以要使用bind(this)修正this指向</p></li>
+<li><p>如果使用create-react-app 有语法不用使用bind</p>
+
+<ul>
+<li><p>下面的写法就不用加bind(this) <br>
+<code>事件函数 = ()=&gt; {}</code></p></li></ul></li>
+</ul>
+
+<h3 id="创建组件">创建组件</h3>
+
+<ul><li><p>类创建</p></li>
+</ul>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="hljs scala"><div class="hljs-line">    <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">组件名称</span>(<span class="hljs-params">首字母大写</span>) <span class="hljs-keyword">extends</span>  <span class="hljs-title">React</span>.<span class="hljs-title">Component</span></span>{
+</div><div class="hljs-line">        render(){
+</div><div class="hljs-line">            <span class="hljs-keyword">return</span> (
+</div><div class="hljs-line">                <span class="hljs-type">JSX</span> -&gt; 结构
+</div><div class="hljs-line">            )
+</div><div class="hljs-line">        }
+</div><div class="hljs-line">    }
+</div></code></pre>
+
+<ul><li><p>函数创建</p></li>
+</ul>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><div class="hljs-line">    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">App</span>(<span class="hljs-params"></span>)</span>{
+</div><div class="hljs-line">        <span class="hljs-keyword">return</span> (
+</div><div class="hljs-line">            <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span></span>
+</div><div class="hljs-line"><span class="xml">                <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>别的上面东西<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
+</div><div class="hljs-line"><span class="xml">            <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
+</div><div class="hljs-line">        )
+</div><div class="hljs-line">    }
+</div></code></pre>
+
+<h3 id="状态-state-在react中的所有数据只要是在state下的这些数据发生变化就会让视图更新">状态 state 在react中的所有数据，只要是在state下的，这些数据发生变化就会让视图更新</h3>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="hljs delphi"><div class="hljs-line">    <span class="hljs-function"><span class="hljs-keyword">constructor</span><span class="hljs-params">()</span><span class="hljs-comment">{</span></span>
+</div><div class="hljs-line"><span class="hljs-function">        super();</span>
+</div><div class="hljs-line"><span class="hljs-function">        this.state = {</span>
+</div><div class="hljs-line"><span class="hljs-function">            数据</span>
+</div><div class="hljs-line"><span class="hljs-function">        }</span>
+</div><div class="hljs-line"><span class="hljs-function">    }</span>
+</div><div class="hljs-line"><span class="hljs-function"></span>
+</div><div class="hljs-line"><span class="hljs-function">    修改数据</span>
+</div><div class="hljs-line"><span class="hljs-function">    <span class="hljs-title">this</span>.<span class="hljs-title">setState</span><span class="hljs-params">(<span class="hljs-comment">{新数据}</span>)</span></span>
+</div></code></pre>
+
+<h3 id="受控组件">受控组件</h3>
+
+<ul><li><p>如果在表单元素上设置了一个（value、checked）默认值，那么该元素就变成了受控组件</p></li>
+</ul>
+
+<h3 id="非受控组件">非受控组件</h3>
+
+<ul><li><p>不设置默认值</p></li>
+<li><p>defaultValue</p></li>
+</ul>
+
+<h3 id="父子组件传递">父子组件传递</h3>
+
+<ul><li><p>1.在父组件上给子组件中绑定自定义属性，把数据放到自定义属性上（发送）</p></li>
+<li><p>2.在子组件中使用<code>this.props.自定义属性名</code>（接收）</p></li>
+</ul>
+
+<pre class="prettyprint hljs-dark"><code class="hljs javascript"><div class="hljs-line"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fn</span>(<span class="hljs-params">a</span>)</span>{
+</div><div class="hljs-line">    <span class="hljs-comment">//console.log(a)</span>
+</div><div class="hljs-line">    a(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">a</span>)</span>{
+</div><div class="hljs-line">        a(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">a</span>)</span>{  
+</div><div class="hljs-line">            <span class="hljs-built_in">console</span>.log(a);
+</div><div class="hljs-line">        })
+</div><div class="hljs-line">    })
+</div><div class="hljs-line">}
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">fn(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">a</span>)</span>{
+</div><div class="hljs-line">    a(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">a</span>)</span>{
+</div><div class="hljs-line">        a(a);
+</div><div class="hljs-line">    })
+</div><div class="hljs-line">});
 </div></code></pre></div></body></html>
