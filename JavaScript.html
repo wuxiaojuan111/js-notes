@@ -7887,7 +7887,7 @@ or</p></li>
 </div><div class="hljs-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> store
 </div></code></pre>
 
-<ul><li><p><strong>action.js</strong></p></li>
+<ul><li><p><strong>store/action.js</strong></p></li>
 </ul>
 
 <pre class="prettyprint hljs-dark"><code class="hljs ada"><div class="hljs-line">引入 actionTypes
@@ -7897,14 +7897,14 @@ or</p></li>
 </div><div class="hljs-line">....
 </div></code></pre>
 
-<ul><li><p><strong>actionTypes.js</strong></p></li>
+<ul><li><p><strong>store/actionTypes.js</strong></p></li>
 </ul>
 
 <pre class="prettyprint hljs-dark"><code class="hljs clean"><div class="hljs-line">const INCRMENT = <span class="hljs-string">'INCRMENT'</span>;
 </div><div class="hljs-line">....
 </div></code></pre>
 
-<ul><li><p><strong>reducer.js</strong></p></li>
+<ul><li><p><strong>store/reducer.js</strong></p></li>
 </ul>
 
 <pre class="prettyprint hljs-dark"><code class="hljs pf"><div class="hljs-line">export <span class="hljs-keyword">default</span> function (<span class="hljs-keyword">state</span>,action){
