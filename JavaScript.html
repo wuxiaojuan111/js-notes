@@ -332,7 +332,9 @@
 </li>
 </ul>
 </li>
-<li><a href="#ajax">AJAX</a><ul>
+<li><a href="#传统的交互方式getpost">传统的交互方式（get/post）</a></li>
+<li><a href="#fetchgetpost请求数据">fetch（get/post）请求数据</a></li>
+<li><a href="#ajax请求数据">AJAX请求数据</a><ul>
 <li><ul>
 <li><a href="#目的从后台拿数据">目的：从后台拿数据</a></li>
 <li><a href="#难点">难点</a></li>
@@ -342,14 +344,23 @@
 <li><a href="#输入url回车之后发生了什么事">输入url回车之后发生了什么事?</a></li>
 </ul>
 </li>
-<li><a href="#传统的交互方式">传统的交互方式</a></li>
-<li><a href="#ajax的交互模型打电话模式">ajax的交互模型(打电话模式)</a></li>
-<li><a href="#fetch请求数据">fetch请求数据</a></li>
-<li><a href="#get和post">get和post</a><ul>
+<li><a href="#ajax的交互模型打电话模式">ajax的交互模型(打电话模式)</a><ul>
+<li><a href="#ajaxgetpost请求">ajax（get/post）请求</a><ul>
+<li><a href="#1get请求参数在url上get一般用于数据展示">1.get请求：参数在url上（get一般用于数据展示）</a></li>
+<li><a href="#2post请求参数在send中post用户传输较大数据">2.post请求：参数在send中（post用户、传输较大数据）</a></li>
+</ul>
+</li>
 <li><a href="#获取xml的数据">获取XML的数据</a></li>
 </ul>
 </li>
 <li><a href="#ajax对象的常用属性和事件">ajax对象的常用属性和事件</a></li>
+</ul>
+</li>
+<li><a href="#axios请求数据">axios请求数据</a><ul>
+<li><a href="#axios封装">axios封装</a><ul>
+<li><a href="#axiospost请求">axios—post请求</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a href="#cookie">cookie</a><ul>
@@ -428,7 +439,10 @@
 <li><a href="#jsx-js-xml-可扩展的js语法">jsx -&gt; js xml 可扩展的js语法</a><ul>
 <li><a href="#创建组件">创建组件</a></li>
 <li><a href="#state状态">state：状态</a></li>
-<li><a href="#setstate修改数据异步执行">setState：修改数据（异步执行）</a></li>
+<li><a href="#setstate修改数据异步执行">setState：修改数据（异步执行）</a><ul>
+<li><a href="#当statesetstate包了一个定时器和原生事件的时候为同步别的地方就异步">当state/setState包了一个定时器和原生事件的时候为“同步”，别的地方就异步</a></li>
+</ul>
+</li>
 <li><a href="#受控组件">受控组件</a></li>
 <li><a href="#非受控组件">非受控组件</a></li>
 <li><a href="#父子组件传递">父子组件传递</a></li>
@@ -457,6 +471,7 @@
 </li>
 <li><a href="#redux-reduce-flux-可预见的状态管理的容器是一个独立的状态管理器不依赖于某个框架的">redux -&gt; reduce + Flux  可预见的状态管理的容器，是一个独立的状态管理器（不依赖于某个框架的）</a><ul>
 <li><a href="#bindactioncreators简化storedispatch操作让函数返回一个对象">bindActionCreators：简化store.dispatch操作，让函数返回一个对象</a></li>
+<li><a href="#引入redux-thunk">引入redux-thunk</a></li>
 </ul>
 </li>
 <li><a href="#react-redux">react-redux</a></li>
@@ -966,6 +981,14 @@ console.log(box.style); <br>
 <h6 id="引用类型复杂类型复合类型">（引用类型、复杂类型、复合类型）</h6>
 
 <ul><li><p>引用数据类型：数组 对象 函数 正则 日期Date Math…</p></li>
+<li><p><strong>纯对象：只能是new Object出来的</strong></p>
+
+<ul>
+<li><p>new Object</p></li>
+<li><p>{ }</p></li>
+<li><p>实例对象的原型链 === 构造函数的原型为Object.prototype <br>
+<code>obj._proto_ === Object.prototype <br>
+Object.getPrototypeOf(obj)  找到指定对象的构造函数的原型</code></p></li></ul></li>
 </ul>
 
 
@@ -4634,7 +4657,7 @@ box1.onmouseenter = function(){ <br>
 </blockquote>
 
 <ul><li><p>原生对象转JQ对象 -&gt; $(原生对象)</p></li>
-<li><p>jQ对象转原生 -&gt; <span class="" rel="98ecce1d6148bf8d5779d9a5b7c9f107"><span class="MathJax_SVG" id="MathJax-Element-1-Frame" role="textbox" aria-readonly="true" style="font-size: 100%; display: inline-block;"><span><img type="image/png" width="125" height="17" longdesc="__SVG__undefined" src="data:image/png;base64,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" style="margin-top:0;margin-bottom:0;"></span></span></span>(“img”).get(0);</p></li>
+<li><p>jQ对象转原生 -&gt; <span class="" rel="98ecce1d6148bf8d5779d9a5b7c9f107"><span class="MathJax_SVG" id="MathJax-Element-2-Frame" role="textbox" aria-readonly="true" style="font-size: 100%; display: inline-block;"><span><img type="image/png" width="133" height="18" longdesc="__SVG__undefined" src="data:image/png;base64,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" style="margin-top:0;margin-bottom:0;"></span></span></span>(“img”).get(0);</p></li>
 <li><p>$ 就是jquery对象</p></li>
 <li><p>divs.eq(数字)  div中的第某个元素，是个jquery对象</p></li>
 <li><p>index(‘缩小范围’)  自动去找某个元素基于父级的子级为第几个元素</p></li>
@@ -5933,9 +5956,60 @@ border:@x solid @c; <br>
 <li><p>4.把消失或者偏移的时间放缓些，尽量超过300ms</p></li>
 </ul>
 
+<h1 id="传统的交互方式getpost">传统的交互方式（get/post）</h1>
+
+<ul><li><p>action=”url路径”</p>
+
+<ul>
+<li><p>url路径是后台给你的地址</p></li></ul></li>
+<li><p>method = “请求方式”</p></li>
+</ul>
 
 
-<h1 id="ajax">AJAX</h1>
+
+<pre class="prettyprint hljs-dark"><code class="hljs xml"><div class="hljs-line"><span class="hljs-comment">&lt;!-- get--&gt;</span>
+</div><div class="hljs-line"><span class="hljs-tag">&lt;<span class="hljs-name">form</span> <span class="hljs-attr">action</span>=<span class="hljs-string">"/get"</span> <span class="hljs-attr">method</span>=<span class="hljs-string">"GET"</span>&gt;</span>
+</div><div class="hljs-line">    用户名:<span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text"</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"user"</span>/&gt;</span>
+</div><div class="hljs-line">    密 码:<span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"password"</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"pw"</span>/&gt;</span>
+</div><div class="hljs-line">    <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"submit"</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"提交"</span>&gt;</span>
+</div><div class="hljs-line"><span class="hljs-tag">&lt;/<span class="hljs-name">form</span>&gt;</span>
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line"><span class="hljs-comment">&lt;!-- post --&gt;</span>
+</div><div class="hljs-line"><span class="hljs-tag">&lt;<span class="hljs-name">form</span> <span class="hljs-attr">action</span>=<span class="hljs-string">"/post"</span> <span class="hljs-attr">method</span>=<span class="hljs-string">"POST"</span> <span class="hljs-attr">enctype</span>=<span class="hljs-string">"application/x-www-form-urlencoded"</span>&gt;</span>
+</div><div class="hljs-line">    用户名:<span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text"</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"user"</span>/&gt;</span>
+</div><div class="hljs-line">    密 码:<span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"password"</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"pw"</span>/&gt;</span>
+</div><div class="hljs-line">    <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"submit"</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"提交"</span>&gt;</span>
+</div><div class="hljs-line"><span class="hljs-tag">&lt;/<span class="hljs-name">form</span>&gt;</span>
+</div></code></pre>
+
+<h1 id="fetchgetpost请求数据">fetch（get/post）请求数据</h1>
+
+<pre class="prettyprint hljs-dark"><code class="hljs javascript"><div class="hljs-line"><span class="hljs-comment">//fetch --- get请求</span>
+</div><div class="hljs-line">user.onblur = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
+</div><div class="hljs-line">        fetch(<span class="hljs-string">'/get?user='</span>+<span class="hljs-keyword">this</span>.value)
+</div><div class="hljs-line">        .then(<span class="hljs-function"><span class="hljs-params">d</span>=&gt;</span>d.json())
+</div><div class="hljs-line">        .then(<span class="hljs-function"><span class="hljs-params">data</span>=&gt;</span>{
+</div><div class="hljs-line">            <span class="hljs-comment">// span.innerHTML = data.msg;</span>
+</div><div class="hljs-line">            <span class="hljs-comment">// console.log(data);</span>
+</div><div class="hljs-line">        });
+</div><div class="hljs-line">    }
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line"><span class="hljs-comment">//fetch --- post请求</span>
+</div><div class="hljs-line">fetch(<span class="hljs-string">'/post'</span>,{
+</div><div class="hljs-line">    <span class="hljs-attr">method</span>:<span class="hljs-string">'post'</span>,
+</div><div class="hljs-line">    <span class="hljs-attr">body</span>:<span class="hljs-string">''</span>+<span class="hljs-keyword">new</span> URLSearchParams({
+</div><div class="hljs-line">        <span class="hljs-attr">user</span>:<span class="hljs-keyword">this</span>.value <span class="hljs-comment">//'user='+this.value,</span>
+</div><div class="hljs-line">    }),
+</div><div class="hljs-line">    <span class="hljs-attr">headers</span>:{
+</div><div class="hljs-line">        <span class="hljs-string">'content-type'</span>:<span class="hljs-string">'application/x-www-form-urlencoded'</span>
+</div><div class="hljs-line">    }
+</div><div class="hljs-line">}).then(<span class="hljs-function"><span class="hljs-params">d</span>=&gt;</span>d.json())
+</div><div class="hljs-line">.then(<span class="hljs-function"><span class="hljs-params">d</span>=&gt;</span>{
+</div><div class="hljs-line">    <span class="hljs-built_in">console</span>.log(d);
+</div><div class="hljs-line">});
+</div></code></pre>
+
+<h1 id="ajax请求数据">AJAX请求数据</h1>
 
 <blockquote>
   <p>Asynchronous(异步) Javascript(js) And(和) XML(可扩展标记语言) <br>
@@ -5943,8 +6017,6 @@ border:@x solid @c; <br>
   
   <p>前后端数据交互的技术</p>
 </blockquote>
-
-
 
 <h3 id="目的从后台拿数据">目的：从后台拿数据</h3>
 
@@ -5963,8 +6035,6 @@ border:@x solid @c; <br>
 
 
 <h2 id="url">url</h2>
-
-
 
 <pre class="prettyprint hljs-dark"><code class="hljs dts"><div class="hljs-line"><span class="hljs-symbol">    url:</span>
 </div><div class="hljs-line"><span class="hljs-symbol">        http:</span><span class="hljs-comment">//localhost:80/3_ajax.html?page=1#hash=xy;</span>
@@ -6011,36 +6081,6 @@ border:@x solid @c; <br>
 <li><p>gui渲染页面</p></li>
 </ul>
 
-
-
-<h2 id="传统的交互方式">传统的交互方式</h2>
-
-<ul><li><p>action=”url路径”</p>
-
-<ul>
-<li><p>url路径是后台给你的地址</p></li></ul></li>
-<li><p>method = “请求方式”</p></li>
-</ul>
-
-
-
-<pre class="prettyprint hljs-dark"><code class="hljs xml"><div class="hljs-line"><span class="hljs-comment">&lt;!-- get--&gt;</span>
-</div><div class="hljs-line"><span class="hljs-tag">&lt;<span class="hljs-name">form</span> <span class="hljs-attr">action</span>=<span class="hljs-string">"/get"</span> <span class="hljs-attr">method</span>=<span class="hljs-string">"GET"</span>&gt;</span>
-</div><div class="hljs-line">    用户名:<span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text"</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"user"</span>/&gt;</span>
-</div><div class="hljs-line">    密 码:<span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"password"</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"pw"</span>/&gt;</span>
-</div><div class="hljs-line">    <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"submit"</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"提交"</span>&gt;</span>
-</div><div class="hljs-line"><span class="hljs-tag">&lt;/<span class="hljs-name">form</span>&gt;</span>
-</div><div class="hljs-line"><wbr>
-</div><div class="hljs-line"><span class="hljs-comment">&lt;!-- post --&gt;</span>
-</div><div class="hljs-line"><span class="hljs-tag">&lt;<span class="hljs-name">form</span> <span class="hljs-attr">action</span>=<span class="hljs-string">"/post"</span> <span class="hljs-attr">method</span>=<span class="hljs-string">"POST"</span> <span class="hljs-attr">enctype</span>=<span class="hljs-string">"application/x-www-form-urlencoded"</span>&gt;</span>
-</div><div class="hljs-line">    用户名:<span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text"</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"user"</span>/&gt;</span>
-</div><div class="hljs-line">    密 码:<span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"password"</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"pw"</span>/&gt;</span>
-</div><div class="hljs-line">    <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"submit"</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"提交"</span>&gt;</span>
-</div><div class="hljs-line"><span class="hljs-tag">&lt;/<span class="hljs-name">form</span>&gt;</span>
-</div></code></pre>
-
-
-
 <h2 id="ajax的交互模型打电话模式">ajax的交互模型(打电话模式)</h2>
 
 <blockquote>
@@ -6051,34 +6091,11 @@ border:@x solid @c; <br>
   5.通话</p>
 </blockquote>
 
+<h3 id="ajaxgetpost请求">ajax（get/post）请求</h3>
 
+<h4 id="1get请求参数在url上get一般用于数据展示"><strong>1.get请求：参数在url上（get一般用于数据展示）</strong></h4>
 
-<h2 id="fetch请求数据">fetch请求数据</h2>
-
-
-
-<pre class="prettyprint hljs-dark"><code class="hljs less"><div class="hljs-line">   <span class="hljs-selector-tag">fetch</span>(<span class="hljs-string">'/post'</span>,{
-</div><div class="hljs-line">       <span class="hljs-attribute">method</span>:<span class="hljs-string">'post'</span>,
-</div><div class="hljs-line">       <span class="hljs-attribute">body</span>:<span class="hljs-string">''</span>+new URLSearchParams({
-</div><div class="hljs-line">           <span class="hljs-attribute">user</span>:this.value <span class="hljs-comment">//'user='+this.value,</span>
-</div><div class="hljs-line">       }),
-</div><div class="hljs-line">       <span class="hljs-attribute">headers</span>:{
-</div><div class="hljs-line">           <span class="hljs-string">'content-type'</span>:<span class="hljs-string">'application/x-www-form-urlencoded'</span>
-</div><div class="hljs-line">       }
-</div><div class="hljs-line">   })<span class="hljs-selector-class">.then</span>(d=&gt;d.json())
-</div><div class="hljs-line">   <span class="hljs-selector-class">.then</span>(d=&gt;{
-</div><div class="hljs-line">       <span class="hljs-selector-tag">console</span><span class="hljs-selector-class">.log</span>(d);
-</div><div class="hljs-line">   });
-</div></code></pre>
-
-
-
-<h2 id="get和post">get和post</h2>
-
-<ul><li><p><strong>1.get请求：参数在url上（get一般用于数据展示）</strong>     </p>
-
-<ul>
-<li><p>get:(应用场景数据渲染) <br>
+<ul><li><p>get:(应用场景数据渲染) <br>
 <code>url -&gt; 后端给的 '/get?user=yuhaiyang' <br>
 xhr.open('get','/s?wd=zhufeng')</code></p></li>
 <li><p>缺点:</p>
@@ -6088,22 +6105,10 @@ xhr.open('get','/s?wd=zhufeng')</code></p></li>
 <li><p>优势:</p>
 
 <ul>
-<li><p>速度快 -&gt; 3步就能请求到数据</p></li></ul></li></ul></li>
+<li><p>速度快 -&gt; 3步就能请求到数据</p></li></ul></li>
 </ul>
 
-
-
-<pre class="prettyprint hljs-dark"><code class="hljs javascript"><div class="hljs-line"><span class="hljs-comment">//原生js，fetch请求</span>
-</div><div class="hljs-line">user.onblur = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
-</div><div class="hljs-line">        fetch(<span class="hljs-string">'/get?user='</span>+<span class="hljs-keyword">this</span>.value)
-</div><div class="hljs-line">        .then(<span class="hljs-function"><span class="hljs-params">d</span>=&gt;</span>d.json())
-</div><div class="hljs-line">        .then(<span class="hljs-function"><span class="hljs-params">data</span>=&gt;</span>{
-</div><div class="hljs-line">            <span class="hljs-comment">// span.innerHTML = data.msg;</span>
-</div><div class="hljs-line">            <span class="hljs-comment">// console.log(data);</span>
-</div><div class="hljs-line">        });
-</div><div class="hljs-line">    }
-</div><div class="hljs-line"><wbr>
-</div><div class="hljs-line"><span class="hljs-comment">//jquery版请求</span>
+<pre class="prettyprint hljs-dark"><code class="hljs javascript"><div class="hljs-line"><span class="hljs-comment">//jquery版--get请求</span>
 </div><div class="hljs-line">$(<span class="hljs-string">'#user'</span>).blur(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
 </div><div class="hljs-line">    $.ajax({
 </div><div class="hljs-line">        <span class="hljs-attr">url</span>:<span class="hljs-string">'/get?user='</span>+$(<span class="hljs-keyword">this</span>).val(),
@@ -6116,7 +6121,7 @@ xhr.open('get','/s?wd=zhufeng')</code></p></li>
 </div><div class="hljs-line">    })
 </div><div class="hljs-line">});
 </div><div class="hljs-line"><wbr>
-</div><div class="hljs-line"><span class="hljs-comment">//get请求</span>
+</div><div class="hljs-line"><span class="hljs-comment">//ajax---get请求</span>
 </div><div class="hljs-line">user.onblur = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
 </div><div class="hljs-line">      <span class="hljs-keyword">var</span> xhr = <span class="hljs-keyword">new</span> XMLHttpRequest;
 </div><div class="hljs-line">      xhr.open(<span class="hljs-string">'get'</span>,<span class="hljs-string">'/get?user='</span>+<span class="hljs-built_in">encodeURI</span>(<span class="hljs-keyword">this</span>.value));
@@ -6142,10 +6147,9 @@ xhr.open('get','/s?wd=zhufeng')</code></p></li>
 </div><div class="hljs-line">        }
 </div></code></pre>
 
-<ul><li><p><strong>2.post请求：参数在send中（post用户、传输较大数据）</strong></p>
+<h4 id="2post请求参数在send中post用户传输较大数据"><strong>2.post请求：参数在send中（post用户、传输较大数据）</strong></h4>
 
-<ul>
-<li><p>post：(用户信息，上传视频…)</p>
+<ul><li><p>post：(用户信息，上传视频…)</p>
 
 <ul>
 <li><p>优势：</p>
@@ -6155,18 +6159,16 @@ xhr.open('get','/s?wd=zhufeng')</code></p></li>
 <li><p>缺点：</p>
 
 <ul>
-<li><p>速度相对get要慢。</p></li></ul></li></ul></li></ul>
+<li><p>速度相对get要慢。</p></li></ul></li></ul></li>
+</ul>
 
 <blockquote>
   <p>需要注意的是：</p>
   
-  <ul>
-  <li><p>在真实开发中，ajax请求基本上都是用第三方库来请求的</p></li>
-  <li><p>第三方库已经把ajax封装起来了，看不见send</p></li></ul>
-</blockquote></li>
-</ul>
-
-
+  <ul><li><p>在真实开发中，ajax请求基本上都是用第三方库来请求的</p></li>
+  <li><p>第三方库已经把ajax封装起来了，看不见send</p></li>
+  </ul>
+</blockquote>
 
 <pre class="prettyprint hljs-dark"><code class="language-java hljs"><div class="hljs-line">用户名:&lt;input type=<span class="hljs-string">"text"</span> id=<span class="hljs-string">"un"</span> name=<span class="hljs-string">"user"</span>/&gt;
 </div><div class="hljs-line">        密 码:&lt;input type=<span class="hljs-string">"password"</span> name=<span class="hljs-string">"pw"</span>/&gt;
@@ -6174,15 +6176,13 @@ xhr.open('get','/s?wd=zhufeng')</code></p></li>
 </div><div class="hljs-line"><wbr>
 </div><div class="hljs-line">&lt;script&gt;
 </div><div class="hljs-line"><wbr>
-</div><div class="hljs-line"><span class="hljs-comment">//post请求</span>
+</div><div class="hljs-line"><span class="hljs-comment">//ajax---post请求</span>
 </div><div class="hljs-line">user.onblur = function(){
 </div><div class="hljs-line">        var xhr = <span class="hljs-keyword">new</span> XMLHttpRequest;
 </div><div class="hljs-line">        xhr.open(<span class="hljs-string">'post'</span>,<span class="hljs-string">'/post'</span>);
-</div><div class="hljs-line"><wbr>
 </div><div class="hljs-line">        xhr.setRequestHeader(<span class="hljs-string">'Content-Type'</span>,<span class="hljs-string">'application/x-www-form-urlencoded'</span>);
 </div><div class="hljs-line">        <span class="hljs-comment">//把传给后端的数据放在send中</span>
 </div><div class="hljs-line">        xhr.send(<span class="hljs-string">'user='</span>+<span class="hljs-keyword">this</span>.value);
-</div><div class="hljs-line"><wbr>
 </div><div class="hljs-line">        xhr.onload = function(){
 </div><div class="hljs-line">            var data = JSON.parse(xhr.responseText);
 </div><div class="hljs-line">            span.innerHTML = data.msg;
@@ -6211,8 +6211,6 @@ xhr.open('get','/s?wd=zhufeng')</code></p></li>
 </div><div class="hljs-line">&lt;/script&gt;
 </div></code></pre>
 
-
-
 <h3 id="获取xml的数据">获取XML的数据</h3>
 
 
@@ -6238,7 +6236,7 @@ xhr.open('get','/s?wd=zhufeng')</code></p></li>
 </div><div class="hljs-line">    });
 </div><div class="hljs-line">}
 </div><div class="hljs-line"><wbr>
-</div><div class="hljs-line"><span class="hljs-comment">//get请求</span>
+</div><div class="hljs-line"><span class="hljs-comment">//ajax---get请求</span>
 </div><div class="hljs-line">btn.onclick = function(){
 </div><div class="hljs-line">   let html = <span class="hljs-string">''</span>;
 </div><div class="hljs-line">   let xhr = <span class="hljs-keyword">new</span> XMLHttpRequest;
@@ -6267,8 +6265,6 @@ xhr.open('get','/s?wd=zhufeng')</code></p></li>
 </div><div class="hljs-line">}
 </div><div class="hljs-line">&lt;/script&gt;
 </div></code></pre>
-
-
 
 <h2 id="ajax对象的常用属性和事件">ajax对象的常用属性和事件</h2>
 
@@ -6372,6 +6368,95 @@ xhr.open('get','/s?wd=zhufeng')</code></p></li>
 </div></code></pre>
 
 
+
+<h1 id="axios请求数据">axios请求数据</h1>
+
+
+
+<h2 id="axios封装">axios封装</h2>
+
+<pre class="prettyprint hljs-dark"><code class="hljs javascript"><div class="hljs-line">;(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">global,factoy</span>)</span>{
+</div><div class="hljs-line">    factoy(global);
+</div><div class="hljs-line">})(<span class="hljs-keyword">this</span>,<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">global,noGlobal</span>)</span>{
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Axios</span>(<span class="hljs-params">json</span>)</span>{
+</div><div class="hljs-line">        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> axios(json);
+</div><div class="hljs-line">    }
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">    Axios.prototype = {
+</div><div class="hljs-line">        <span class="hljs-attr">constructor</span>:axios,
+</div><div class="hljs-line">        <span class="hljs-attr">get</span>:<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">url,data</span>)</span>{
+</div><div class="hljs-line">            <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>(<span class="hljs-function">(<span class="hljs-params">resolve,reject</span>)=&gt;</span>{
+</div><div class="hljs-line">                <span class="hljs-keyword">this</span>.xhr.open(<span class="hljs-string">'get'</span>,url);
+</div><div class="hljs-line">                <span class="hljs-keyword">this</span>.xhr.onreadystatechange = <span class="hljs-keyword">this</span>.ready.bind(<span class="hljs-keyword">this</span>,resolve,reject);
+</div><div class="hljs-line">                <span class="hljs-keyword">this</span>.xhr.send(<span class="hljs-keyword">this</span>.quryString(data));
+</div><div class="hljs-line">            }); 
+</div><div class="hljs-line">        },
+</div><div class="hljs-line">        <span class="hljs-attr">post</span>:<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">url,data</span>)</span>{
+</div><div class="hljs-line">            <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>(<span class="hljs-function">(<span class="hljs-params">resolve,reject</span>)=&gt;</span>{
+</div><div class="hljs-line">                <span class="hljs-keyword">this</span>.xhr.open(<span class="hljs-string">'post'</span>,url);
+</div><div class="hljs-line">                <span class="hljs-keyword">this</span>.xhr.setRequestHeader(<span class="hljs-string">'Content-Type'</span>,<span class="hljs-string">'application/x-www-form-urlencoded'</span>);
+</div><div class="hljs-line">                <span class="hljs-keyword">this</span>.xhr.onreadystatechange = <span class="hljs-keyword">this</span>.ready.bind(<span class="hljs-keyword">this</span>,resolve,reject);
+</div><div class="hljs-line">                <span class="hljs-keyword">this</span>.xhr.send(<span class="hljs-keyword">this</span>.quryString(data));
+</div><div class="hljs-line">            });
+</div><div class="hljs-line">        },
+</div><div class="hljs-line">        <span class="hljs-comment">//把对象变成字符串以key=val&amp;key2=val2...</span>
+</div><div class="hljs-line">        quryString:<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">data</span>)</span>{
+</div><div class="hljs-line">            <span class="hljs-keyword">var</span> arr = [];
+</div><div class="hljs-line">            <span class="hljs-keyword">for</span>(<span class="hljs-keyword">var</span> attr <span class="hljs-keyword">in</span> data){
+</div><div class="hljs-line">                arr.push(attr +<span class="hljs-string">'='</span>+ data[attr]);
+</div><div class="hljs-line">            }
+</div><div class="hljs-line">            <span class="hljs-keyword">return</span> arr.join(<span class="hljs-string">'&amp;'</span>);
+</div><div class="hljs-line">        },
+</div><div class="hljs-line">        <span class="hljs-attr">all</span>:<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">ary</span>)</span>{
+</div><div class="hljs-line">            <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.all(ary);
+</div><div class="hljs-line">        },
+</div><div class="hljs-line">        <span class="hljs-attr">ready</span>:<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">resolve,reject</span>)</span>{
+</div><div class="hljs-line">            <span class="hljs-keyword">if</span>(<span class="hljs-keyword">this</span>.xhr.readyState === <span class="hljs-number">4</span>){
+</div><div class="hljs-line">                <span class="hljs-keyword">if</span>(<span class="hljs-keyword">this</span>.xhr.status &gt;= <span class="hljs-number">200</span> &amp;&amp; <span class="hljs-keyword">this</span>.xhr.status &lt;=<span class="hljs-number">207</span> || <span class="hljs-keyword">this</span>.xhr.status === <span class="hljs-number">304</span>){
+</div><div class="hljs-line">                    resolve(<span class="hljs-keyword">this</span>.xhr.responseText);
+</div><div class="hljs-line">                }<span class="hljs-keyword">else</span>{
+</div><div class="hljs-line">                    reject(<span class="hljs-keyword">this</span>.xhr.status);
+</div><div class="hljs-line">                }
+</div><div class="hljs-line">            }
+</div><div class="hljs-line">        }
+</div><div class="hljs-line">    }
+</div><div class="hljs-line">    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">axios</span>(<span class="hljs-params">json</span>)</span>{
+</div><div class="hljs-line">        <span class="hljs-keyword">this</span>.xhr = <span class="hljs-keyword">new</span> XMLHttpRequest;
+</div><div class="hljs-line">    }
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">    axios.prototype = Axios.prototype;
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">    global.axios = Axios();
+</div><div class="hljs-line">});
+</div></code></pre>
+
+
+
+<h3 id="axiospost请求">axios—post请求</h3>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="hljs scilab"><div class="hljs-line">axios({
+</div><div class="hljs-line">    method: <span class="hljs-string">'post'</span>,
+</div><div class="hljs-line">    url: <span class="hljs-string">'/user/12345'</span>,
+</div><div class="hljs-line">    data: {
+</div><div class="hljs-line">        firstName: <span class="hljs-string">'Fred'</span>,
+</div><div class="hljs-line">        lastName: <span class="hljs-string">'Flintstone'</span>
+</div><div class="hljs-line">    }
+</div><div class="hljs-line">})
+</div><div class="hljs-line">.<span class="hljs-keyword">then</span>(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(response)</span> {</span>
+</div><div class="hljs-line">    console.<span class="hljs-built_in">log</span>(response);
+</div><div class="hljs-line">})
+</div><div class="hljs-line">.<span class="hljs-keyword">catch</span>(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(error)</span> {</span>
+</div><div class="hljs-line">    console.<span class="hljs-built_in">log</span>(<span class="hljs-built_in">error</span>);
+</div><div class="hljs-line">});
+</div></code></pre>
+
+<blockquote>
+  <p><strong>ajax和axios、fetch的区别</strong> <br>
+  <a href="https://www.jianshu.com/p/8bc48f8fde75" target="_blank">https://www.jianshu.com/p/8bc48f8fde75</a></p>
+</blockquote>
 
 <h1 id="cookie">cookie</h1>
 
@@ -7195,7 +7280,10 @@ rules:[ <br>
 <li><p>cd 文件名</p></li>
 <li><p>npm start <br>
 or</p></li>
-<li><p>yarn 安装</p></li>
+<li><p>yarn 安装</p>
+
+<ul>
+<li><p>在npm中安装 ： npm install -g yarn</p></li></ul></li>
 </ul>
 
 
@@ -7347,8 +7435,11 @@ or</p></li>
 </div><div class="hljs-line"><span class="hljs-keyword">this</span>.setState({<span class="hljs-built_in">num</span>:<span class="hljs-number">6</span>}); <span class="hljs-comment">//只会执行这个</span>
 </div><div class="hljs-line"><span class="hljs-keyword">this</span>.props.change(<span class="hljs-built_in">num</span>);
 </div></code></pre></li>
-<li><p><strong>当setState包了一个定时器和原生事件的时候为“同步”，别的地方就异步</strong></p></li>
 </ul>
+
+
+
+<h4 id="当statesetstate包了一个定时器和原生事件的时候为同步别的地方就异步"><strong>当state/setState包了一个定时器和原生事件的时候为“同步”，别的地方就异步</strong></h4>
 
 
 
@@ -7837,6 +7928,7 @@ or</p></li>
 <h3 id="redux-reduce-flux-可预见的状态管理的容器是一个独立的状态管理器不依赖于某个框架的">redux -&gt; reduce + Flux  可预见的状态管理的容器，是一个独立的状态管理器（不依赖于某个框架的）</h3>
 
 <ul><li><p>安装 npm i redux -S</p></li>
+<li><p>中间件：yarn add redux-thunk</p></li>
 <li><p>引包 <code>import {createStore} from 'redux'</code></p></li>
 <li><p>创建store、reducer</p></li>
 </ul>
@@ -7860,7 +7952,7 @@ or</p></li>
 </div></code></pre>
 
 <ul><li><p>使用  <code>console.log(store.getState()) -&gt; {num:0}</code></p></li>
-<li><p>修改state，就要触发<code>dispatch({type:'ADD_NUM'})</code>  ,默认传入一个对象</p></li>
+<li><p>修改state，就要触发<code>dispatch({type:'ADD_NUM'})</code>  ，默认传入一个对象</p></li>
 </ul>
 
 <blockquote>
@@ -7871,14 +7963,32 @@ or</p></li>
 
 <h4 id="bindactioncreators简化storedispatch操作让函数返回一个对象"><strong>bindActionCreators：简化store.dispatch操作，让函数返回一个对象</strong></h4>
 
+
+
 <pre class="prettyprint hljs-dark"><code class="hljs javascript"><div class="hljs-line"><span class="hljs-keyword">import</span> {createStore,bindActionCreators} <span class="hljs-keyword">from</span> <span class="hljs-string">'redux'</span>;
 </div><div class="hljs-line"><span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> actionCreateors <span class="hljs-keyword">from</span> <span class="hljs-string">'./action'</span>; 
 </div><div class="hljs-line"><span class="hljs-keyword">const</span> store = createStore(reducer);
 </div><div class="hljs-line"><span class="hljs-keyword">const</span> ActionCreators = bindActionCreators(actionCreateors,store.dispatch)
 </div></code></pre>
 
+
+
+<h4 id="引入redux-thunk"><strong>引入redux-thunk</strong></h4>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="hljs javascript"><div class="hljs-line"><span class="hljs-keyword">import</span> { applyMiddleware, createStore } <span class="hljs-keyword">from</span> <span class="hljs-string">'redux'</span>;
+</div><div class="hljs-line"><span class="hljs-keyword">import</span> thunk <span class="hljs-keyword">from</span> <span class="hljs-string">'redux-thunk'</span>;
+</div><div class="hljs-line"> <span class="hljs-keyword">const</span> store = createStore(
+</div><div class="hljs-line">  reducers, 
+</div><div class="hljs-line">  applyMiddleware(thunk)
+</div><div class="hljs-line">);
+</div></code></pre>
+
 <ul><li><p><strong>store/index.js</strong></p></li>
 </ul>
+
+
 
 <pre class="prettyprint hljs-dark"><code class="hljs javascript"><div class="hljs-line"><span class="hljs-keyword">import</span> {createStore,bindActionCreators} <span class="hljs-keyword">from</span> <span class="hljs-string">'redux'</span>;
 </div><div class="hljs-line"><span class="hljs-keyword">const</span> store = createStore(reducer)
@@ -7890,6 +8000,8 @@ or</p></li>
 <ul><li><p><strong>store/action.js</strong></p></li>
 </ul>
 
+
+
 <pre class="prettyprint hljs-dark"><code class="hljs ada"><div class="hljs-line">引入 actionTypes
 </div><div class="hljs-line">export <span class="hljs-keyword">function</span> <span class="hljs-title">incrment</span>(){
 </div><div class="hljs-line">    <span class="hljs-keyword">return</span> <span class="hljs-type">{type:actionTypes.INCRMENT}</span>
@@ -7900,12 +8012,16 @@ or</p></li>
 <ul><li><p><strong>store/actionTypes.js</strong></p></li>
 </ul>
 
+
+
 <pre class="prettyprint hljs-dark"><code class="hljs clean"><div class="hljs-line">const INCRMENT = <span class="hljs-string">'INCRMENT'</span>;
 </div><div class="hljs-line">....
 </div></code></pre>
 
 <ul><li><p><strong>store/reducer.js</strong></p></li>
 </ul>
+
+
 
 <pre class="prettyprint hljs-dark"><code class="hljs pf"><div class="hljs-line">export <span class="hljs-keyword">default</span> function (<span class="hljs-keyword">state</span>,action){
 </div><div class="hljs-line">     switch(action.type){
@@ -7929,7 +8045,9 @@ or</p></li>
   <ul><li><p>store、action、reducer、dispatch、store.subscribe、getState()</p></li>
   <li><p>bindActionCreators、combineReducers、actions、actionTypes</p></li>
   </ul>
-</blockquote>
+  
+  </blockquote>
+
 
 <h3 id="react-redux">react-redux</h3>
 
@@ -7942,6 +8060,8 @@ or</p></li>
 <ul>
 <li><p><strong>index.js</strong></p></li></ul></li>
 </ul>
+
+
 
 <pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><div class="hljs-line">生产
 </div><div class="hljs-line"><span class="hljs-keyword">import</span> {Provider} <span class="hljs-keyword">from</span> <span class="hljs-string">'react-redux'</span>; <span class="hljs-comment">//引包</span>
@@ -7959,6 +8079,8 @@ or</p></li>
 <ul>
 <li><p><strong>components/app.js</strong></p></li></ul></li>
 </ul>
+
+
 
 <pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><div class="hljs-line"><span class="hljs-keyword">import</span> {connect} <span class="hljs-keyword">from</span> <span class="hljs-string">'react-redux'</span>;
 </div><div class="hljs-line"><wbr>
