@@ -8508,17 +8508,29 @@ or</p></li>
 
 <h3 id="slot-插槽">slot 插槽</h3>
 
-<ul><li><p>在组件中使用slot标签，包裹默认的元素和样式||组件</p></li>
-<li><p>用双标签注入到父级组件中，那么显示出来的结果就是slot标签中的结构||组件</p></li>
-<li><p>如果在双标签中有添加别的标签，那么就会显示添加的标签而不会显示slot中的默认标签||组件</p>
+<ul><li><p>在组件中使用slot标签，包裹默认的元素和样式 || 组件</p>
 
 <ul>
+<li><p>用双标签把子级组件注入到父级组件中，那么显示出来的结果就是slot标签中的结构 || 组件</p></li>
+<li><p>如果在双标签中有添加别的标签，那么就会显示添加的标签而不会显示slot中的默认标签 || 组件</p></li>
 <li><p>比如:</p>
 
 <pre class="prettyprint hljs-dark"><code class="hljs xml"><div class="hljs-line">走slot默认
 </div><div class="hljs-line"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"root"</span>&gt;</span>
 </div><div class="hljs-line">  <span class="hljs-tag">&lt;<span class="hljs-name">ppa</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">ppa</span>&gt;</span>  
 </div><div class="hljs-line"><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+</div><div class="hljs-line"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="handlebars"><span class="xml"></span></span>
+</div><div class="hljs-line"><span class="handlebars">  //定义slot:</span>
+</div><div class="hljs-line"><span class="handlebars">  Vue.component('ppa',{</span>
+</div><div class="hljs-line"><span class="handlebars">        template:`</span>
+</div><div class="hljs-line"><span class="handlebars">            <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>                   </span>
+</div><div class="hljs-line"><span class="handlebars">                <span class="hljs-tag">&lt;<span class="hljs-name">slot</span>&gt;</span></span>
+</div><div class="hljs-line"><span class="handlebars">                    <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>默认的组件或者元素<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></span>
+</div><div class="hljs-line"><span class="handlebars">                <span class="hljs-tag">&lt;/<span class="hljs-name">slot</span>&gt;</span>                      </span>
+</div><div class="hljs-line"><span class="handlebars">            <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
+</div><div class="hljs-line"><span class="handlebars">        `</span>
+</div><div class="hljs-line"><span class="handlebars">    });</span>
+</div><div class="hljs-line"><span class="handlebars"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
 </div><div class="hljs-line"><wbr>
 </div><div class="hljs-line"><wbr>
 </div><div class="hljs-line">走自定义的组件
@@ -8527,17 +8539,18 @@ or</p></li>
 </div><div class="hljs-line">      <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>自定义组件<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
 </div><div class="hljs-line">  <span class="hljs-tag">&lt;/<span class="hljs-name">ppa</span>&gt;</span>  
 </div><div class="hljs-line"><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
-</div><div class="hljs-line"><wbr>
-</div><div class="hljs-line"><wbr>
-</div><div class="hljs-line">定义slot:
-</div><div class="hljs-line">  Vue.component('ppa',{
-</div><div class="hljs-line">      template:`
-</div><div class="hljs-line">          <span class="hljs-tag">&lt;<span class="hljs-name">slot</span>&gt;</span>
-</div><div class="hljs-line">              <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>默认的组件或者元素<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
-</div><div class="hljs-line">          <span class="hljs-tag">&lt;<span class="hljs-name">slot</span>&gt;</span>
-</div><div class="hljs-line">      `
-</div><div class="hljs-line">  })
-</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="handlebars"><span class="xml"></span></span>
+</div><div class="hljs-line"><span class="handlebars">//定义slot:</span>
+</div><div class="hljs-line"><span class="handlebars">  Vue.component('ppa',{</span>
+</div><div class="hljs-line"><span class="handlebars">        template:`</span>
+</div><div class="hljs-line"><span class="handlebars">            <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span></span>
+</div><div class="hljs-line"><span class="handlebars">                <span class="hljs-tag">&lt;<span class="hljs-name">slot</span>&gt;</span></span>
+</div><div class="hljs-line"><span class="handlebars">                    <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>默认的组件或者元素<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></span>
+</div><div class="hljs-line"><span class="handlebars">                <span class="hljs-tag">&lt;/<span class="hljs-name">slot</span>&gt;</span>    </span>
+</div><div class="hljs-line"><span class="handlebars">            <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
+</div><div class="hljs-line"><span class="handlebars">        `</span>
+</div><div class="hljs-line"><span class="handlebars">    });</span>
+</div><div class="hljs-line"><span class="handlebars"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>  
 </div></code></pre></li></ul></li>
 </ul>
 
@@ -8553,20 +8566,20 @@ or</p></li>
 </div><div class="hljs-line">        <span class="hljs-tag">&lt;/<span class="hljs-name">ppa</span>&gt;</span>  
 </div><div class="hljs-line">    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
 </div><div class="hljs-line"><wbr>
-</div><div class="hljs-line"><wbr>
-</div><div class="hljs-line">    Vue.component('ppa',{
-</div><div class="hljs-line">        template:`
-</div><div class="hljs-line">            <span class="hljs-tag">&lt;<span class="hljs-name">slot</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"m1"</span>&gt;</span>
-</div><div class="hljs-line">                <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>默认的组件或者元素<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
-</div><div class="hljs-line">            <span class="hljs-tag">&lt;<span class="hljs-name">slot</span>&gt;</span>
-</div><div class="hljs-line">             <span class="hljs-tag">&lt;<span class="hljs-name">slot</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"m2"</span>&gt;</span>
-</div><div class="hljs-line">                <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>默认的组件或者元素<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
-</div><div class="hljs-line">            <span class="hljs-tag">&lt;<span class="hljs-name">slot</span>&gt;</span>
-</div><div class="hljs-line"><wbr>
-</div><div class="hljs-line">    })
+</div><div class="hljs-line">    <span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="handlebars"><span class="xml"></span></span>
+</div><div class="hljs-line"><span class="handlebars">    Vue.component('ppa',{</span>
+</div><div class="hljs-line"><span class="handlebars">        template:`</span>
+</div><div class="hljs-line"><span class="handlebars">            <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span></span>
+</div><div class="hljs-line"><span class="handlebars">                <span class="hljs-tag">&lt;<span class="hljs-name">slot</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"m1"</span>&gt;</span></span>
+</div><div class="hljs-line"><span class="handlebars">                    <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>默认的组件或者元素<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></span>
+</div><div class="hljs-line"><span class="handlebars">                <span class="hljs-tag">&lt;/<span class="hljs-name">slot</span>&gt;</span></span>
+</div><div class="hljs-line"><span class="handlebars">                 <span class="hljs-tag">&lt;<span class="hljs-name">slot</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"m2"</span>&gt;</span></span>
+</div><div class="hljs-line"><span class="handlebars">                    <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>默认的组件或者元素<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></span>
+</div><div class="hljs-line"><span class="handlebars">                <span class="hljs-tag">&lt;/<span class="hljs-name">slot</span>&gt;</span></span>
+</div><div class="hljs-line"><span class="handlebars">            <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
+</div><div class="hljs-line"><span class="handlebars">    })</span>
+</div><div class="hljs-line"><span class="handlebars">    </span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
 </div></code></pre>
-
-
 
 <h2 id="vue的生命周期">vue的生命周期</h2>
 
