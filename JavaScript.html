@@ -477,14 +477,28 @@
 </ul>
 </li>
 <li><a href="#vue中文文档">VUE–中文文档</a><ul>
+<li><a href="#第一种方式通过vuejs引入使用">第一种方式：通过vue.js引入，使用</a><ul>
 <li><ul>
-<li><a href="#第一种方式通过vuejs引入">第一种方式：通过vue.js引入</a></li>
-<li><a href="#使用">使用</a><ul>
 <li><a href="#指令">指令</a></li>
 </ul>
 </li>
+<li><a href="#组件">组件</a><ul>
+<li><a href="#子组件的数据流动">子组件的数据流动</a><ul>
+<li><a href="#传递的方式">传递的方式：</a></li>
 </ul>
 </li>
+<li><a href="#ref-快速定位组件或者是元素">ref 快速定位组件或者是元素</a></li>
+<li><a href="#nexttick">nextTick</a></li>
+</ul>
+</li>
+<li><a href="#slot-插槽">slot 插槽</a><ul>
+<li><a href="#如果有多个slot的情况下要保证结构同步那么可以给slot设置一个name去识别使用的时候通过slotname去关联">如果有多个slot的情况下要保证结构同步那么可以给slot设置一个name去识别，使用的时候通过slot=“name”去关联</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#vue的生命周期">vue的生命周期</a></li>
+<li><a href="#路由">路由:</a></li>
 </ul>
 </li>
 </ul>
@@ -3754,8 +3768,6 @@ box1.onmouseenter = function(){ <br>
     }</code></p></li>
 <li><p>当按键的时候会停顿一下，这个停顿有助于提高用户体验，避免重复输入</p></li>
 </ul>
-
-
 
 <pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><div class="hljs-line"><span class="hljs-keyword">let</span> numL = <span class="hljs-number">0</span>;
 </div><div class="hljs-line"><span class="hljs-keyword">let</span> numT = <span class="hljs-number">0</span>;
@@ -8157,11 +8169,9 @@ or</p></li>
 <li><p>{{}} 双声波写法 / 小胡子写法</p></li></ul></li>
 </ul>
 
-<h3 id="第一种方式通过vuejs引入">第一种方式：通过vue.js引入</h3>
-
-<h3 id="使用">使用</h3>
 
 
+<h2 id="第一种方式通过vuejs引入使用">第一种方式：通过vue.js引入，使用</h2>
 
 <pre class="prettyprint hljs-dark"><code class="hljs css"><div class="hljs-line"><span class="hljs-selector-tag">new</span> <span class="hljs-selector-tag">Vue</span>({
 </div><div class="hljs-line">    <span class="hljs-attribute">el</span>:<span class="hljs-string">'#挂载的元素名'</span>,
@@ -8271,6 +8281,8 @@ or</p></li>
 <li><p><strong>数据劫持</strong></p></li>
 </ul>
 
+
+
 <pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><div class="hljs-line"><span class="hljs-keyword">let</span> obj = {
 </div><div class="hljs-line">        <span class="hljs-attr">num</span>:<span class="hljs-number">2</span>
 </div><div class="hljs-line">    }    
@@ -8306,4 +8318,363 @@ or</p></li>
 </div><div class="hljs-line">    <span class="hljs-comment">// console.log(obj.n);</span>
 </div><div class="hljs-line"><wbr>
 </div><div class="hljs-line">    <span class="hljs-built_in">console</span>.log(obj.n &lt; <span class="hljs-number">3</span> &amp;&amp; obj.n &gt;= <span class="hljs-number">4</span>); <span class="hljs-comment">//true</span>
-</div></code></pre></div></body></html>
+</div></code></pre>
+
+<ul><li><p><strong>watch：监听data数据的变化，只要变化就触发，第一次是不会触发的，只有改变后才触发</strong></p></li>
+</ul>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="hljs dts"><div class="hljs-line">写法：
+</div><div class="hljs-line"><span class="hljs-symbol">    data:</span>{
+</div><div class="hljs-line"><span class="hljs-symbol">        arr:</span>[]
+</div><div class="hljs-line">    },
+</div><div class="hljs-line"><span class="hljs-symbol">    watch:</span>{
+</div><div class="hljs-line">    要监听的数据名：函数或者对象
+</div><div class="hljs-line">    比如：
+</div><div class="hljs-line">    arr(newValue,oldValue){
+</div><div class="hljs-line">        <span class="hljs-comment">//当arr发生变化的时候做得事情</span>
+</div><div class="hljs-line">        }
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">        如果数据要深层监听要用对象的方式
+</div><div class="hljs-line">        比如：
+</div><div class="hljs-line"><span class="hljs-symbol">        arr:</span>{
+</div><div class="hljs-line"><span class="hljs-symbol">            handler:</span>function(newValue,oldValue){
+</div><div class="hljs-line">                <span class="hljs-comment">//当arr发生变化的时候做得事情</span>
+</div><div class="hljs-line">            },
+</div><div class="hljs-line"><span class="hljs-symbol">            deep:</span>true
+</div><div class="hljs-line">        }
+</div><div class="hljs-line">    }
+</div></code></pre>
+
+
+
+<h3 id="组件">组件</h3>
+
+<ul><li><p><strong>在Vue中有一个component的方法来创建组件。</strong></p>
+
+<blockquote>
+  <p>注意：<strong>方法必须写在new Vue的上面；</strong> <br>
+  要记得插入子组件； <br>
+  data的值为函数，这个函数必须返回一个对象，对象的值就是初始化数据 <br>
+  组件的名字要么小写，要么烤串命名：get-by-id <br>
+  组件顶层只能有一个元素</p>
+</blockquote></li>
+<li><p>使用：</p></li>
+</ul>
+
+<pre class="prettyprint hljs-dark"><code class="language-java hljs"><div class="hljs-line">&lt;div id=<span class="hljs-string">"app"</span>&gt;
+</div><div class="hljs-line">    {{num}}
+</div><div class="hljs-line">    &lt;ppa&gt;&lt;/ppa&gt;
+</div><div class="hljs-line">&lt;/div&gt;
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">&lt;script&gt;
+</div><div class="hljs-line">Vue.component(<span class="hljs-string">'ppa'</span>,{
+</div><div class="hljs-line">    template:<span class="hljs-string">'&lt;div&gt;子组件{{nn}}&lt;/div&gt;'</span>,
+</div><div class="hljs-line">    data(){
+</div><div class="hljs-line">    <span class="hljs-keyword">return</span>{
+</div><div class="hljs-line">     ary:[],
+</div><div class="hljs-line">     nn:<span class="hljs-number">10</span>
+</div><div class="hljs-line">     }
+</div><div class="hljs-line">    }
+</div><div class="hljs-line">});
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line"><span class="hljs-keyword">new</span> Vue({
+</div><div class="hljs-line">    el:<span class="hljs-string">'#app'</span>,
+</div><div class="hljs-line">    data:{
+</div><div class="hljs-line">        num:<span class="hljs-number">0</span>
+</div><div class="hljs-line">    }
+</div><div class="hljs-line">});
+</div><div class="hljs-line">&lt;/script&gt;
+</div></code></pre>
+
+
+
+<h4 id="子组件的数据流动">子组件的数据流动</h4>
+
+<ul><li><p>react是单向的流动</p></li>
+<li><p><strong>vue是单向流动</strong> -&gt; 父级的数据传递给子级，如果需要通过操作子级修改数据，只能是父级修改（因为数据是从父级流向子级的，子级是不能流动数据给父级的）</p></li>
+<li><p><strong>双向数据绑定</strong> -&gt; 数据驱动视图，视图操作数据</p></li>
+</ul>
+
+
+
+<h5 id="传递的方式">传递的方式：</h5>
+
+<ul><li><p><strong>父传子：</strong></p>
+
+<ul>
+<li><p>1.通过在子组件上挂一个自定义属性</p>
+
+<ul>
+<li><p>如果传递的值是一个静态的，那么不需要加v-bind</p>
+
+<ul>
+<li><p>比如：pn=”1”  这个1就是静态的</p></li></ul></li>
+<li><p>如果传递的值是一个动态的，那么这个属性必须是被v-bind所绑定</p>
+
+<ul>
+<li><p>比如：:pn=”num”  这个num是父级或者可能需要变化的</p></li></ul></li></ul></li>
+<li><p>2.接收：</p></li>
+<li><p>子组件写上props的属性</p>
+
+<ul>
+<li><p>比如：</p>
+
+<pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><div class="hljs-line">{
+</div><div class="hljs-line">data(){
+</div><div class="hljs-line">    <span class="hljs-keyword">return</span>{}
+</div><div class="hljs-line">    },
+</div><div class="hljs-line"><span class="hljs-attr">props</span>:[<span class="hljs-string">'自定义属性的名字'</span>]   可以是个数组
+</div><div class="hljs-line">        还可以写对象（对象是为了验证传递的数据类型）
+</div><div class="hljs-line">props:{
+</div><div class="hljs-line">        自定义的名字：类型
+</div><div class="hljs-line">        pn:<span class="hljs-built_in">String</span>
+</div><div class="hljs-line">    }
+</div><div class="hljs-line">还可以
+</div><div class="hljs-line">props:{
+</div><div class="hljs-line">    自定义的名字:[类型,类型]
+</div><div class="hljs-line">    pn:[<span class="hljs-built_in">String</span>,<span class="hljs-built_in">Number</span>]
+</div><div class="hljs-line">    还可以写
+</div><div class="hljs-line">    <span class="hljs-keyword">default</span>:<span class="hljs-number">100</span>  <span class="hljs-comment">// 如果没有传默认值为100</span>
+</div><div class="hljs-line">    required:<span class="hljs-literal">true</span> <span class="hljs-comment">//必须传</span>
+</div><div class="hljs-line">}
+</div><div class="hljs-line">}
+</div></code></pre></li></ul></li></ul></li>
+<li><p><strong>子传父：</strong></p>
+
+<ul>
+<li><p>第一种：子级和父级同时改变</p>
+
+<ul>
+<li><p>1.父级定义一个改变数据的方法</p></li>
+<li><p>2.子组件内使用this,$emit(‘通道’)去定义一个自定义事件</p>
+
+<ul>
+<li><p>比如：this.$emit(‘tongdao’,可以加参数)</p></li></ul></li>
+<li><p>3.在子组件上绑定tongdao这个事件，并且把父组件的改变数据的方法添加到自定义事件上</p></li></ul></li>
+<li><p>第二种：把父级的数据变成子级自己的，跟父级断开联系</p>
+
+<ul>
+<li><p>1.通过props去接收父级的数据</p></li>
+<li><p>2.把接收到的数据存到自己的data中</p>
+
+<pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><div class="hljs-line">{
+</div><div class="hljs-line">    <span class="hljs-attr">props</span>:[<span class="hljs-string">'nn'</span>],
+</div><div class="hljs-line">    data(){
+</div><div class="hljs-line">        <span class="hljs-keyword">return</span> {
+</div><div class="hljs-line">            <span class="hljs-attr">cnum</span>:<span class="hljs-keyword">this</span>.nn
+</div><div class="hljs-line">        }
+</div><div class="hljs-line">    },
+</div><div class="hljs-line">    <span class="hljs-attr">template</span>:<span class="hljs-string">`&lt;div&gt;{{cnum}}&lt;/div&gt;`</span>
+</div><div class="hljs-line">}
+</div></code></pre></li>
+<li><p>如果想父级的数据根据子级的数据变化；那么，父级需要定义的一个方法去接收子级传过来的数据</p>
+
+<ul>
+<li><p>比如:</p>
+
+<pre class="prettyprint hljs-dark"><code class="hljs kotlin"><div class="hljs-line">    getchildfn(<span class="hljs-keyword">val</span>){
+</div><div class="hljs-line">        <span class="hljs-keyword">this</span>.num = <span class="hljs-keyword">val</span>;
+</div><div class="hljs-line">    }
+</div></code></pre></li>
+<li><p>然后通过事件绑定的方式把getchildfn传给子级 <br>
+<code>@自定义名字="getchildfn"</code></p></li>
+<li><p>最后当修改子级数据的时候，创建一个自定义名字的事件，并且把数据传进去</p>
+
+<ul>
+<li><p>比如:</p>
+
+<pre class="prettyprint hljs-dark"><code class="hljs kotlin"><div class="hljs-line"><span class="hljs-keyword">this</span>.$emit(<span class="hljs-string">'自定义名字'</span>,要传给父级的数据)
+</div></code></pre></li></ul></li></ul></li></ul></li></ul></li>
+</ul>
+
+<h4 id="ref-快速定位组件或者是元素">ref 快速定位组件或者是元素</h4>
+
+<ul><li><p>给元素身上加上ref的属性，值就是自定义的名字</p>
+
+<blockquote>
+  <p>小技巧: <br>
+    在v-for的时候如果在被遍历的元素上写死一个名字，那么所有的遍历元素都会有相同的名字，那么这个时候可以使用字符串拼接的方式来区分ref的名字 <br>
+  比如: <br>
+     <code>&lt;li v-for="val,key in arr" ref="'aa'+val.id"&gt;&lt;/li&gt;  -&gt; refs['aa'+id]</code></p>
+</blockquote></li>
+</ul>
+
+<h4 id="nexttick">nextTick</h4>
+
+<ul><li><p>当DOM加载完成执行的一个函数（在下次 DOM 更新循环结束之后执行延迟回调。在修改数据之后立即使用这个方法，获取更新后的 DOM。）</p></li>
+</ul>
+
+<h3 id="slot-插槽">slot 插槽</h3>
+
+<ul><li><p>在组件中使用slot标签，包裹默认的元素和样式||组件</p></li>
+<li><p>用双标签注入到父级组件中，那么显示出来的结果就是slot标签中的结构||组件</p></li>
+<li><p>如果在双标签中有添加别的标签，那么就会显示添加的标签而不会显示slot中的默认标签||组件</p>
+
+<ul>
+<li><p>比如:</p>
+
+<pre class="prettyprint hljs-dark"><code class="hljs xml"><div class="hljs-line">走slot默认
+</div><div class="hljs-line"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"root"</span>&gt;</span>
+</div><div class="hljs-line">  <span class="hljs-tag">&lt;<span class="hljs-name">ppa</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">ppa</span>&gt;</span>  
+</div><div class="hljs-line"><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">走自定义的组件
+</div><div class="hljs-line"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"root"</span>&gt;</span>
+</div><div class="hljs-line">  <span class="hljs-tag">&lt;<span class="hljs-name">ppa</span>&gt;</span>
+</div><div class="hljs-line">      <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>自定义组件<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+</div><div class="hljs-line">  <span class="hljs-tag">&lt;/<span class="hljs-name">ppa</span>&gt;</span>  
+</div><div class="hljs-line"><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">定义slot:
+</div><div class="hljs-line">  Vue.component('ppa',{
+</div><div class="hljs-line">      template:`
+</div><div class="hljs-line">          <span class="hljs-tag">&lt;<span class="hljs-name">slot</span>&gt;</span>
+</div><div class="hljs-line">              <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>默认的组件或者元素<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+</div><div class="hljs-line">          <span class="hljs-tag">&lt;<span class="hljs-name">slot</span>&gt;</span>
+</div><div class="hljs-line">      `
+</div><div class="hljs-line">  })
+</div><div class="hljs-line"><wbr>
+</div></code></pre></li></ul></li>
+</ul>
+
+<h4 id="如果有多个slot的情况下要保证结构同步那么可以给slot设置一个name去识别使用的时候通过slotname去关联">如果有多个slot的情况下要保证结构同步那么可以给slot设置一个name去识别，使用的时候通过slot=“name”去关联</h4>
+
+<ul><li><p>比如:</p></li>
+</ul>
+
+<pre class="prettyprint hljs-dark"><code class="hljs xml"><div class="hljs-line">    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"root"</span>&gt;</span>
+</div><div class="hljs-line">        <span class="hljs-tag">&lt;<span class="hljs-name">ppa</span>&gt;</span>
+</div><div class="hljs-line">            <span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">slot</span>=<span class="hljs-string">"m2"</span>&gt;</span>自定义组件2<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+</div><div class="hljs-line">            <span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">slot</span>=<span class="hljs-string">"m1"</span>&gt;</span>自定义组件<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+</div><div class="hljs-line">        <span class="hljs-tag">&lt;/<span class="hljs-name">ppa</span>&gt;</span>  
+</div><div class="hljs-line">    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">    Vue.component('ppa',{
+</div><div class="hljs-line">        template:`
+</div><div class="hljs-line">            <span class="hljs-tag">&lt;<span class="hljs-name">slot</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"m1"</span>&gt;</span>
+</div><div class="hljs-line">                <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>默认的组件或者元素<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+</div><div class="hljs-line">            <span class="hljs-tag">&lt;<span class="hljs-name">slot</span>&gt;</span>
+</div><div class="hljs-line">             <span class="hljs-tag">&lt;<span class="hljs-name">slot</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"m2"</span>&gt;</span>
+</div><div class="hljs-line">                <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>默认的组件或者元素<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+</div><div class="hljs-line">            <span class="hljs-tag">&lt;<span class="hljs-name">slot</span>&gt;</span>
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">    })
+</div></code></pre>
+
+
+
+<h2 id="vue的生命周期">vue的生命周期</h2>
+
+<ul><li><p>当new了Vue之后就执行vue的代码</p>
+
+<ul>
+<li><p><strong>beforeCreate  数据挂载之前  拿不到数据</strong></p></li>
+<li><p><strong>created   数据挂载之后  可以拿到数据，此时可以进行ajax请求</strong></p>
+
+<ul>
+<li><p>有没有el(挂载元素)，如果有去看有没有模板，如果没有看看有没有$mount(‘el’)，如果都没有就没有后续了，页面该是什么样子就是什么样子</p></li></ul></li>
+<li><p><strong>beforeMount (数据渲染之前)  数据还没生产模板，只能获取到页面中手写的DOM</strong></p></li>
+<li><p><strong>mounted (数据渲染之后) 在这个生命周期中，我们可以获取到渲染之后的DOM</strong></p>
+
+<blockquote>
+  <p>上面的过程只会执行一次</p>
+</blockquote></li>
+<li><p><strong>beforeUpdate  数据修改更新之前</strong></p></li>
+<li><p><strong>updated   数据更新之后，可以获取到最新的数据和数据对应的dom</strong></p>
+
+<blockquote>
+  <p>beforeUpdate、updated 只要数据发生变化就执行</p>
+</blockquote></li>
+<li><p><strong>beforeDestroy  组件卸载之前  关闭定时器,函数初始化</strong></p></li>
+<li><p><strong>destroyed  销毁监听事件</strong></p></li></ul></li>
+</ul>
+
+<pre class="prettyprint hljs-dark"><code class="hljs django"><div class="hljs-line"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"app"</span>&gt;</span></span>
+</div><div class="hljs-line"><span class="xml">      <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"box"</span> </span></span>
+</div><div class="hljs-line"><span class="xml">          @<span class="hljs-attr">click</span>=<span class="hljs-string">"++num"</span></span>
+</div><div class="hljs-line"><span class="xml">      &gt;<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">v-for</span>=<span class="hljs-string">"val in arr"</span>&gt;</span></span><span class="hljs-template-variable">{{val}}</span><span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
+</div><div class="hljs-line"><span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
+</div><div class="hljs-line"><span class="xml"></span>
+</div><div class="hljs-line"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"./vue.js"</span>&gt;</span><span class="undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></span>
+</div><div class="hljs-line"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript"></span></span>
+</div><div class="hljs-line"><span class="xml"><span class="hljs-keyword">let</span> vm = <span class="hljs-keyword">new</span> Vue({</span>
+</div><div class="hljs-line"><span class="xml">    <span class="hljs-comment">// el:'#app',</span></span>
+</div><div class="hljs-line"><span class="xml">    <span class="hljs-comment">//数据加载之前，是获取不到数据的</span></span>
+</div><div class="hljs-line"><span class="xml">    beforeCreate() {</span>
+</div><div class="hljs-line"><span class="xml">        <span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">this</span>.num);</span>
+</div><div class="hljs-line"><span class="xml">    },</span>
+</div><div class="hljs-line"><span class="xml">    <span class="hljs-comment">//数据加载之后，可以获取到数据</span></span>
+</div><div class="hljs-line"><span class="xml">    created(){ <span class="hljs-comment">//ajax请求</span></span>
+</div><div class="hljs-line"><span class="xml">        setTimeout(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {</span>
+</div><div class="hljs-line"><span class="xml">            <span class="hljs-keyword">this</span>.num = <span class="hljs-number">10</span>;</span>
+</div><div class="hljs-line"><span class="xml">        }, <span class="hljs-number">1000</span>);</span>
+</div><div class="hljs-line"><span class="xml">        <span class="hljs-comment">// console.log(this.num);</span></span>
+</div><div class="hljs-line"><span class="xml">    },</span>
+</div><div class="hljs-line"><span class="xml">    beforeMount() {</span>
+</div><div class="hljs-line"><span class="xml">        <span class="hljs-comment">//模板加载数据之前</span></span>
+</div><div class="hljs-line"><span class="xml">        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'之前'</span>,<span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">'box'</span>).children);</span>
+</div><div class="hljs-line"><span class="xml">    },</span>
+</div><div class="hljs-line"><span class="xml">    mounted() {</span>
+</div><div class="hljs-line"><span class="xml">        <span class="hljs-comment">//模板加载数据之后</span></span>
+</div><div class="hljs-line"><span class="xml">        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'之后'</span>,<span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">'box'</span>).children);</span>
+</div><div class="hljs-line"><span class="xml">    },</span>
+</div><div class="hljs-line"><span class="xml"></span>
+</div><div class="hljs-line"><span class="xml">    beforeUpdate() {</span>
+</div><div class="hljs-line"><span class="xml">        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'数据改变之前'</span>);</span>
+</div><div class="hljs-line"><span class="xml">    },</span>
+</div><div class="hljs-line"><span class="xml">    updated(){</span>
+</div><div class="hljs-line"><span class="xml">        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'数据改变之后'</span>); </span>
+</div><div class="hljs-line"><span class="xml">    },</span>
+</div><div class="hljs-line"><span class="xml"></span>
+</div><div class="hljs-line"><span class="xml">    <span class="hljs-attr">data</span>:{</span>
+</div><div class="hljs-line"><span class="xml">        <span class="hljs-attr">num</span>:<span class="hljs-number">0</span>,</span>
+</div><div class="hljs-line"><span class="xml">        <span class="hljs-attr">arr</span>:[<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>]</span>
+</div><div class="hljs-line"><span class="xml">    }</span>
+</div><div class="hljs-line"><span class="xml">}).$mount(<span class="hljs-string">'#app'</span>)</span>
+</div><div class="hljs-line"><span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></span>
+</div></code></pre>
+
+<h2 id="路由">路由:</h2>
+
+<ul><li><p>安装 <strong>vue-router</strong></p></li>
+<li><p>创建一个<strong>router</strong>文件夹</p></li>
+<li><p><strong>router / index.js</strong> </p></li>
+</ul>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="hljs javascript"><div class="hljs-line"><span class="hljs-keyword">import</span> VueRouter <span class="hljs-keyword">from</span> <span class="hljs-string">'vue-router'</span>;
+</div><div class="hljs-line"> <span class="hljs-keyword">const</span> routes = [
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line"> ]
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line"> <span class="hljs-keyword">const</span> router = <span class="hljs-keyword">new</span> VueRouter({
+</div><div class="hljs-line">     <span class="hljs-attr">mode</span>:<span class="hljs-string">'history'</span>, <span class="hljs-comment">//开启history模式，不写默认hash模式</span>
+</div><div class="hljs-line">     routes
+</div><div class="hljs-line"> })
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line"> <span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> router
+</div></code></pre>
+
+<ul><li><p><strong>src / main.js</strong></p></li>
+</ul>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="hljs coffeescript"><div class="hljs-line"><span class="hljs-keyword">import</span> VueRouter <span class="hljs-keyword">from</span> <span class="hljs-string">'vue-router'</span>;
+</div><div class="hljs-line"><span class="hljs-keyword">import</span> router <span class="hljs-keyword">from</span> <span class="hljs-string">'./router/index'</span>;
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">Vue.use(VueRouter)
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line"><span class="hljs-keyword">new</span> Vue({
+</div><div class="hljs-line">    router
+</div><div class="hljs-line">})
+</div></code></pre>
+
+<ul><li><p>用路由一定要使用：<code>&lt;router-view&gt;&lt;/router-view&gt;</code></p></li>
+</ul></div></body></html>
