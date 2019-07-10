@@ -498,7 +498,15 @@
 </ul>
 </li>
 <li><a href="#vue的生命周期">vue的生命周期</a></li>
-<li><a href="#路由">路由:</a></li>
+<li><a href="#路由">路由:</a><ul>
+<li><a href="#导航守卫">导航守卫</a><ul>
+<li><a href="#全局的守卫只要是切换路由就会进">全局的守卫：只要是切换路由就会进</a></li>
+<li><a href="#局部守卫">局部守卫</a></li>
+</ul>
+</li>
+<li><a href="#redirect">redirect</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -3768,6 +3776,8 @@ box1.onmouseenter = function(){ <br>
     }</code></p></li>
 <li><p>当按键的时候会停顿一下，这个停顿有助于提高用户体验，避免重复输入</p></li>
 </ul>
+
+
 
 <pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><div class="hljs-line"><span class="hljs-keyword">let</span> numL = <span class="hljs-number">0</span>;
 </div><div class="hljs-line"><span class="hljs-keyword">let</span> numT = <span class="hljs-number">0</span>;
@@ -8173,6 +8183,8 @@ or</p></li>
 
 <h2 id="第一种方式通过vuejs引入使用">第一种方式：通过vue.js引入，使用</h2>
 
+
+
 <pre class="prettyprint hljs-dark"><code class="hljs css"><div class="hljs-line"><span class="hljs-selector-tag">new</span> <span class="hljs-selector-tag">Vue</span>({
 </div><div class="hljs-line">    <span class="hljs-attribute">el</span>:<span class="hljs-string">'#挂载的元素名'</span>,
 </div><div class="hljs-line">    data:{
@@ -8363,6 +8375,8 @@ or</p></li>
 <li><p>使用：</p></li>
 </ul>
 
+
+
 <pre class="prettyprint hljs-dark"><code class="language-java hljs"><div class="hljs-line">&lt;div id=<span class="hljs-string">"app"</span>&gt;
 </div><div class="hljs-line">    {{num}}
 </div><div class="hljs-line">    &lt;ppa&gt;&lt;/ppa&gt;
@@ -8489,6 +8503,8 @@ or</p></li>
 </div></code></pre></li></ul></li></ul></li></ul></li></ul></li>
 </ul>
 
+
+
 <h4 id="ref-快速定位组件或者是元素">ref 快速定位组件或者是元素</h4>
 
 <ul><li><p>给元素身上加上ref的属性，值就是自定义的名字</p>
@@ -8501,10 +8517,14 @@ or</p></li>
 </blockquote></li>
 </ul>
 
+
+
 <h4 id="nexttick">nextTick</h4>
 
 <ul><li><p>当DOM加载完成执行的一个函数（在下次 DOM 更新循环结束之后执行延迟回调。在修改数据之后立即使用这个方法，获取更新后的 DOM。）</p></li>
 </ul>
+
+
 
 <h3 id="slot-插槽">slot 插槽</h3>
 
@@ -8554,10 +8574,14 @@ or</p></li>
 </div></code></pre></li></ul></li>
 </ul>
 
+
+
 <h4 id="如果有多个slot的情况下要保证结构同步那么可以给slot设置一个name去识别使用的时候通过slotname去关联">如果有多个slot的情况下要保证结构同步那么可以给slot设置一个name去识别，使用的时候通过slot=“name”去关联</h4>
 
 <ul><li><p>比如:</p></li>
 </ul>
+
+
 
 <pre class="prettyprint hljs-dark"><code class="hljs xml"><div class="hljs-line">    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"root"</span>&gt;</span>
 </div><div class="hljs-line">        <span class="hljs-tag">&lt;<span class="hljs-name">ppa</span>&gt;</span>
@@ -8580,6 +8604,8 @@ or</p></li>
 </div><div class="hljs-line"><span class="handlebars">    })</span>
 </div><div class="hljs-line"><span class="handlebars">    </span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
 </div></code></pre>
+
+
 
 <h2 id="vue的生命周期">vue的生命周期</h2>
 
@@ -8606,6 +8632,8 @@ or</p></li>
 <li><p><strong>beforeDestroy  组件卸载之前  关闭定时器,函数初始化</strong></p></li>
 <li><p><strong>destroyed  销毁监听事件</strong></p></li></ul></li>
 </ul>
+
+
 
 <pre class="prettyprint hljs-dark"><code class="hljs django"><div class="hljs-line"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"app"</span>&gt;</span></span>
 </div><div class="hljs-line"><span class="xml">      <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"box"</span> </span></span>
@@ -8652,6 +8680,8 @@ or</p></li>
 </div><div class="hljs-line"><span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></span>
 </div></code></pre>
 
+
+
 <h2 id="路由">路由:</h2>
 
 <ul><li><p>安装 <strong>vue-router</strong></p></li>
@@ -8690,4 +8720,85 @@ or</p></li>
 </div></code></pre>
 
 <ul><li><p>用路由一定要使用：<code>&lt;router-view&gt;&lt;/router-view&gt;</code></p></li>
-</ul></div></body></html>
+<li><p>配置好路由之后，可以通过<strong>$route.xx</strong>去拿到查询信息或者<strong>paramsId</strong></p></li>
+</ul>
+
+<pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><div class="hljs-line">比如:
+</div><div class="hljs-line">        模板中:
+</div><div class="hljs-line">            $route.params.id
+</div><div class="hljs-line">            $route.query.a
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">        组件中:
+</div><div class="hljs-line">            <span class="hljs-keyword">this</span>.$route.params.id
+</div><div class="hljs-line">            <span class="hljs-keyword">this</span>.$route.query.a
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">    &lt;router-link to=<span class="hljs-string">"/"</span>&gt;
+</div><div class="hljs-line">    &lt;router-link :to="{path:'/',query:{a:1}}"&gt;
+</div><div class="hljs-line">    &lt;router-link :to="{name:'news',query:{a:1}}"&gt;
+</div></code></pre>
+
+<ul><li><p><strong>$route是放属性的</strong></p>
+
+<ul>
+<li><p><strong>可以获取到查询信息: ?后面的</strong>   </p></li>
+<li><p><strong>可以获取hash值：#后面的</strong></p></li>
+<li><p><strong>可以获取到params /xx/:id</strong></p></li></ul></li>
+<li><p><strong>$router是放方法的</strong></p>
+
+<ul>
+<li><p><strong>push()</strong></p></li>
+<li><p><strong>replace</strong></p></li>
+<li><p><strong>go(1)</strong></p></li></ul></li>
+</ul>
+
+
+
+<h3 id="导航守卫">导航守卫</h3>
+
+
+
+<h4 id="全局的守卫只要是切换路由就会进">全局的守卫：只要是切换路由就会进</h4>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><div class="hljs-line">  需要在router.beforeEach(<span class="hljs-function">(<span class="hljs-params">to,<span class="hljs-keyword">from</span>,next</span>)=&gt;</span>{
+</div><div class="hljs-line">      to,<span class="hljs-comment">//到哪里去</span>
+</div><div class="hljs-line">      <span class="hljs-keyword">from</span>，<span class="hljs-comment">//从哪里来</span>
+</div><div class="hljs-line">      next，<span class="hljs-comment">//继续向下执行</span>
+</div><div class="hljs-line">      next();
+</div><div class="hljs-line">  });
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">   router.afterEach(<span class="hljs-function">(<span class="hljs-params">to,<span class="hljs-keyword">from</span></span>)=&gt;</span>{
+</div><div class="hljs-line">       <span class="hljs-comment">//路由守卫结束</span>
+</div><div class="hljs-line">   });
+</div></code></pre>
+
+<h4 id="局部守卫">局部守卫</h4>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><div class="hljs-line">  beforeRouteEnter(<span class="hljs-function">(<span class="hljs-params">to,<span class="hljs-keyword">from</span>,next</span>)=&gt;</span>{
+</div><div class="hljs-line">      <span class="hljs-comment">// 在渲染该组件的对应路由被 confirm 前调用</span>
+</div><div class="hljs-line">      <span class="hljs-comment">// 不！能！获取组件实例 `this`</span>
+</div><div class="hljs-line">      <span class="hljs-comment">// 因为当守卫执行前，组件实例还没被创建</span>
+</div><div class="hljs-line">  })
+</div><div class="hljs-line">  beforeRouteUpdate(<span class="hljs-function">(<span class="hljs-params">to,<span class="hljs-keyword">from</span>,next</span>)=&gt;</span>{
+</div><div class="hljs-line">      <span class="hljs-comment">// 在当前路由改变，但是该组件***被复用时调用***</span>
+</div><div class="hljs-line">      <span class="hljs-comment">// 举例来说，对于一个带有动态参数的路径 /foo/:id，在 /foo/1 和 /foo/2 之间跳转的时候，</span>
+</div><div class="hljs-line">      <span class="hljs-comment">// 由于会渲染同样的 Foo 组件，因此组件实例会被复用。而这个钩子就会在这个情况下被调用。</span>
+</div><div class="hljs-line">      <span class="hljs-comment">// 可以访问组件实例 `this`</span>
+</div><div class="hljs-line">  }) 
+</div><div class="hljs-line">  beforeRouteLeave(<span class="hljs-function">(<span class="hljs-params">to,<span class="hljs-keyword">from</span>,next</span>)=&gt;</span>{
+</div><div class="hljs-line">      <span class="hljs-comment">// 导航离开该组件的对应路由时调用</span>
+</div><div class="hljs-line">      <span class="hljs-comment">// 可以访问组件实例 `this`</span>
+</div><div class="hljs-line">  })
+</div></code></pre>
+
+<h3 id="redirect">redirect</h3>
+
+<pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><div class="hljs-line"><span class="hljs-keyword">const</span> router = <span class="hljs-keyword">new</span> VueRouter({
+</div><div class="hljs-line">  <span class="hljs-attr">routes</span>: [
+</div><div class="hljs-line">    { <span class="hljs-attr">path</span>: <span class="hljs-string">'/a'</span>, <span class="hljs-attr">redirect</span>: <span class="hljs-string">'/b'</span> }
+</div><div class="hljs-line">  ]
+</div><div class="hljs-line">})
+</div></code></pre></div></body></html>
