@@ -507,6 +507,14 @@
 <li><a href="#redirect">redirect</a></li>
 </ul>
 </li>
+<li><a href="#event-bus">EVENT BUS</a></li>
+<li><a href="#vuex-状态管理容器">VueX 状态管理容器</a><ul>
+<li><ul>
+<li><a href="#使用步骤">使用步骤:</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -1976,36 +1984,36 @@ setInterval(fn,1000);</code></p></li>
 <li><p>父子关系</p>
 
 <ul>
-<li><p>parentNode  父节点</p></li>
-<li><p>childNodes  所有子节点（包括元素节点、文本节点、注释节点）</p></li>
-<li><p>children  获取某个元素下的元素子节点。</p></li></ul></li>
+<li><p><strong>parentNode  父节点</strong></p></li>
+<li><p><strong>childNodes  所有子节点</strong>（包括元素节点、文本节点、注释节点）</p></li>
+<li><p><strong>children  获取某个元素下的元素子节点。</strong></p></li></ul></li>
 <li><p>祖孙关系</p></li>
 <li><p>兄弟关系：</p>
 
 <ul>
-<li><p>previousElementSibling上一个兄弟节点</p></li>
-<li><p>nextElementSibling 下一个兄弟节点</p></li>
+<li><p><strong>previousElementSibling上一个兄弟节点</strong></p></li>
+<li><p><strong>nextElementSibling 下一个兄弟节点</strong></p></li>
 <li><p>没有就是null</p></li></ul></li></ul></li>
-<li><p>第一个娃 firstElementChild</p></li>
-<li><p>最后一个娃 lastElementChild</p></li>
+<li><p><strong>第一个娃 firstElementChild</strong></p></li>
+<li><p><strong>最后一个娃 lastElementChild</strong></p></li>
 </ul>
 
 
 
 <h3 id="节点整个html中全是节点">节点：整个html中全是节点</h3>
 
-<ul><li><p>标签-&gt;元素节点：数字1</p></li>
-<li><p>属性节点：数字2</p></li>
-<li><p>文本节点：数字3  文字、换行</p></li>
-<li><p>注释节点：数字 8</p></li>
-<li><p>document：数字9</p></li>
-</ul>
-
 
 
 <h4 id="1属性nodetype-值是一个数字">1、属性：nodeType -&gt;值是一个数字</h4>
 
-<ul><li><p>去查看节点类型的</p></li>
+<ul><li><p>去查看节点类型的</p>
+
+<ul>
+<li><p>标签-&gt;元素节点：数字1</p></li>
+<li><p>属性节点：数字2</p></li>
+<li><p>文本节点：数字3  文字、换行</p></li>
+<li><p>注释节点：数字 8</p></li>
+<li><p>document：数字9</p></li></ul></li>
 </ul>
 
 
@@ -2258,8 +2266,8 @@ fn(1,2,3,4,5)</code>            </p>
 
 <ul>
 <li><p>此处无脑回车，会出现方框</p></li>
-<li><p>git config –global  user.name “这里换上你的用户名”</p></li>
-<li><p>git config –global user.email “这里换上你的邮箱”</p></li>
+<li><p>git config - -global  user.name “这里换上你的用户名”</p></li>
+<li><p>git config —global user.email “这里换上你的邮箱”</p></li>
 <li><p>输入: ssh -T git@github.com </p>
 
 <ul>
@@ -2553,6 +2561,10 @@ fn{}  实例化对象</code>           </p></li></ul></li>
 
 <h3 id="this的指向">this的指向</h3>
 
+<blockquote>
+  <p>只要遇到函数，this就有可能变</p>
+</blockquote>
+
 <ul><li><p><strong>window:</strong></p>
 
 <ul>
@@ -2581,7 +2593,7 @@ fn{}  实例化对象</code>           </p></li></ul></li>
     console.log(this); <br>
 } <br>
 arr.fn(); //[1,2,3,4]</code></p></li>
-<li><p>在严格模式下为undefined <br>
+<li><p><strong>在严格模式下为undefined</strong> <br>
 <code>function fn(){ <br>
     "use strict" <br>
     console.log(this); <br>
@@ -2594,8 +2606,9 @@ fn();</code></p></li>
 <h3 id="修改this指向的方法">修改this指向的方法</h3>
 
 <blockquote>
-  <p>一个函数，天生就自带一些属性和方法 <br>
-  其中有：</p>
+  <p>一个函数，天生就自带一些属性和方法</p>
+  
+  <p>其中有：</p>
 </blockquote>
 
 <ul><li><p>1、<strong>call():</strong></p>
@@ -3597,9 +3610,14 @@ btn.removeEventListener('click',c); <br>
 <li><p><strong>onmouseup  鼠标抬起</strong></p></li>
 <li><p><strong>onscroll 有滚动条的时候滚轮时触发</strong></p></li>
 <li><p><strong>onload  加载完后</strong></p></li>
-<li><p><strong>onerror  异常加载</strong></p></li>
+<li><p><strong>onerror  异常加载</strong>  - &gt; img.onerror  img.onload</p></li>
 <li><p><strong>onhashchange  当hash值发生变化的时候就触发</strong></p></li>
-<li><p><strong>onresize  缩放浏览器的时候触发的事件</strong></p></li>
+<li><p><strong>onresize  缩放浏览器的时候触发的事件</strong></p>
+
+<blockquote>
+  <p>onload 和ready的区别： <br>
+  （DOMContentLoaded，onreadystatechange）</p>
+</blockquote></li>
 </ul>
 
 
@@ -8692,6 +8710,7 @@ or</p></li>
 
 
 <pre class="prettyprint hljs-dark"><code class="hljs javascript"><div class="hljs-line"><span class="hljs-keyword">import</span> VueRouter <span class="hljs-keyword">from</span> <span class="hljs-string">'vue-router'</span>;
+</div><div class="hljs-line">Vue.use(Router)
 </div><div class="hljs-line"> <span class="hljs-keyword">const</span> routes = [
 </div><div class="hljs-line"><wbr>
 </div><div class="hljs-line"> ]
@@ -8712,8 +8731,6 @@ or</p></li>
 <pre class="prettyprint hljs-dark"><code class="hljs coffeescript"><div class="hljs-line"><span class="hljs-keyword">import</span> VueRouter <span class="hljs-keyword">from</span> <span class="hljs-string">'vue-router'</span>;
 </div><div class="hljs-line"><span class="hljs-keyword">import</span> router <span class="hljs-keyword">from</span> <span class="hljs-string">'./router/index'</span>;
 </div><div class="hljs-line"><wbr>
-</div><div class="hljs-line">Vue.use(VueRouter)
-</div><div class="hljs-line"><wbr>
 </div><div class="hljs-line"><span class="hljs-keyword">new</span> Vue({
 </div><div class="hljs-line">    router
 </div><div class="hljs-line">})
@@ -8722,6 +8739,8 @@ or</p></li>
 <ul><li><p>用路由一定要使用：<code>&lt;router-view&gt;&lt;/router-view&gt;</code></p></li>
 <li><p>配置好路由之后，可以通过<strong>$route.xx</strong>去拿到查询信息或者<strong>paramsId</strong></p></li>
 </ul>
+
+
 
 <pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><div class="hljs-line">比如:
 </div><div class="hljs-line">        模板中:
@@ -8773,6 +8792,8 @@ or</p></li>
 </div><div class="hljs-line">   });
 </div></code></pre>
 
+
+
 <h4 id="局部守卫">局部守卫</h4>
 
 
@@ -8794,11 +8815,148 @@ or</p></li>
 </div><div class="hljs-line">  })
 </div></code></pre>
 
+
+
 <h3 id="redirect">redirect</h3>
+
+
 
 <pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><div class="hljs-line"><span class="hljs-keyword">const</span> router = <span class="hljs-keyword">new</span> VueRouter({
 </div><div class="hljs-line">  <span class="hljs-attr">routes</span>: [
 </div><div class="hljs-line">    { <span class="hljs-attr">path</span>: <span class="hljs-string">'/a'</span>, <span class="hljs-attr">redirect</span>: <span class="hljs-string">'/b'</span> }
 </div><div class="hljs-line">  ]
 </div><div class="hljs-line">})
+</div></code></pre>
+
+
+
+<h2 id="event-bus">EVENT BUS</h2>
+
+<ul><li><p>new Vue()  vue的实例就是EVENT BUS</p></li>
+<li><p>绑定事件:  </p>
+
+<ul>
+<li><p>在created下去写一个事件绑定</p></li>
+<li><p>Bus.$on(‘事件名’,(传入参数)=&gt;{该事件要做的事情})</p></li></ul></li>
+<li><p>事件触发:</p>
+
+<ul>
+<li><p>在methods中触发</p></li>
+<li><p>Bus.$emit(‘要触发的事件名’,参数)</p></li></ul></li>
+</ul>
+
+
+
+<h2 id="vuex-状态管理容器">VueX 状态管理容器</h2>
+
+
+
+<h4 id="使用步骤">使用步骤:</h4>
+
+<ul><li><p>安装包  npm install vuex -S</p></li>
+<li><p>引包  </p>
+
+<ul>
+<li><p>import Vuex from ‘vuex’;</p></li>
+<li><p>Vue.use(Vuex);引入中间件</p></li></ul></li>
+<li><p>创建store</p></li>
+</ul>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="hljs pf"><div class="hljs-line">const store = new Vuex.Store({
+</div><div class="hljs-line">    <span class="hljs-keyword">state</span>:{
+</div><div class="hljs-line">        //初始化数据
+</div><div class="hljs-line">    },
+</div><div class="hljs-line">    mutations:{
+</div><div class="hljs-line">        //数据更新的方法都写在里面,只有mutations才能改变数据的状态
+</div><div class="hljs-line">        increment(<span class="hljs-keyword">state</span>){
+</div><div class="hljs-line">            <span class="hljs-keyword">state</span>.num ++;
+</div><div class="hljs-line">        }
+</div><div class="hljs-line">    }
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">});
+</div></code></pre>
+
+<ul><li><p>在new Vue({store}) 引入store</p></li>
+<li><p>Vue组件如何显示store的数据呢？</p>
+
+<ul>
+<li><p>如果在模板中</p>
+
+<ul>
+<li><p>$store.state.xx</p></li></ul></li>
+<li><p>如果在组件的方法中</p>
+
+<ul>
+<li><p>this.$store.state.xxx</p></li></ul></li>
+<li><p>还可以通过vuex下的mapState去获取数据</p>
+
+<ul>
+<li><p>在computed下使用mapState</p></li>
+<li><p>比如:</p></li></ul></li></ul></li>
+</ul>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="hljs pf"><div class="hljs-line">import {mapState} <span class="hljs-keyword">from</span> 'vuex';
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">computed:mapState({
+</div><div class="hljs-line">   nn:'num'    把store下的num获取到，并且取个nn的名字
+</div><div class="hljs-line">   nn:<span class="hljs-keyword">state</span>=&gt;state.num 效果和上面一样
+</div><div class="hljs-line">   fn(<span class="hljs-keyword">state</span>){
+</div><div class="hljs-line">       return <span class="hljs-keyword">state</span>.num + this.num;  //this代表当前组件的
+</div><div class="hljs-line">   }
+</div><div class="hljs-line">})
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">或者是
+</div><div class="hljs-line">...mapState(['num'])
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line"><span class="hljs-variable">&lt;!-- let {num.str...} = this.props --&gt;</span>
+</div></code></pre>
+
+<ul><li><p>getters: 就是通过数据派生出来的结果</p>
+
+<ul>
+<li><p>比如:</p></li></ul></li>
+</ul>
+
+<pre class="prettyprint hljs-dark"><code class="hljs clean"><div class="hljs-line"><span class="hljs-keyword">import</span> {mapState,mapGetters} <span class="hljs-keyword">from</span> <span class="hljs-string">'vuex'</span>;
+</div><div class="hljs-line">computed:...mapState([<span class="hljs-string">'toudbl'</span>])
+</div></code></pre>
+
+<ul><li><p>mutations:是改变store中状态的唯一方式;Mutation <strong>必须是同步函数</strong></p></li>
+</ul>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="hljs pf"><div class="hljs-line">mutations:{
+</div><div class="hljs-line">    add(<span class="hljs-keyword">state</span>,n){
+</div><div class="hljs-line">        <span class="hljs-keyword">state</span>.num += n;
+</div><div class="hljs-line">    }
+</div><div class="hljs-line">}
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">发起mutations使用commit
+</div><div class="hljs-line"><span class="hljs-variable">$stroe</span>.commit('add',<span class="hljs-number">5</span>);
+</div></code></pre>
+
+<ul><li><p>actions:异步请求的时候使用</p></li>
+</ul>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="hljs xquery"><div class="hljs-line">actions:{
+</div><div class="hljs-line">    actionAdd(context){
+</div><div class="hljs-line">        setTimeout(() =&gt; {
+</div><div class="hljs-line">            context.commit(<span class="hljs-string">'add'</span>);
+</div><div class="hljs-line">        },<span class="hljs-number">2000</span>)
+</div><div class="hljs-line">    }
+</div><div class="hljs-line">}
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">$store.dispatch(<span class="hljs-string">'actionAdd'</span>)
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">mapActions:
+</div><div class="hljs-line">    methods:{
+</div><div class="hljs-line">    ...mapActions([<span class="hljs-string">'actionAdd'</span>])
+</div><div class="hljs-line">}
 </div></code></pre></div></body></html>
