@@ -159,6 +159,11 @@
 </li>
 </ul>
 </li>
+<li><a href="#git开发的小流程">git开发的小流程</a><ul>
+<li><a href="#第一种">第一种</a></li>
+<li><a href="#第二种">第二种:</a></li>
+</ul>
+</li>
 <li><a href="#单例模式">单例模式:</a><ul>
 <li><ul>
 <li><a href="#单例模式功能相对单一用来描述具体一个事务">单例模式功能相对单一,用来描述具体一个事务。</a></li>
@@ -2257,7 +2262,7 @@ fn(1,2,3,4,5)</code>            </p>
 <li><p>1.进入github</p></li>
 <li><p>2.找到你的头像，点击选择settings       </p></li>
 <li><p>3.在最左边有SSH and GPG keys</p></li></ul></li>
-<li><p>生成秘钥:</p>
+<li><p>生成秘钥:  ssh-keygen -t rsa -C “你的邮箱名”  去生成秘钥（一堆方块）</p>
 
 <ul>
 <li><p><a href="https://blog.csdn.net/lqlqlq007/article/details/78983879" target="_blank">https://blog.csdn.net/lqlqlq007/article/details/78983879</a></p></li></ul></li>
@@ -2267,15 +2272,13 @@ fn(1,2,3,4,5)</code>            </p>
 <ul>
 <li><p>此处无脑回车，会出现方框</p></li>
 <li><p>git config - -global  user.name “这里换上你的用户名”</p></li>
-<li><p>git config —global user.email “这里换上你的邮箱”</p></li>
+<li><p>git config - -global user.email “这里换上你的邮箱”</p></li>
 <li><p>输入: ssh -T git@github.com </p>
 
 <ul>
 <li><p>只要出现Hi ….就说明绑定成功</p></li>
 <li><p>如果有兴趣，可以自己研究一下hexo搭建自己的博客</p></li></ul></li></ul></li>
 </ul>
-
-
 
 <h4 id="git版本控制工具新建控制项目">git:版本控制工具–新建控制项目:</h4>
 
@@ -2356,7 +2359,7 @@ fn(1,2,3,4,5)</code>            </p>
 
 <h5 id="还原版本">还原版本:</h5>
 
-<ul><li><p>git reset –hard 版本号</p>
+<ul><li><p>git reset - -hard 版本号</p>
 
 <ul>
 <li><p>版本号通过查看版本去找</p></li></ul></li>
@@ -2365,14 +2368,108 @@ fn(1,2,3,4,5)</code>            </p>
 <li><p>git push origin master</p></li>
 </ul>
 
-
-
 <h5 id="永久免密上传">永久免密上传:</h5>
 
-<ul><li><p>git config –global credential.helper store</p></li>
+<ul><li><p>git config - -global credential.helper store</p></li>
 </ul>
 
 
+
+<h3 id="git开发的小流程">git开发的小流程</h3>
+
+<blockquote>
+  <p>因为要从别人的代码保管库中去拿代码，所以要知道保管库的地址（比如github），还要使用git（要通过git去获取保管库中的资源）</p>
+</blockquote>
+
+<ul><li><p>设置贡献者</p>
+
+<ul>
+<li><p>配置本地提交的用户名和密码</p></li>
+<li><p>git config –global user.email “你提交分支的时候提交记录里显示的用户邮箱”</p></li>
+<li><p>git config –global user.name “提交分支的时候提交记录里显示的用户名”</p></li>
+<li><p>git config –global user.name 查看用户邮箱</p></li>
+<li><p>git config –list  查看所有配置项</p></li></ul></li>
+<li><p>检测是否关联:</p>
+
+<ul>
+<li><p>ssh git@github.com</p></li></ul></li>
+<li><p>通过git clone 去拿到项目</p></li>
+</ul>
+
+
+
+<h4 id="第一种">第一种</h4>
+
+<ul><li><p>1.先fork项目(去项目上点击fork按钮)</p></li>
+<li><p>2.克隆项目到本地</p></li>
+<li><p>3.修改代码并提交代码</p></li>
+<li><p>4.到你fork的项目上点击new pull request</p></li>
+<li><p>5.create pull request</p></li>
+</ul>
+
+<h4 id="第二种">第二种:</h4>
+
+<ul><li><p>1.先fork项目(去项目上点击fork按钮)</p></li>
+<li><p>2.克隆项目到本地</p></li>
+<li><p>3.开分支</p>
+
+<ul>
+<li><p>创建分支:</p>
+
+<ul>
+<li><p>git branch 名字</p></li></ul></li>
+<li><p>查看分支:</p>
+
+<ul>
+<li><p>git branch,带*号说明当前分支位置</p></li></ul></li>
+<li><p>切换分支:</p>
+
+<ul>
+<li><p>git checkout 分支名</p></li></ul></li>
+<li><p>快速创建分支并且切换:</p>
+
+<ul>
+<li><p>git checkout -b 分支名</p></li></ul></li>
+<li><p>合并分支:</p>
+
+<ul>
+<li><p>git merge 分支名</p></li></ul></li></ul>
+
+<blockquote>
+  <p>在合并代码的时候有可能会出现冲突，会进入MERGING状态</p>
+  
+  <p>需要手动的去删除或者添加代码，然后再进行一次版本的控制(使MERGING状态变成分支状态，这个时候就合并成功)</p>
+</blockquote></li>
+<li><p>4.修改代码并提交代码</p>
+
+<ul>
+<li><p>第一次使用create pull request</p></li>
+<li><p>提交过一次之后，作者会保留合并信息（修改者多次提交，作者都能看到）</p></li></ul></li>
+<li><p><strong>查看远程仓库地址:</strong></p>
+
+<ul>
+<li><p>git remote -v</p></li></ul></li>
+<li><p><strong>撤销:</strong></p>
+
+<ul>
+<li><p>git checkout – 文件名</p></li>
+<li><p>git reset HEAD 文件名</p></li>
+<li><p>git commit –amend -m “注释”</p></li>
+<li><p>git reset –hard HEAD|版本号(回滚)</p></li></ul></li>
+<li><p><strong>如果说有白名单，在提交的时候代码冲突</strong></p>
+
+<ul>
+<li><p>那么git pull</p>
+
+<ul>
+<li><p>直接把远程仓库的代码和本地就进行了合并(但是不一定有效，有时候会直接覆盖)        </p></li></ul></li>
+<li><p>用git fetch 把远程的代码下载下来</p>
+
+<ul>
+<li><p>可以通过 git diff origin/master  去查看差异</p></li>
+<li><p>用git merge master origin/master 合并</p></li>
+<li><p>手动解决冲突，然提交在版本区，在push</p></li></ul></li></ul></li>
+</ul>
 
 <h3 id="单例模式">单例模式:</h3>
 
@@ -2398,8 +2495,6 @@ fn(1,2,3,4,5)</code>            </p>
 <li><p>2.把相同事务归为了一类，并且把这些属性或者方法，放到了一个堆内存空间中存储。</p></li>
 <li><p>3.模块化的开发</p></li>
 </ul>
-
-
 
 <h5 id="单例模式功能相对单一用来描述具体一个事务">单例模式功能相对单一,用来描述具体一个事务。</h5>
 
@@ -5226,18 +5321,49 @@ box1.onmouseenter = function(){ <br>
 
 <h3 id="iterator-遍历器只要数据中有symboliterator就能使用for-of">Iterator ,遍历器，只要数据中有Symbol.iterator就能使用for of</h3>
 
-<pre class="prettyprint hljs-dark"><code class="hljs ocaml"><div class="hljs-line">遍历接口返回一个对象，对象中有一个next方法
-</div><div class="hljs-line">这个方法必须return对象，在这个对象下有<span class="hljs-number">2</span>个属性
-</div><div class="hljs-line"><span class="hljs-keyword">value</span>，<span class="hljs-keyword">done</span>
-</div><div class="hljs-line"><wbr>
-</div><div class="hljs-line"><span class="hljs-keyword">value</span>就是<span class="hljs-keyword">for</span> <span class="hljs-keyword">of</span>中的attr
-</div><div class="hljs-line"><span class="hljs-keyword">done</span>:为<span class="hljs-literal">true</span>的时候不遍历
-</div><div class="hljs-line"><span class="hljs-keyword">done</span>:为<span class="hljs-literal">false</span>的时候遍历
-</div></code></pre>
-
 <blockquote>
   <p>当使用for of的时候，内部会调用next方法，只要next的返回值done为false就一直调用next，直到为true就不调用next方法了</p>
 </blockquote>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="hljs javascript"><div class="hljs-line"><span class="hljs-keyword">let</span> obj = {
+</div><div class="hljs-line">        <span class="hljs-attr">name</span>:<span class="hljs-string">'林同贺'</span>,
+</div><div class="hljs-line">        <span class="hljs-attr">age</span>:<span class="hljs-number">81</span>
+</div><div class="hljs-line">    }
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">    <span class="hljs-comment">/*</span>
+</div><div class="hljs-line"><span class="hljs-comment">        遍历接口返回一个对象，对象中有一个next方法</span>
+</div><div class="hljs-line"><span class="hljs-comment">        这个方法必须return对象，在这个对象下有2个属性</span>
+</div><div class="hljs-line"><span class="hljs-comment">        value，done</span>
+</div><div class="hljs-line"><span class="hljs-comment"></span>
+</div><div class="hljs-line"><span class="hljs-comment">        value就是for of中的attr</span>
+</div><div class="hljs-line"><span class="hljs-comment">        done:为true的时候不遍历</span>
+</div><div class="hljs-line"><span class="hljs-comment">        done:为false的时候遍历</span>
+</div><div class="hljs-line"><span class="hljs-comment">    */</span>
+</div><div class="hljs-line">    obj[<span class="hljs-built_in">Symbol</span>.iterator] = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
+</div><div class="hljs-line">        <span class="hljs-keyword">let</span> keys = <span class="hljs-built_in">Object</span>.keys(obj);<span class="hljs-comment">//['name','age']</span>
+</div><div class="hljs-line">        <span class="hljs-keyword">let</span> len = keys.length; <span class="hljs-comment">//2</span>
+</div><div class="hljs-line">        <span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>;
+</div><div class="hljs-line">        <span class="hljs-keyword">return</span> {
+</div><div class="hljs-line">            next(){
+</div><div class="hljs-line">                <span class="hljs-keyword">if</span>(i&lt;len){
+</div><div class="hljs-line">                    <span class="hljs-keyword">return</span> { <span class="hljs-attr">value</span>:{<span class="hljs-attr">key</span>:keys[i],<span class="hljs-attr">val</span>:obj[keys[i++]]}, <span class="hljs-attr">done</span>: <span class="hljs-literal">false</span> };
+</div><div class="hljs-line">                }<span class="hljs-keyword">else</span>{
+</div><div class="hljs-line">                    <span class="hljs-keyword">return</span> {<span class="hljs-attr">done</span>: <span class="hljs-literal">true</span> };
+</div><div class="hljs-line">                }   
+</div><div class="hljs-line">            }
+</div><div class="hljs-line">        }
+</div><div class="hljs-line">    }
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">    <span class="hljs-keyword">let</span> iter = obj[<span class="hljs-built_in">Symbol</span>.iterator]();
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">    <span class="hljs-built_in">console</span>.log(iter);
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">    <span class="hljs-built_in">console</span>.log(iter.next());
+</div><div class="hljs-line">    <span class="hljs-built_in">console</span>.log(iter.next());
+</div><div class="hljs-line">    <span class="hljs-built_in">console</span>.log(iter.next());
+</div></code></pre>
 
 
 
@@ -5303,9 +5429,158 @@ box1.onmouseenter = function(){ <br>
 </div><div class="hljs-line">            <span class="hljs-built_in">console</span>.log(val2)
 </div><div class="hljs-line">        })
 </div><div class="hljs-line"><wbr>
+</div><div class="hljs-line"><span class="hljs-comment">/*</span>
+</div><div class="hljs-line"><span class="hljs-comment">        Promise.resolve('foo')</span>
+</div><div class="hljs-line"><span class="hljs-comment">        // 等价于</span>
+</div><div class="hljs-line"><span class="hljs-comment">        new Promise(resolve =&gt; resolve('foo'))</span>
+</div><div class="hljs-line"><span class="hljs-comment"></span>
+</div><div class="hljs-line"><span class="hljs-comment">        console.log(Promise.resolve())</span>
+</div><div class="hljs-line"><span class="hljs-comment"></span>
+</div><div class="hljs-line"><span class="hljs-comment">        new Promise(resolve =&gt; resolve())</span>
+</div><div class="hljs-line"><span class="hljs-comment"></span>
+</div><div class="hljs-line"><span class="hljs-comment">        then方法一定是在Promise对象下的。</span>
+</div><div class="hljs-line"><span class="hljs-comment">        如果说then有return， 如果return后是promise对象</span>
+</div><div class="hljs-line"><span class="hljs-comment">        那么再then，是基于return后这个promise对象的</span>
+</div><div class="hljs-line"><span class="hljs-comment">        如果return后并不是promise对象，那么promise对象</span>
+</div><div class="hljs-line"><span class="hljs-comment">        往上找，</span>
+</div><div class="hljs-line"><span class="hljs-comment">        如果下面还有then,成功的结果为上面then中return的值</span>
+</div><div class="hljs-line"><span class="hljs-comment"></span>
+</div><div class="hljs-line"><span class="hljs-comment"></span>
+</div><div class="hljs-line"><span class="hljs-comment">        注意:</span>
+</div><div class="hljs-line"><span class="hljs-comment">            then中的return不能返回Promise实例，不然会报错(死循环)</span>
+</div><div class="hljs-line"><span class="hljs-comment">    */</span>
+</div><div class="hljs-line">    <span class="hljs-comment">// Promise.resolve()</span>
+</div><div class="hljs-line">    <span class="hljs-comment">// .then(() =&gt; {</span>
+</div><div class="hljs-line">    <span class="hljs-comment">//     console.log('a');</span>
+</div><div class="hljs-line">    <span class="hljs-comment">//     // throw new Error('error');</span>
+</div><div class="hljs-line">    <span class="hljs-comment">//     return new Error('error');</span>
+</div><div class="hljs-line">    <span class="hljs-comment">// })</span>
+</div><div class="hljs-line">    <span class="hljs-comment">// .then((res)=&gt;{</span>
+</div><div class="hljs-line">    <span class="hljs-comment">//     console.log('b');</span>
+</div><div class="hljs-line">    <span class="hljs-comment">//     console.log('then:',res);</span>
+</div><div class="hljs-line">    <span class="hljs-comment">// })</span>
+</div><div class="hljs-line">    <span class="hljs-comment">// .catch((err) =&gt;{</span>
+</div><div class="hljs-line">    <span class="hljs-comment">//     console.log('c');</span>
+</div><div class="hljs-line">    <span class="hljs-comment">//     console.log('catch:',err);</span>
+</div><div class="hljs-line">    <span class="hljs-comment">// });</span>
 </div></code></pre>
 
 
+
+<pre class="prettyprint hljs-dark"><code class="hljs javascript"><div class="hljs-line">promise 源码：
+</div><div class="hljs-line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyPromise</span> </span>{
+</div><div class="hljs-line">        <span class="hljs-keyword">constructor</span>(exception){
+</div><div class="hljs-line">            <span class="hljs-keyword">this</span>.state = <span class="hljs-string">'pending'</span>; <span class="hljs-comment">//等待状态</span>
+</div><div class="hljs-line">            <span class="hljs-keyword">this</span>.value;
+</div><div class="hljs-line">            <span class="hljs-keyword">this</span>.reason;
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">            <span class="hljs-comment">//记录，订阅成功或者失败的函数</span>
+</div><div class="hljs-line">            <span class="hljs-keyword">this</span>.fulfilledCallbacks = [];
+</div><div class="hljs-line">            <span class="hljs-keyword">this</span>.rejectedCallbacks = [];
+</div><div class="hljs-line">            <span class="hljs-comment">//成功执行的函数</span>
+</div><div class="hljs-line">            <span class="hljs-keyword">let</span> resolve = <span class="hljs-function">(<span class="hljs-params">value</span>) =&gt;</span> {
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">                <span class="hljs-comment">//如果状态是为pending才能执行成功的代码，保证从pending到某个状态，状态是凝固的</span>
+</div><div class="hljs-line">                <span class="hljs-keyword">if</span>(<span class="hljs-keyword">this</span>.state === <span class="hljs-string">'pending'</span>){
+</div><div class="hljs-line">                    <span class="hljs-comment">// console.log('一秒之后');</span>
+</div><div class="hljs-line">                    <span class="hljs-keyword">this</span>.state = <span class="hljs-string">'fulfilled'</span>; <span class="hljs-comment">//只要是成功就把状态变为fulfilled</span>
+</div><div class="hljs-line">                    <span class="hljs-keyword">this</span>.value = value;
+</div><div class="hljs-line">                    <span class="hljs-keyword">this</span>.fulfilledCallbacks.forEach(<span class="hljs-function"><span class="hljs-params">fn</span>=&gt;</span>fn());
+</div><div class="hljs-line">                }
+</div><div class="hljs-line">            }
+</div><div class="hljs-line">            <span class="hljs-comment">//失败执行的函数</span>
+</div><div class="hljs-line">            <span class="hljs-keyword">let</span> reject = <span class="hljs-function">(<span class="hljs-params">reason</span>) =&gt;</span> {
+</div><div class="hljs-line">                <span class="hljs-comment">//如果状态是为pending才能执行失败的代码，保证从pending到某个状态，状态是凝固的</span>
+</div><div class="hljs-line">                <span class="hljs-keyword">if</span>(<span class="hljs-keyword">this</span>.state === <span class="hljs-string">'pending'</span>){
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">                    <span class="hljs-keyword">this</span>.state = <span class="hljs-string">'rejected'</span>;<span class="hljs-comment">//只要是失败就把状态变为rejected</span>
+</div><div class="hljs-line">                    <span class="hljs-keyword">this</span>.reason = reason;
+</div><div class="hljs-line">                    <span class="hljs-keyword">this</span>.rejectedCallbacks.forEach(<span class="hljs-function"><span class="hljs-params">fn</span>=&gt;</span>fn());
+</div><div class="hljs-line">                }
+</div><div class="hljs-line">            }
+</div><div class="hljs-line">            <span class="hljs-comment">//promise调用的函数</span>
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">            <span class="hljs-comment">//如果new Promise内的函数为报错，那么直接进reject</span>
+</div><div class="hljs-line">            <span class="hljs-keyword">try</span> {
+</div><div class="hljs-line">                exception(resolve,reject);
+</div><div class="hljs-line">                <span class="hljs-comment">// console.log(this.state);</span>
+</div><div class="hljs-line">            } <span class="hljs-keyword">catch</span> (error) {
+</div><div class="hljs-line">                reject(error);
+</div><div class="hljs-line">            }
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">            <span class="hljs-comment">// console.log(this.state)</span>
+</div><div class="hljs-line">        }
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">        then(onfulfilled,onrejected){
+</div><div class="hljs-line">            <span class="hljs-keyword">let</span> p2;
+</div><div class="hljs-line">            p2 = <span class="hljs-keyword">new</span> MyPromise(<span class="hljs-function">(<span class="hljs-params">resolve,reject</span>)=&gt;</span>{
+</div><div class="hljs-line">                    <span class="hljs-comment">//成功就调用第一个参数，并且把值(this.value||this.reason)传到函数中</span>
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">                <span class="hljs-keyword">if</span>(<span class="hljs-keyword">this</span>.state === <span class="hljs-string">'fulfilled'</span>){
+</div><div class="hljs-line">                    <span class="hljs-keyword">try</span> {
+</div><div class="hljs-line">                        <span class="hljs-keyword">let</span> x = onfulfilled(<span class="hljs-keyword">this</span>.value);
+</div><div class="hljs-line">                        resolve(x);
+</div><div class="hljs-line">                    } <span class="hljs-keyword">catch</span> (error) {
+</div><div class="hljs-line">                        reject(error);
+</div><div class="hljs-line">                    }
+</div><div class="hljs-line">                }
+</div><div class="hljs-line">                <span class="hljs-keyword">if</span>(<span class="hljs-keyword">this</span>.state === <span class="hljs-string">'rejected'</span>){
+</div><div class="hljs-line">                    <span class="hljs-keyword">try</span> {
+</div><div class="hljs-line">                        <span class="hljs-keyword">let</span> x = onrejected(<span class="hljs-keyword">this</span>.reason);
+</div><div class="hljs-line">                        reject(x);
+</div><div class="hljs-line">                    } <span class="hljs-keyword">catch</span> (error) {
+</div><div class="hljs-line">                        reject(error);
+</div><div class="hljs-line">                    }
+</div><div class="hljs-line">                }
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">                <span class="hljs-keyword">if</span>(<span class="hljs-keyword">this</span>.state === <span class="hljs-string">'pending'</span>){
+</div><div class="hljs-line">                    <span class="hljs-keyword">this</span>.fulfilledCallbacks.push(<span class="hljs-function"><span class="hljs-params">()</span>=&gt;</span>{
+</div><div class="hljs-line">                        <span class="hljs-keyword">try</span> {
+</div><div class="hljs-line">                            <span class="hljs-keyword">let</span> x = onfulfilled(<span class="hljs-keyword">this</span>.value);
+</div><div class="hljs-line">                            resolve(x);
+</div><div class="hljs-line">                        } <span class="hljs-keyword">catch</span> (error) {
+</div><div class="hljs-line">                            reject(error);
+</div><div class="hljs-line">                        }
+</div><div class="hljs-line">                    });
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">                    <span class="hljs-comment">// console.log(this.fulfilledCallbacks)</span>
+</div><div class="hljs-line">                    <span class="hljs-keyword">this</span>.rejectedCallbacks.push(<span class="hljs-function"><span class="hljs-params">()</span>=&gt;</span>{
+</div><div class="hljs-line">                        <span class="hljs-keyword">try</span> {
+</div><div class="hljs-line">                                <span class="hljs-keyword">let</span> x = onrejected(<span class="hljs-keyword">this</span>.reason);
+</div><div class="hljs-line">                                reject(x);
+</div><div class="hljs-line">                        } <span class="hljs-keyword">catch</span> (error) {
+</div><div class="hljs-line">                                reject(error);
+</div><div class="hljs-line">                        }
+</div><div class="hljs-line">                    });
+</div><div class="hljs-line">                }  
+</div><div class="hljs-line">          })
+</div><div class="hljs-line">          <span class="hljs-keyword">return</span> p2;
+</div><div class="hljs-line">        }
+</div><div class="hljs-line">    }
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">    <span class="hljs-keyword">new</span> MyPromise(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">resolve,reject</span>)</span>{
+</div><div class="hljs-line">        <span class="hljs-comment">// throw Error('123');</span>
+</div><div class="hljs-line">        setTimeout(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+</div><div class="hljs-line">            resolve(<span class="hljs-number">100</span>); <span class="hljs-comment">//内置的resolve</span>
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">        }, <span class="hljs-number">1000</span>);
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">        <span class="hljs-comment">// reject(2);</span>
+</div><div class="hljs-line">    })
+</div><div class="hljs-line">    .then(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">succ</span>)</span>{  <span class="hljs-comment">//onfulfilled</span>
+</div><div class="hljs-line">        <span class="hljs-built_in">console</span>.log(succ)
+</div><div class="hljs-line">        <span class="hljs-keyword">return</span> <span class="hljs-number">200</span>;
+</div><div class="hljs-line">    })
+</div><div class="hljs-line">    .then(<span class="hljs-function">(<span class="hljs-params">data</span>)=&gt;</span>{
+</div><div class="hljs-line">        <span class="hljs-comment">// console.log(data)</span>
+</div><div class="hljs-line">        <span class="hljs-keyword">throw</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">'错误'</span>)
+</div><div class="hljs-line">    })
+</div><div class="hljs-line">    .then(<span class="hljs-function">(<span class="hljs-params">d</span>)=&gt;</span>{
+</div><div class="hljs-line">        <span class="hljs-built_in">console</span>.log(d);
+</div><div class="hljs-line">    },(error)=&gt;{
+</div><div class="hljs-line">        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'错了'</span>,error)
+</div><div class="hljs-line">    });
+</div></code></pre>
 
 <h2 id="generator">Generator</h2>
 
@@ -8920,6 +9195,8 @@ or</p></li>
 <ul>
 <li><p>比如:</p></li></ul></li>
 </ul>
+
+
 
 <pre class="prettyprint hljs-dark"><code class="hljs clean"><div class="hljs-line"><span class="hljs-keyword">import</span> {mapState,mapGetters} <span class="hljs-keyword">from</span> <span class="hljs-string">'vuex'</span>;
 </div><div class="hljs-line">computed:...mapState([<span class="hljs-string">'toudbl'</span>])
